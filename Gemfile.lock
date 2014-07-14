@@ -1,3 +1,9 @@
+GIT
+  remote: git://github.com/EppO/rolify.git
+  revision: f2ad6cb43ee0656246d7012706dc64950dcec221
+  specs:
+    rolify (3.5.0)
+
 GEM
   remote: https://rubygems.org/
   specs:
@@ -91,7 +97,6 @@ GEM
     rake (10.3.2)
     rdoc (4.1.1)
       json (~> 1.4)
-    rolify (3.2.0)
     sass (3.2.19)
     sass-rails (4.0.3)
       railties (>= 4.0.0, < 5.0)
@@ -139,7 +144,7 @@ DEPENDENCIES
   pg
   rails (= 4.0.2)
   rails_12factor
-  rolify
+  rolify!
   sass-rails (~> 4.0.0)
   sdoc
   turbolinks
