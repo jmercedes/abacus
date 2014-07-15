@@ -1,0 +1,28 @@
+    <div class="header">
+        <a href="index.html">
+          <%= image_tag 'logo_crediclub.png' %>
+        </a>
+    </div>
+    <div class="row-fluid login-wrapper">
+        <div class="box">
+            <div class="content-wrap">
+							<h6>Regístrate</h6>
+							<%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
+							  <%= devise_error_messages! %>
+							
+								  <div><%= f.email_field :email, autofocus: true, placeholder: 'Correo Electrónico', class: 'span12' %></div>
+								  <div><%= f.password_field :password, autocomplete: "off", class: 'span12', placeholder: 'Password' %></div>
+								    <div><%= f.password_field :password_confirmation, autocomplete: "off", class: 'span12' %></div>
+
+								  <div><%= f.submit "Sign up", class: 'btn-glow primary signup' %></div>
+								<% end %>
+
+								<%= render "devise/shared/links" %>
+            </div>
+        </div>
+
+        <div class="span4 already">
+            <p>Already have an account?</p>
+            <a href="signin.html">Sign in</a>
+        </div>
+    </div>

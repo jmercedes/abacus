@@ -20,10 +20,17 @@ module AbacusApp
     # config.i18n.load_path += Dir[Rails.root.join('my', 'locales', '*.{rb,yml}').to_s]
     # config.i18n.default_locale = :de
     
+    config.assets.paths << Rails.root.join("signup")
+    
     # Add fonts path
     #config.assets.paths << "#{Rails.root}/app/assets/fonts"
 
     # Precompile additional assets
     #config.assets.precompile += %w( .svg .eot .woff .ttf )
+    
+    #config.to_prepare do
+    #    Devise::RegistrationsController.layout proc{ |controller| user_signed_in? ? "application"   : "devise" }
+    #end
+    
   end
 end
