@@ -11,10 +11,10 @@
 							  <%= devise_error_messages! %>
 							
 								  <div><%= f.email_field :email, autofocus: true, placeholder: 'Correo Electrónico', class: 'span12' %></div>
-								  <div><%= f.password_field :password, autocomplete: "off", class: 'span12', placeholder: 'Password' %></div>
-								    <div><%= f.password_field :password_confirmation, autocomplete: "off", class: 'span12' %></div>
+								  <div><%= f.password_field :password, autocomplete: "off", class: 'span12', placeholder: 'Contraseña' %></div>
+								    <div><%= f.password_field :password_confirmation, autocomplete: "off", class: 'span12', placeholder: 'Confirmar contraseña' %></div>
 
-								  <div><%= f.submit "Sign up", class: 'btn-glow primary signup' %></div>
+								  <div><%= f.submit "Regístrate", class: 'btn-glow primary signup' %></div>
 								<% end %>
 
 								<%= render "devise/shared/links" %>
@@ -22,7 +22,7 @@
         </div>
 
         <div class="span4 already">
-            <p>Already have an account?</p>
-            <a href="signin.html">Sign in</a>
+            <p>¿Tienes tu cuenta?</p>
+            <a href="signin.html">Accede</a>
         </div>
     </div>
