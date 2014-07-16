@@ -1,0 +1,44 @@
+
+
+
+<%= form_for(@profile) do |f| %>
+  <% if @profile.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@profile.errors.count, "error") %> prohibited this loan from being saved:</h2>
+
+      <ul>
+      <% @profile.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.text_field :first_name %>
+    <%= f.text_field :second_name %>
+    <%= f.text_field :first_last_name %>
+    <%= f.text_field :second_last_name %>
+    <%= f.text_field :personal_identification_number %>
+    <%= f.text_field :social_status %>
+    <%= f.text_field :date_of_birth %>
+    <%= f.text_field :residence_phone_number %>
+    <%= f.text_field :mobile_phone_number %>
+    <%= f.text_field :ofice_phone_number %>
+    <%= f.text_field :address %>
+    <%= f.text_field :address_2 %>
+    <%= f.text_field :city %>
+    <%= f.text_field :sector %>
+    <%= f.text_field :province %>
+    <%= f.text_field :profesion %>
+    <%= f.text_field :scholar_degree %>
+    <%= f.text_field :job_position %>
+    <%= f.text_field :time_in_current_job %>
+    <%= f.text_field :monthly_income %>
+    <%= f.text_field :other_income %>
+
+  </div>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>
