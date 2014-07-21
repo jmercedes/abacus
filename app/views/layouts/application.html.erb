@@ -157,48 +157,9 @@
 	<!-- main container -->
     <div class="content">
 
+      <%= yield %>
 
-        <!-- upper main stats -->
-        <div id="main-stats">
-            <div class="row stats-row">
-                <div class="col-md-3 col-sm-3 stat">
-                    <div class="data">
-                        <span class="number">2457</span>
-                        xxxxx
-                    </div>
-                    <span class="date">xxxx xxxx</span>
-                </div>
-                <div class="col-md-3 col-sm-3 stat">
-                    <div class="data">
-                        <span class="number">3240</span>
-                        xxxxxxx
-                    </div>
-                    <span class="date">xxxxx xxxxxxx xxxx</span>
-                </div>
-                <div class="col-md-3 col-sm-3 stat">
-                    <div class="data">
-                        <span class="number">322</span>
-                        xxxxxxxx
-                    </div>
-                    <span class="date">xxxx xxxxxxx</span>
-                </div>
-                <div class="col-md-3 col-sm-3 stat last">
-                    <div class="data">
-                        <span class="number">$2,340</span>
-                        xxxxxxxxx
-                    </div>
-                    <span class="date">xxxxxxx xxxxxx xxx</span>
-                </div>
-            </div>
-        </div>
-        <!-- end upper main stats -->
 
-        <div id="pad-wrapper">
-	
-
-                 <%= yield %>
-
-        </div>
     </div>
 
 
@@ -317,6 +278,5 @@
             });
         });
     </script>
-		<%= yield %>
 </body>
 </html>
