@@ -55,4 +55,4 @@ end
 # Use debugger
 # gem 'debugger', group: [:development, :test]
 
-gem 'rails-i18n'
+#gem 'rails-i18n'
