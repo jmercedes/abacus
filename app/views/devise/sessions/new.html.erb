@@ -1,22 +1,30 @@
+<div class="header">
+        <a href="index.html">
+          <%= image_tag 'logo_crediclub.png' %>
+        </a>
+</div>
 
+    <div class="row-fluid login-wrapper">
+        <div class="box">
+            <div class="content-wrap">
 
-
-
-
-<h2>Sign in</h2>
+<h2>Acceder</h2>
 
 <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
-  <div><%= f.label :email %><br />
-  <%= f.email_field :email, autofocus: true %></div>
+  <div><br />
+  <%= f.email_field :email, autofocus: true, class: 'span12', placeholder: 'Correo Electrónico' %></div>
 
-  <div><%= f.label :password %><br />
-    <%= f.password_field :password, autocomplete: "off" %></div>
+  <div><br />
+    <%= f.password_field :password, autocomplete: "off", class: 'span12', placeholder: 'Contraseña' %></div>
 
-  <% if devise_mapping.rememberable? -%>
-    <div><%= f.check_box :remember_me %> <%= f.label :remember_me %></div>
-  <% end -%>
+  <%# if devise_mapping.rememberable? -%>
+    <div><%#= f.check_box :remember_me %> <%#= f.label :remember_me %></div>
+  <%# end -%>
 
-  <div><%= f.submit "Sign in" %></div>
+  <div><%= f.submit "Sign in", class: 'btn-glow primary signup' %></div>
 <% end %>
 
 <%= render "devise/shared/links" %>
+        </div>
+    </div>
+</div>
