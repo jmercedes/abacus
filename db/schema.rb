@@ -11,10 +11,34 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140716120207) do
+ActiveRecord::Schema.define(version: 20140812125437) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "contract_templates", force: true do |t|
+    t.integer  "investment_contract_id"
+    t.string   "type"
+    t.text     "content"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "fund_assignments", force: true do |t|
+    t.float "amount"
+    t.float "rate"
+    t.float "period_of_time"
+  end
+
+  create_table "investment_contracts", force: true do |t|
+    t.integer  "user_id"
+    t.float    "amount"
+    t.float    "rate"
+    t.float    "period_of_time"
+    t.string   "status"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
   create_table "loans", force: true do |t|
     t.float    "amount"
