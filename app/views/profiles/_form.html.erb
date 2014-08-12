@@ -73,7 +73,7 @@
                           </div>
                           <div class="field-box">
 										        <%= f.label :social_status, t('.social_status') %>
-										        <%= f.text_field :social_status, class: 'span8' %>
+										        <%= f.select :social_status, options_for_select(%w[Soltero Casado]), class: 'span8' %>
                           </div>
 													<div class="field-box">
 											        <%= f.label :date_of_birth, t('.date_of_birth') %>
@@ -100,8 +100,8 @@
 
 
 										<div class="field-box">
-								        <%= f.label :ofice_phone_number, t('.office_phone')  %>
-								        <%= f.text_field :ofice_phone_number, class: 'span8' %>
+								        <%= f.label :office_phone_number, t('.office_phone')  %>
+								        <%= f.text_field :office_phone_number, class: 'span8' %>
 								    </div>
 
 										<div class="field-box">
@@ -137,8 +137,8 @@
               <div class="row-fluid form-wrapper">
                   <div class="span8">
 										<div class="field-box">
-								        <%= f.label :profesion, t('.profession') %>
-								        <%= f.text_field :profesion, class: 'span8' %>
+								        <%= f.label :profession, t('.profession') %>
+								        <%= f.text_field :profession, class: 'span8' %>
 								    </div>
 
 										<div class="field-box">

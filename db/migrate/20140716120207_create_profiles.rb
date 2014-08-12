@@ -9,12 +9,13 @@ class CreateProfiles < ActiveRecord::Migration
       t.string :second_last_name
       t.string :personal_identification_number
       t.string :social_status
+      t.string :gender
       t.date :date_of_birth
       
       #Contact information
       t.string :residence_phone_number
       t.string :mobile_phone_number
-      t.string :ofice_phone_number
+      t.string :office_phone_number
       
       #Address information
       t.string :address
@@ -25,10 +26,11 @@ class CreateProfiles < ActiveRecord::Migration
       t.string :country
       
       #Education information
-      t.string :profesion
+      t.string :profession
       t.string :scholar_degree
       
       #Job Information
+      t.boolean :currently_working
       t.string :job_position
       t.string :time_in_current_job
       t.string :monthly_income
