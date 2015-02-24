@@ -61,6 +61,7 @@ body {
   font-weight: 600;
 }
 .login-wrapper .box input[type="text"],
+.login-wrapper .box input[type="email"],
 .login-wrapper .box input[type="password"] {
   font-size: 15px;
   height: 40px;
@@ -120,7 +121,34 @@ body {
   text-align: center;
   font-size: 13px;
   margin-top: 30px;
+} 
+
+.login-wrapper .box .remember {
+  display: block;
+  overflow: hidden;
+  margin-bottom: 20px;
 }
+.login-wrapper .box .remember input[type="checkbox"] {
+  float: left;
+  margin-right: 8px;
+}
+.login-wrapper .box .remember label {
+  float: left;
+  color: #4a576a;
+  font-size: 13px;
+  font-weight: 600;
+}
+
+.login-wrapper .box a.forgot {
+  display: block;
+  text-align: right;
+  font-style: italic;
+  text-decoration: underline;
+  color: #3d88ba;
+  font-size: 13px;
+  margin-bottom: 6px;
+}
+
 .login-wrapper .already p {
   display: inline-block;
   color: #222;

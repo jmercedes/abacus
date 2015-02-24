@@ -1,13 +1,23 @@
 AbacusApp::Application.routes.draw do
-  devise_for :users
+  devise_for :users, :controllers => { :registrations => "registrations" }
+  
+  #get 'registrations/awaiting_confirmation', to: 'registrations#awaiting_confirmation'
+
+  devise_scope :user do
+    get 'registrations/awaiting_confirmation' => 'registrations#awaiting_confirmation'
+  end
+  
   resources :loans
   resources :profiles
+  resources :investment_contracts
+  resources :contract_templates
+  resources :fund_assignments
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 
   # You can have the root of your site routed with "root"
-  root 'loans#index'
+  root 'dashboard#index'
 
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'

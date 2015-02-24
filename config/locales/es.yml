@@ -41,5 +41,6 @@ es:
       time_at_job: 'Tiempo laborando en la empresa'
       monthly_income: 'Salario mensual'
       other_income: 'Otros ingresos'
+      gender: 'Género'
       
       

@@ -1,4 +1,4 @@
-class InvesntmentContract < ActiveRecord::Migration
+class InvesntmentContracts < ActiveRecord::Migration
   def change
     create_table :investment_contracts do |t|
       t.integer :user_id

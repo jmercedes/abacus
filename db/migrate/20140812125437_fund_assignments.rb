@@ -1,4 +1,4 @@
-class FundAssignment < ActiveRecord::Migration
+class FundAssignments < ActiveRecord::Migration
   def change
     create_table :fund_assignments do |t|
       t.float :amount

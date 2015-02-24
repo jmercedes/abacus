@@ -11,10 +11,20 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140812125437) do
+ActiveRecord::Schema.define(version: 20150224174334) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "assets", force: true do |t|
+    t.integer "profile_id"
+    t.string  "name"
+    t.text    "description"
+    t.float   "commercial_value"
+    t.string  "ownership_status"
+    t.float   "amount_owned"
+    t.float   "amount_debt"
+  end
 
   create_table "contract_templates", force: true do |t|
     t.integer  "investment_contract_id"
@@ -30,6 +40,24 @@ ActiveRecord::Schema.define(version: 20140812125437) do
     t.float "period_of_time"
   end
 
+  create_table "guarantor", force: true do |t|
+    t.integer "profile_id"
+    t.string  "first_name"
+    t.string  "second_name"
+    t.string  "first_last_name"
+    t.string  "second_last_name"
+    t.string  "document_type"
+    t.string  "birth_date"
+    t.string  "gender"
+    t.string  "nationality"
+    t.string  "address"
+    t.string  "city"
+    t.string  "province"
+    t.string  "zipcode"
+    t.string  "residence_phone_number"
+    t.string  "mobile_phone_number"
+  end
+
   create_table "investment_contracts", force: true do |t|
     t.integer  "user_id"
     t.float    "amount"
@@ -40,8 +68,21 @@ ActiveRecord::Schema.define(version: 20140812125437) do
     t.datetime "updated_at"
   end
 
+  create_table "loan_applications", force: true do |t|
+    t.float "amount"
+    t.float "rate"
+  end
+
+  create_table "loan_types", force: true do |t|
+    t.integer "loan_id"
+    t.string  "name"
+  end
+
   create_table "loans", force: true do |t|
     t.float    "amount"
+    t.string   "status"
+    t.float    "rate"
+    t.integer  "time_frame"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -52,12 +93,30 @@ ActiveRecord::Schema.define(version: 20140812125437) do
     t.string   "first_last_name"
     t.string   "second_last_name"
     t.string   "personal_identification_number"
+    t.string   "nationality"
     t.string   "social_status"
     t.string   "gender"
     t.date     "date_of_birth"
+    t.string   "father_first_name"
+    t.string   "father_second_name"
+    t.string   "father_first_lastname"
+    t.string   "father_second_lastname"
+    t.string   "mother_first_name"
+    t.string   "mother_second_name"
+    t.string   "mother_first_lastname"
+    t.string   "mother_second_lastname"
+    t.string   "spouse_first_name"
+    t.string   "spouse_second_name"
+    t.string   "spouse_first_lastname"
+    t.string   "spouse_second_lastname"
+    t.string   "spouse_personal_identification_number"
+    t.string   "spouse_mobile_phone_number"
+    t.string   "spouse_date_of_birth"
     t.string   "residence_phone_number"
     t.string   "mobile_phone_number"
     t.string   "office_phone_number"
+    t.string   "residence_status"
+    t.integer  "time_living_in_current_residence"
     t.string   "address"
     t.string   "address_2"
     t.string   "city"
@@ -66,13 +125,27 @@ ActiveRecord::Schema.define(version: 20140812125437) do
     t.string   "country"
     t.string   "profession"
     t.string   "scholar_degree"
+    t.string   "job_status"
     t.boolean  "currently_working"
+    t.string   "business_name"
+    t.string   "business_social_reason"
+    t.string   "business_phone"
     t.string   "job_position"
     t.string   "time_in_current_job"
     t.string   "monthly_income"
+    t.string   "prior_job"
     t.string   "other_income"
     t.datetime "created_at"
     t.datetime "updated_at"
+  end
+
+  create_table "references", force: true do |t|
+    t.integer "profile_id"
+    t.string  "name"
+    t.string  "last_name"
+    t.string  "residence_phone_numner"
+    t.string  "mobile_phone_number"
+    t.string  "linkage"
   end
 
   create_table "roles", force: true do |t|
@@ -99,8 +172,12 @@ ActiveRecord::Schema.define(version: 20140812125437) do
     t.string   "last_sign_in_ip"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.string   "confirmation_token"
+    t.datetime "confirmed_at"
+    t.datetime "confirmation_sent_at"
   end
 
+  add_index "users", ["confirmation_token"], name: "index_users_on_confirmation_token", unique: true, using: :btree
   add_index "users", ["email"], name: "index_users_on_email", unique: true, using: :btree
   add_index "users", ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true, using: :btree
 

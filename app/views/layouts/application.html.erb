@@ -46,6 +46,16 @@
             <li class="settings hidden-xs hidden-sm">
                 <a href="personal-info.html" role="button">
                     <i class="fa fa-cog fa-lg"></i>
+										<% if user_signed_in? %>
+										  <li>
+										  <%= link_to('Logout', destroy_user_session_path, :method => :delete) %>        
+										  </li>
+										<% else %>
+										  <li>
+										  <%= link_to('Login', new_user_session_path)  %>  
+										  </li>
+										<% end %>
+										
                 </a>
             </li>
         </ul>
@@ -156,8 +166,15 @@
 
 	<!-- main container -->
     <div class="content">
-
-      <%= yield %>
+		
+      <% if notice %>
+			  <p class="alert alert-success"><%= notice %></p>
+			<% end %>
+			<% if alert %>
+			  <p class="alert alert-danger"><%= alert %></p>
+			<% end %>
+  
+    <%= yield %>
 
 
     </div>

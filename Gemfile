@@ -56,3 +56,14 @@ end
 # gem 'debugger', group: [:development, :test]
 
 #gem 'rails-i18n'
+
+gem 'figaro'
+
+gem 'rspec-rails', :group => [:test, :development]
+gem 'rb-fsevent'
+
+group :test do
+  gem 'factory_girl_rails'
+  gem 'capybara'
+  gem 'guard-rspec'
+end

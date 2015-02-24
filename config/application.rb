@@ -21,7 +21,7 @@ module AbacusApp
     config.i18n.default_locale = :es
     
     config.assets.paths << Rails.root.join("signup")
-    
+    config.paths['app/views'] << "app/views/registrations"
     # Add fonts path
     #config.assets.paths << "#{Rails.root}/app/assets/fonts"
 

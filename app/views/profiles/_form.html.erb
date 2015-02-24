@@ -67,17 +67,66 @@
 											        <%= f.text_field :second_last_name, class: 'span4' %>
                               <span class="alert-msg"><i class="icon-remove-sign"></i>Favor completar</span>
                           </div>
+													<div class="field-box">
+											        <%= f.label :date_of_birth, t('.date_of_birth') %>
+											        <%= f.date_field :date_of_birth, class: 'span8' %>
+											    </div>
+													
                           <div class="field-box">
 										        <%= f.label :personal_identification_number, t('.id_number') %>
 										        <%= f.text_field :personal_identification_number, class: 'span8' %>
                           </div>
                           <div class="field-box">
+										        <%= f.label :nationatilty, t('.id_number') %>
+										        <%= f.text_field :nationality, class: 'span8' %>
+                          </div>
+                          <div class="field-box">
 										        <%= f.label :social_status, t('.social_status') %>
 										        <%= f.select :social_status, options_for_select(%w[Soltero Casado]), class: 'span8' %>
                           </div>
+                          <div class="field-box">
+										        <%= f.label :gender, t('.gender') %>
+										        <%= f.select :gender, options_for_select(%w[Hombre Mujer]), class: 'span8' %>
+                          </div>
 													<div class="field-box">
-											        <%= f.label :date_of_birth, t('.date_of_birth') %>
-											        <%= f.date_field :date_of_birth, class: 'span8' %>
+											        <%= f.label :residence_status, t('.residence_status') %>
+											        <%= f.text_field :residence_status, class: 'span8' %>
+											    </div>
+													<div class="field-box">
+											        <%= f.label :time_living_in_current_residence, t('.time_living_in_current_residence') %>
+											        <%= f.text_field :time_living_in_current_residence, class: 'span8' %>
+											    </div>
+													<div class="field-box">
+											        <%= f.label :residence_phone_number, t('.residence_phone') %>
+											        <%= f.text_field :residence_phone_number, class: 'span8' %>
+											    </div>
+													<div class="field-box">
+											        <%= f.label :mobile_phone_number, t('.mobile_phone') %>
+											        <%= f.text_field :mobile_phone_number, class: 'span8' %>
+											    </div>
+													<div class="field-box">
+											        <%= f.label :office_phone_number, t('.office_phone')  %>
+											        <%= f.text_field :office_phone_number, class: 'span8' %>
+											    </div>
+													<div class="field-box">
+											        <%= f.label :address, t('.address') %>
+											        <%= f.text_field :address, class: 'span8' %>
+											    </div>
+													<div class="field-box">
+											        <%= f.label :address_2, t('.address_2') %>
+											        <%= f.text_field :address_2, class: 'span8' %>
+											    </div>
+													<div class="field-box">
+											        <%= f.label :city, t('.city') %>
+											        <%= f.text_field :city, class: 'span8' %>
+											    </div>
+													<div class="field-box">
+											        <%= f.label :sector, t('.sector') %>
+											        <%= f.text_field :sector, class: 'span8' %>
+											    </div>
+													<div class="field-box">
+											        <%= f.label :province, t('.province') %>
+											        <%= f.text_field :province, class: 'span8' %>
 											    </div>
                   </div>
               </div>
@@ -87,47 +136,46 @@
           <div class="step-pane" id="step2">
               <div class="row-fluid form-wrapper">
                   <div class="span8">
-										<div class="field-box">
-								        <%= f.label :residence_phone_number, t('.residence_phone') %>
-								        <%= f.text_field :residence_phone_number, class: 'span8' %>
-								    </div>
+                    <div class="field-box">
+							        <%= f.label :spouse_first_name, t('.spouse_names') %>
+							        <%= f.text_field :spouse_first_name, class: 'span4' %>
+							        <%= f.text_field :spouse_second_name, class: 'span4' %>
+                    </div>
+                    <div class="field-box">
+							        <%= f.label :spouse_first_lastname, t('.father_names') %>
+							        <%= f.text_field :spouse_first_lastname, class: 'span4' %>
+							        <%= f.text_field :spouse_second_lastname, class: 'span4' %>
+                    </div>
+                    <div class="field-box">
+							        <%= f.label :spouse_personal_identification_number, t('.spouse_personal_identification_number') %>
+							        <%= f.text_field :spouse_personal_identification_number, class: 'span4' %>
+                    </div>
+                    <div class="field-box">
+							        <%= f.label :spouse_mobile_phone_number, t('.spouse_mobile_phone_number') %>
+							        <%= f.text_field :spouse_mobile_phone_number, class: 'span4' %>
+                    </div>
+                    <div class="field-box">
+							        <%= f.label :spouse_date_of_birth, t('.spouse_date_of_birth') %>
+							        <%= f.text_field :spouse_date_of_birth, class: 'span4' %>
+                    </div>
 
+                    <div class="field-box">
+							        <%= f.label :father_first_name, t('.father_last_names') %>
+							        <%= f.text_field :father_first_lastname, class: 'span4' %>
+							        <%= f.text_field :father_second_lastname, class: 'span4' %>
+                    </div>
 
-										<div class="field-box">
-								        <%= f.label :mobile_phone_number, t('.mobile_phone') %>
-								        <%= f.text_field :mobile_phone_number, class: 'span8' %>
-								    </div>
+                    <div class="field-box">
+							        <%= f.label :mother_first_name, t('.mother_names') %>
+							        <%= f.text_field :mother_first_name, class: 'span4' %>
+							        <%= f.text_field :mother_second_name, class: 'span4' %>
+                    </div>
 
-
-										<div class="field-box">
-								        <%= f.label :office_phone_number, t('.office_phone')  %>
-								        <%= f.text_field :office_phone_number, class: 'span8' %>
-								    </div>
-
-										<div class="field-box">
-								        <%= f.label :address, t('.address') %>
-								        <%= f.text_field :address, class: 'span8' %>
-								    </div>
-
-										<div class="field-box">
-								        <%= f.label :address_2, t('.address_2') %>
-								        <%= f.text_field :address_2, class: 'span8' %>
-								    </div>
-
-										<div class="field-box">
-								        <%= f.label :city, t('.city') %>
-								        <%= f.text_field :city, class: 'span8' %>
-								    </div>
-
-										<div class="field-box">
-								        <%= f.label :sector, t('.sector') %>
-								        <%= f.text_field :sector, class: 'span8' %>
-								    </div>
-
-										<div class="field-box">
-								        <%= f.label :province, t('.province') %>
-								        <%= f.text_field :province, class: 'span8' %>
-								    </div>
+                    <div class="field-box">
+							        <%= f.label :mother_first_name, t('.mother_last_names') %>
+							        <%= f.text_field :mother_first_lastname, class: 'span4' %>
+							        <%= f.text_field :mother_second_lastname, class: 'span4' %>
+                    </div>
                   </div>
               </div>
           </div>
@@ -140,22 +188,34 @@
 								        <%= f.label :profession, t('.profession') %>
 								        <%= f.text_field :profession, class: 'span8' %>
 								    </div>
-
 										<div class="field-box">
 								        <%= f.label :scholar_degree, t('.professional_level') %>
 								        <%= f.text_field :scholar_degree, class: 'span8' %>
 								    </div>
-
+										<div class="field-box">
+								        <%= f.label :job_status, t('.job_status') %>
+								        <%= f.text_field :job_status, class: 'span8' %>
+								    </div>
 										<div class="field-box">
 								        <%= f.label :job_position, t('.job_position') %>
 								        <%= f.text_field :job_position, class: 'span8' %>
 								    </div>
-
+										<div class="field-box">
+								        <%= f.label :business_name, t('.business_name') %>
+								        <%= f.text_field :business_name, class: 'span8' %>
+								    </div>
+										<div class="field-box">
+								        <%= f.label :business_social_reason, t('.business_social_reason') %>
+								        <%= f.text_field :business_social_reason, class: 'span8' %>
+								    </div>
+										<div class="field-box">
+								        <%= f.label :business_phone, t('.business_phone') %>
+								        <%= f.text_field :business_phone, class: 'span8' %>
+								    </div>
 										<div class="field-box">
 								        <%= f.label :time_in_current_job, t('.time_at_job') %>
 								        <%= f.text_field :time_in_current_job, class: 'span8' %>
 								    </div>
-
 										<div class="field-box">
 								        <%= f.label :monthly_income, t('.monthly_income') %>
 								        <%= f.text_field :monthly_income, class: 'span8' %>

@@ -1,0 +1,44 @@
+<div class="container-fluid">
+    <div id="pad-wrapper">
+         <div class="row-fluid head">
+            <div class="span12">
+                <h1>Acuerdo de Inversión</h1>
+								
+            </div>
+
+						<div class="row-fluid form-wrapper">
+							<!-- left column -->
+							<div class="span9 with-sidebar">
+								<div class="container new_user_form inline-input">
+									<%= form_for(@investment_contract) do |f| %>
+										<div class="span12 field-box">
+                        <%= f.label :amount %>
+												<%= f.text_field :amount  %>
+                    </div>
+  
+                  <div class="span12 field-box">
+										<%= f.label :rate %>
+										<%= f.text_field :rate %>
+                  </div>
+
+                  <div class="span12 field-box">
+										<%= f.label :period_of_time %>
+										<%= f.text_field :period_of_time %>
+									</div>
+										 <%= f.submit 'Generar contrato', :class => 'btn-glow success btn-finish' %>  
+									<% end %>
+								</div>
+							</div>
+						</div>
+								
+
+
+         </div>
+		</div>
+</div>
+
+
+
+
+
+

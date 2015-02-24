@@ -1,6 +1,10 @@
 class Profile < ActiveRecord::Base
   
   belongs_to :user
+  has_many :assets
+  has_many :references
+  has_one :guarantor
+  
   
   #Stablish validation criteria
   validates :first_name,
