@@ -319,9 +319,7 @@
                                             <td class="headerContent" style="border-collapse: collapse;color: #202020;font-family: Arial;font-size: 34px;font-weight: bold;line-height: 100%;padding: 0;text-align: center;vertical-align: middle;">
                                             
                                             	<!-- // Begin Module: Standard Header Image \\ -->
-																							<%= image_tag 'logo_crediclub.png' %>
-																							
-                                            	<img src="http://gallery.mailchimp.com/653153ae841fd11de66ad181a/images/placeholder_600.gif" style="max-width: 600px;border: 0;height: auto;line-height: 100%;outline: none;text-decoration: none;" id="headerImage campaign-icon" mc:label="header_image" mc:edit="header_image" mc:allowdesigner mc:allowtext>
+                                            	<img src="https://s3.amazonaws.com/crediclub/logo_crediclub_plantilla_email.jpg" style="max-width: 600px;border: 0;height: auto;line-height: 100%;outline: none;text-decoration: none;" id="headerImage campaign-icon" mc:label="header_image" mc:edit="header_image" mc:allowdesigner mc:allowtext>
                                             	<!-- // End Module: Standard Header Image \\ -->
                                             
                                             </td>
@@ -342,14 +340,14 @@
                                                     <tr>
                                                         <td valign="top" class="bodyContent" style="border-collapse: collapse;background-color: #FFFFFF;">
                                                             <div mc:edit="std_content00" style="color: #505050;font-family: Arial;font-size: 16px;line-height: 150%;text-align: left;">
-                                                                <h1 class="h1" style="color: #666666;display: block;font-family: Arial;font-size: 34px;font-weight: bold;line-height: 100%;margin-top: 0;margin-right: 0;margin-bottom: 10px;margin-left: 0;text-align: left;">Heading 1</h1>
-                                                                <h2 class="h2" style="color: #666666;display: block;font-family: Arial;font-size: 30px;font-weight: bold;line-height: 100%;margin-top: 0;margin-right: 0;margin-bottom: 10px;margin-left: 0;text-align: left;">Heading 2</h2>
-                                                                <h3 class="h3" style="color: #666666;display: block;font-family: Arial;font-size: 26px;font-weight: bold;line-height: 100%;margin-top: 0;margin-right: 0;margin-bottom: 10px;margin-left: 0;text-align: left;">Heading 3</h3>
-                                                                <h4 class="h4" style="color: #666666;display: block;font-family: Arial;font-size: 22px;font-weight: bold;line-height: 100%;margin-top: 0;margin-right: 0;margin-bottom: 10px;margin-left: 0;text-align: left;">Heading 4</h4>
-                                                                <strong>Getting started:</strong> Transactional emails serve a defined and simple purpose. They differ from traditional mass-emails because they're generally sent on a user-by-user basis, instead of large list of users, and are generally used to deliver purchase receipts, account updates, security notifications, and more.
+                                                                <!-- <h1 class="h1" style="color: #666666;display: block;font-family: Arial;font-size: 34px;font-weight: bold;line-height: 100%;margin-top: 0;margin-right: 0;margin-bottom: 10px;margin-left: 0;text-align: left;">Heading 1</h1>
+                                                                                                                               <h2 class="h2" style="color: #666666;display: block;font-family: Arial;font-size: 30px;font-weight: bold;line-height: 100%;margin-top: 0;margin-right: 0;margin-bottom: 10px;margin-left: 0;text-align: left;">Heading 2</h2>
+                                                                                                                               <h3 class="h3" style="color: #666666;display: block;font-family: Arial;font-size: 26px;font-weight: bold;line-height: 100%;margin-top: 0;margin-right: 0;margin-bottom: 10px;margin-left: 0;text-align: left;">Heading 3</h3>  -->
+                                                                <h4 class="h4" style="color: #666666;display: block;font-family: Arial;font-size: 22px;font-weight: bold;line-height: 100%;margin-top: 0;margin-right: 0;margin-bottom: 10px;margin-left: 0;text-align: left;">Bienvenido a Crediclub</h4>
+                                                                <strong>Accede</strong> al siguiente enlace para activar tu cuenta: 
                                                                 <br>
                                                                 <br>
-                                                                Where <a href="http://www.mailchimp.com/" target="_blank" style="color: #6CB33F;font-weight: normal;text-decoration: underline;">MailChimp</a> can be used to send newsletters to several subscribers in one large blast, <a href="http://www.mandrill.com/" target="_blank" style="color: #6CB33F;font-weight: normal;text-decoration: underline;">Mandrill</a> is specifically positioned to send transactional emails, and offers relevant tracking and metrics that isn't necessarily available through a traditional email platform.
+                                                                <!-- Where <a href="http://www.mailchimp.com/" target="_blank" style="color: #6CB33F;font-weight: normal;text-decoration: underline;">MailChimp</a> can be used to send newsletters to several subscribers in one large blast, <a href="http://www.mandrill.com/" target="_blank" style="color: #6CB33F;font-weight: normal;text-decoration: underline;">Mandrill</a> is specifically positioned to send transactional emails, and offers relevant tracking and metrics that isn't necessarily available through a traditional email platform.                                      -->
                                                             </div>
 														</td>
                                                     </tr>
@@ -359,7 +357,9 @@
                                                             	<tr>
                                                                 	<td valign="middle" class="templateButtonContent" style="border-collapse: collapse;">
                                                                     	<div mc:edit="std_content01">
-                                                                        	<a href="http://www.mandrill.com/" target="_blank" style="color: #FFFFFF;font-family: Arial;font-size: 15px;font-weight: bold;letter-spacing: -.5px;line-height: 100%;text-align: center;text-decoration: none;">See What Mandrill Can Do</a>
+                                                                        	
+	
+	<%= link_to 'Confirm my account', confirmation_url(@resource, confirmation_token: @token, { :style => 'color: #FFFFFF;font-family: Arial;font-size: 15px;font-weight: bold;letter-spacing: -.5px;line-height: 100%;text-align: center;text-decoration: none;'}) %>
                                                                         </div>
                                                                     </td>
                                                                 </tr>
@@ -387,21 +387,18 @@
                                                     <tr>
                                                         <td valign="top" style="border-collapse: collapse;">
                                                             <div mc:edit="std_footer" style="color: #707070;font-family: Arial;font-size: 12px;line-height: 125%;text-align: center;">
-																<em>Copyright &copy; *|CURRENT_YEAR|* *|LIST:COMPANY|*, All rights reserved.</em>
+																<em>Crediclub&copy;, Todos los derechos reservados.</em>
 																<br>
-																*|IFNOT:ARCHIVE_PAGE|* *|LIST:DESCRIPTION|*
 																<br>
-																<strong>Our mailing address is:</strong>
 																<br>
-																*|HTML:LIST_ADDRESS_HTML|**|END:IF|* 
                                                             </div>
                                                         </td>
                                                     </tr>
                                                     <tr>
                                                         <td valign="middle" id="utility" style="border-collapse: collapse;background-color: #FFFFFF;border: 0;">
-                                                            <div mc:edit="std_utility" style="color: #707070;font-family: Arial;font-size: 12px;line-height: 125%;text-align: center;">
-                                                                &nbsp;<a href="*|ARCHIVE|*" target="_blank" style="color: #6CB33F;font-weight: normal;text-decoration: underline;">view this in your browser</a> | <a href="*|UNSUB|*" style="color: #6CB33F;font-weight: normal;text-decoration: underline;">unsubscribe from this list</a> | <a href="*|UPDATE_PROFILE|*" style="color: #6CB33F;font-weight: normal;text-decoration: underline;">update subscription preferences</a>&nbsp;
-                                                            </div>
+                                                            <!-- <div mc:edit="std_utility" style="color: #707070;font-family: Arial;font-size: 12px;line-height: 125%;text-align: center;">
+                                                                                                                            &nbsp;<a href="*|ARCHIVE|*" target="_blank" style="color: #6CB33F;font-weight: normal;text-decoration: underline;">view this in your browser</a> | <a href="*|UNSUB|*" style="color: #6CB33F;font-weight: normal;text-decoration: underline;">unsubscribe from this list</a> | <a href="*|UPDATE_PROFILE|*" style="color: #6CB33F;font-weight: normal;text-decoration: underline;">update subscription preferences</a>&nbsp;
+                                                                                                                        </div> -->
                                                         </td>
                                                     </tr>
                                                 </table>
@@ -421,9 +418,3 @@
         </center>
     </body>
 </html>
-
-<p>Welcome <%= @email %>!</p>
-
-<p>You can confirm your account email through the link below:</p>
-
-<p><%= link_to 'Confirm my account', confirmation_url(@resource, confirmation_token: @token) %></p>
