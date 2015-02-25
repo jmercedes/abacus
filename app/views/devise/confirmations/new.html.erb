@@ -10,7 +10,15 @@
 					<h6>Reenviar instrucciones de confirmación</h6>
 
 					<%= form_for(resource, as: resource_name, url: confirmation_path(resource_name), html: { method: :post }) do |f| %>
-					  <%= devise_error_messages! %>
+					  
+					  <% if notice %>
+					  <p class="alert alert-success"><%= notice %></p>
+					<% end %>
+					<% if alert %>
+					  <p class="alert alert-danger"><%= alert %></p>
+					<% end %>
+					
+						<%= devise_error_messages! %>
 
 					  <%= f.email_field :email, autofocus: true, placeholder: 'Correo Electrónico', class: 'span12' %></div>
 
