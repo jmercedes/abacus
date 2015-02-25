@@ -80,12 +80,12 @@ AbacusApp::Application.configure do
   
   config.action_mailer.default_url_options = { :host => 'https://abacus-app.herokuapp.com' }
   ActionMailer::Base.smtp_settings = {
-    :address        => "smtp.sendgrid.net",
-    :port           => "25",
+    :address        => 'smtp.sendgrid.net',
+    :port           => '587',
     :authentication => :plain,
     :user_name      => ENV['SENDGRID_USERNAME'],
     :password       => ENV['SENDGRID_PASSWORD'],
-    :domain         => ENV['SENDGRID_DOMAIN']
+    :domain         => 'heroku.com',
+    :enable_starttls_auto => true
   }
-  
 end
