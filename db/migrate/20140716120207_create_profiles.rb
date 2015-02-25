@@ -62,9 +62,7 @@ class CreateProfiles < ActiveRecord::Migration
       t.string :job_position
       t.string :time_in_current_job
       t.string :monthly_income
-      
       t.string :prior_job
-      
       #Financial information
       t.string :other_income
 

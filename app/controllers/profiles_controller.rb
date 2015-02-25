@@ -12,6 +12,10 @@ class ProfilesController < ApplicationController
 
   def new
     @profile = Profile.new
+    
+    @profile.build_guarantor
+    2.times { @profile.assets.build }
+    2.times { @profile.references.build }
   end
   
   def create

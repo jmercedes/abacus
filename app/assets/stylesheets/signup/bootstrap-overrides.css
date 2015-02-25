@@ -188,14 +188,14 @@ textarea::-webkit-input-placeholder {
 	border-radius: 0px;
 	border-bottom: 1px solid #191e23;
 
-	background: #2c3742; /* Old browsers */
-	background: -moz-linear-gradient(top,  #2c3742 0%, #28303a 100%); /* FF3.6+ */
-	background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#2c3742), color-stop(100%,#28303a)); /* Chrome,Safari4+ */
-	background: -webkit-linear-gradient(top,  #2c3742 0%,#28303a 100%); /* Chrome10+,Safari5.1+ */
-	background: -o-linear-gradient(top,  #2c3742 0%,#28303a 100%); /* Opera 11.10+ */
-	background: -ms-linear-gradient(top,  #2c3742 0%,#28303a 100%); /* IE10+ */
-	background: linear-gradient(to bottom,  #2c3742 0%,#28303a 100%); /* W3C */
-	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#2c3742', endColorstr='#28303a',GradientType=0 ); /* IE6-9 */
+	background: #6CB33F; /* Old browsers */
+	background: -moz-linear-gradient(top,  #6CB33F 0%, #569f27 100%); /* FF3.6+ */
+	background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#6CB33F), color-stop(100%,#569f27)); /* Chrome,Safari4+ */
+	background: -webkit-linear-gradient(top,  #6CB33F 0%,#569f27 100%); /* Chrome10+,Safari5.1+ */
+	background: -o-linear-gradient(top,  #6CB33F 0%,#569f27 100%); /* Opera 11.10+ */
+	background: -ms-linear-gradient(top,  #6CB33F 0%,#569f27 100%); /* IE10+ */
+	background: linear-gradient(to bottom,  #6CB33F 0%,#569f27 100%); /* W3C */
+	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#6CB33F', endColorstr='#569f27',GradientType=0 ); /* IE6-9 */
 }
 .navbar-inverse .btn-navbar {
 	float: left;
@@ -212,8 +212,8 @@ textarea::-webkit-input-placeholder {
 }
 .navbar-inverse .nav > li > a {
 	padding: 13px 15px 8px;
-	border-left: 1px solid #101417;
-	color: rgb(214, 214, 214);
+	border-left: 1px solid #69be33;
+	color: rgb(255, 255, 255);
 	outline: 0px;
 	height: 25px;
 	transition: background .1s linear;
@@ -222,7 +222,7 @@ textarea::-webkit-input-placeholder {
 	-o-transition: background .1s linear;  /* Opera */
 }
 .navbar-inverse .nav > li > a:hover {
-	background: rgba(25, 31, 36,0.6);
+	background: rgba(225, 255, 255,0.6);
 }
 /* TODO: deprecated mobile-menu, ya no se usa, remover despues de migrar todos los htmls al nuevo diseno */
 .navbar-inverse .mobile-menu .nav > li > a {

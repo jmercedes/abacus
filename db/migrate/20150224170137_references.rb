@@ -4,7 +4,8 @@ class References < ActiveRecord::Migration
       t.integer :profile_id
       t.string  :name
       t.string  :last_name
-      t.string  :residence_phone_numner
+      t.string  :personal_identification_number
+      t.string  :residence_phone_number
       t.string  :mobile_phone_number
       t.string  :linkage
     end

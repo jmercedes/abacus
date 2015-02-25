@@ -1,8 +1,8 @@
 class Profile < ActiveRecord::Base
   
   belongs_to :user
-  has_many :assets
-  has_many :references
+  has_many :assets, dependent: :destroy
+  has_many :references, dependent: :destroy
   has_one :guarantor
   
   

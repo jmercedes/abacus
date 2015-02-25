@@ -40,13 +40,13 @@ ActiveRecord::Schema.define(version: 20150224174334) do
     t.float "period_of_time"
   end
 
-  create_table "guarantor", force: true do |t|
+  create_table "guarantors", force: true do |t|
     t.integer "profile_id"
     t.string  "first_name"
     t.string  "second_name"
     t.string  "first_last_name"
     t.string  "second_last_name"
-    t.string  "document_type"
+    t.string  "personal_identification_number"
     t.string  "birth_date"
     t.string  "gender"
     t.string  "nationality"
@@ -143,7 +143,8 @@ ActiveRecord::Schema.define(version: 20150224174334) do
     t.integer "profile_id"
     t.string  "name"
     t.string  "last_name"
-    t.string  "residence_phone_numner"
+    t.string  "personal_identification_number"
+    t.string  "residence_phone_number"
     t.string  "mobile_phone_number"
     t.string  "linkage"
   end

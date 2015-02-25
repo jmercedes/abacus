@@ -1,5 +1,5 @@
 <div class="header">
-        <a href="index.html">
+        <a href="/">
           <%= image_tag 'logo_crediclub.png' %>
         </a>
 </div>
@@ -14,9 +14,9 @@
 							  	<div><%#= f.email_field :email, autofocus: true, placeholder: 'Nombre', class: 'span12' %></div>
 								  <div><%= f.email_field :email, autofocus: true, placeholder: 'Correo Electrónico', class: 'span12' %></div>
 								  <div><%= f.password_field :password, autocomplete: "off", class: 'span12', placeholder: 'Contraseña' %></div>
-								  <div><%= f.password_field :password_confirmation, autocomplete: "off", class: 'span12', placeholder: 'Confirm password' %></div>
+								  <div><%= f.password_field :password_confirmation, autocomplete: "off", class: 'span12', placeholder: 'Confirmar contraseña' %></div>
 
-								  <div><%= f.submit "Regístrate", class: 'btn-glow primary signup' %></div>
+								  <div><%= f.submit "Regístrate", class: 'btn-flat success' %></div>
 								<% end %>
 
 								<%= render "devise/shared/links" %>
@@ -25,6 +25,6 @@
 
         <div class="span4 already">
             <p>¿Tienes tu cuenta?</p>
-            <a href="signin.html">Accede</a>
+            <a href="signin.html">Accede ahora</a>
         </div>
     </div>

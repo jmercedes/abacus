@@ -42,5 +42,26 @@ es:
       monthly_income: 'Salario mensual'
       other_income: 'Otros ingresos'
       gender: 'Género'
-      
+      nationality: "Nacionalidad"
+      residence_status: "Status residencia"
+      time_living_in_current_residence: "Tiempo viviendo en residencia"
+      address_2: "Dirección 2"
+      name: "Nombres"
+      lastname: "Apellidos"
+      personal_id: "Cédula"
+      residence_phone_number: "Teléfono residencia"
+      mobile_phone_number: "Teléfono móvil"
+      birth_date: "Fecha nacimiento"
+      linkage: "Vinculo"
+      amount_debt: "Monto adeudato"
+      amount_owned: "Monto pagado"
+      ownership_status: "Estatus de propiedad"
+      asset_name: "Nombre"
+      description: "Descripción"
+      commercial_value: "Valor comercial"
+      zipcode: "Código postal"
+      business_name: "Nombre empresa"
+      job_status: "Estatus laboral"
+      business_phone: "Teléfono empresa"
+      business_social_reason: "Razón social"
       

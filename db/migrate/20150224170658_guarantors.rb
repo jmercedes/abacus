@@ -1,12 +1,12 @@
-class Guarantor < ActiveRecord::Migration
+class Guarantors < ActiveRecord::Migration
   def change
-    create_table :guarantor do |t|
+    create_table :guarantors do |t|
       t.integer :profile_id
       t.string :first_name
       t.string :second_name
       t.string :first_last_name
       t.string :second_last_name
-      t.string :document_type
+      t.string :personal_identification_number
       t.string :birth_date
       t.string :gender
       
