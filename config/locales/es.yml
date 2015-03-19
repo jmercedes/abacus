@@ -20,6 +20,13 @@
 # available at http://guides.rubyonrails.org/i18n.html.
 
 es:
+  activerecord:
+    errors:
+      models:
+        profile:
+          attributes:
+            first_name:
+              blank: "Completar"
   profiles:
     form:
       names: 'Nombres'

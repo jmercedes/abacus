@@ -185,10 +185,10 @@
                 </div>
                 <a href="#">
                     <i class="icon-home"></i>
-                    <span>Home</span>
+                    <span>Inicio</span>
                 </a>
             </li>
-            <!-- 
+            
             <li>
                 <a href="chart-showcase.html">
                     <i class="icon-signal"></i>
@@ -197,12 +197,12 @@
             </li>
             <li>
                 <a class="dropdown-toggle" href="#">
-                    <i class="icon-group"></i>
-                    <span>Users</span>
+                    <i class="icon-user"></i>
+                    <span>Perfil</span>
                     <i class="icon-chevron-down"></i>
                 </a>
                 <ul class="submenu">
-                    <li><a href="user-list.html">User list</a></li>
+                    <li><a href="user-list.html">Activos</a></li>
                     <li><a href="new-user.html">New user form</a></li>
                     <li><a href="user-profile.html">User profile</a></li>
                 </ul>
@@ -271,7 +271,7 @@
                     <li><a href="signup.html">Sign up</a></li>
                 </ul>
             </li>
-						-->
+						
         </ul>
     </div>
     <!-- end sidebar -->
@@ -279,12 +279,12 @@
 
 	<!-- main container -->
     <div class="content">
-		
-      <% if notice %>
-			  <p class="alert alert-success"><%= notice %></p>
-			<% end %>
-			<% if alert %>
-			  <p class="alert alert-danger"><%= alert %></p>
+			
+			<% flash.each do |name, msg| %>
+			  <div class="alert alert-<%= name == :notice ? "success" : "error" %>">
+			    <a class="close" data-dismiss="alert">×</a>
+			    <%= msg %>
+			  </div>
 			<% end %>
   
     <%= yield %>
