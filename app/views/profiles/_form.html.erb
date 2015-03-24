@@ -133,14 +133,11 @@
 
 	                  <h3>Activos</h3>
 										<hr>
-						    <%= f.fields_for :assets do |assets| %>
-										<%= assets.input :name, label: 'Nombre' %>
-										<%= assets.input :description, label: 'Descripción', input_html: { class: 'span6' } %>
-										<%= assets.input :commercial_value, label: 'Valor comercial' %>
-										<%= assets.input :ownership_status, collection: ['Propio', 'Financiado'], label: 'Estatus'  %>
-										<%= assets.input :amount_owned, label: 'Monto pagado' %>
-										<%= assets.input :amount_debt, label: 'Monto adeudado' %>
+
+						    <%= f.fields_for :assets do |builder| %>
+										<%= render "asset_fields", :f => builder %>
 								<% end %>
+								<p><%= link_to_add_fields "Agregar Activo", f, :assets %></p>
 						
 						
 						     <div class="pull-right">

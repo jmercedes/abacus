@@ -14,7 +14,7 @@ class ProfilesController < ApplicationController
     @profile = Profile.new
     
     # @profile.build_guarantor
-    # 2.times { @profile.assets.build }
+    2.times { @profile.assets.build }
     # 2.times { @profile.references.build }
   end
   
@@ -109,7 +109,10 @@ class ProfilesController < ApplicationController
       :commercial_value,
       :ownership_status,
       :amount_owned,
-      :amount_debt)
+      :amount_debt,
+      :assets_attributes => [:profile_id, :name, :description,
+                             :commercial_value, :ownership_status,
+                             :amount_owned, :amount_debt])
     end
     
     

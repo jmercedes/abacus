@@ -24,7 +24,13 @@
                 <li class: "#{'active' if tab == 'profile_edit'}">
 									<%= link_to "Editar", edit_profile_path(user) %></a>
 								</li>
+                <li class: "#{'active' if tab == 'profile_edit'}">
+									<%= link_to "Editar", edit_profile_path(user) %></a>
+								</li>
 
+								<li class: "#{'active' if tab == 'profile_new'}">
+									<%= link_to "Nuevo", new_profile_path %></a>
+								</li>
 								
 					      <!-- %li{class: "#{'active' if tab == 'profile_show'}"}= link_to "Show", profile_path(doctor)
 					      %li{class: "#{'active' if tab == 'profile_edit'}"}= link_to "Edit", edit_profile_path(doctor)
