@@ -19,6 +19,7 @@ gem 'bootstrap-sass', '~> 3.2.0'
 gem 'autoprefixer-rails'
 gem 'simple_form'
 gem 'rails-i18n'
+gem 'haml'
 
 gem 'rails_12factor', group: :production
 

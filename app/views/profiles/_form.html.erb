@@ -3,13 +3,22 @@
         <div class="row-fluid form-wrapper">
             <!-- left column -->
             <div class="span11 column">
-							<% flash.each do |name, msg| %>
-							  <div class="alert alert-<%= name == :notice ? "success" : "error" %>">
-							    <a class="close" data-dismiss="alert">×</a>
-							    <%= msg %>
-							  </div>
-							<% end  %>
+
 							<%= simple_form_for(@profile, html: { class: 'form-vertical' }, defaults: { label_html: { class: 'span3' } }) do |f| %>
+							
+							<% if @profile.errors.any? %>
+						    <div id="error_explanation">
+						      <h2><%= pluralize(@profile.errors.count, "error") %> prohibited this loan from being saved:</h2>
+
+						      <ul>
+						      <% @profile.errors.full_messages.each do |msg| %>
+						        <li><%= msg %></li>
+						      <% end %>
+						      </ul>
+						    </div>
+						  <% end %>
+						  
+							
 	
                 <h3>Información personal</h3>
 								<hr>
@@ -17,6 +26,7 @@
 						        <%= f.input :lastnames, label: 'Apellidos' %>
 					          <%= f.input :personal_identification_number, label: 'Cédula no.' %>
  				        		<%= f.input :nationality, label: 'Nacionalidad' %>
+ 				        		<%#= f.input :country, label: 'Pais' %>
 										<%= f.input :social_status, collection: ['Soltero', 'Casado'], label: 'Estatus' %>
 					          <%= f.input :gender, collection: ['Hombre', 'Mujer'], label: 'Género' %>
 

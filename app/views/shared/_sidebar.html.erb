@@ -1,0 +1,110 @@
+<!-- sidebar -->
+<div id="sidebar-nav">
+    <ul id="dashboard-menu">
+        <li class="active">
+            <div class="pointer">
+                <div class="arrow"></div>
+                <div class="arrow_border"></div>
+            </div>
+            <a href="#">
+                <i class="icon-home"></i>
+                <span>Inicio</span>
+            </a>
+        </li>
+        <li>
+            <a class="dropdown-toggle" href="#">
+                <i class="icon-user"></i>
+                <span>Perfil</span>
+                <i class="icon-chevron-down"></i>
+            </a>
+            <ul class="submenu">
+                <li class: "#{'active' if tab == 'profile_show'}">
+									<%= link_to "Show", profile_path(user) %></a>
+								</li>
+                <li class: "#{'active' if tab == 'profile_edit'}">
+									<%= link_to "Editar", edit_profile_path(user) %></a>
+								</li>
+
+								
+					      <!-- %li{class: "#{'active' if tab == 'profile_show'}"}= link_to "Show", profile_path(doctor)
+					      %li{class: "#{'active' if tab == 'profile_edit'}"}= link_to "Edit", edit_profile_path(doctor)
+					      %li.nav-header Schedule
+					      %li{class: "#{'active' if tab == 'schedule_show'}"}= link_to "Show", schedule_path(doctor)
+					      %li{class: "#{'active' if tab == 'schedule_edit'}"}= link_to "Edit", edit_schedule_path(doctor)
+					      %li.nav-header Appointments
+					      %li{class: "#{'active' if tab == 'appointments_show'}"}= link_to "Show", doctor_appointments_path(doctor)
+					      %li{class: "#{'active' if tab == 'appointments_new'}"}= link_to "Create", new_doctor_appointment_path(doctor)  -->
+					
+				        
+								<%#= link_to "ver", edit_profile_path(@profile) %>
+                <!-- <li><a href="user-profile.html">Ver</a></li> -->
+            </ul>
+        </li>
+        <li>
+            <a class="dropdown-toggle" href="#">
+                <i class="icon-edit"></i>
+                <span>Forms</span>
+                <i class="icon-chevron-down"></i>
+            </a>
+            <ul class="submenu">
+                <li><a href="form-showcase.html">Form showcase</a></li>
+                <li><a href="form-wizard.html">Form wizard</a></li>
+            </ul>
+        </li>
+        <li>
+            <a href="gallery.html">
+                <i class="icon-picture"></i>
+                <span>Gallery</span>
+            </a>
+        </li>
+        <li>
+            <a href="calendar.html">
+                <i class="icon-calendar-empty"></i>
+                <span>Calendar</span>
+            </a>
+        </li>
+        <li>
+            <a class="dropdown-toggle" href="tables.html">
+                <i class="icon-th-large"></i>
+                <span>Tables</span>
+                <i class="icon-chevron-down"></i>
+            </a>
+            <ul class="submenu">
+                <li><a href="tables.html">Custom tables</a></li>
+                <li><a href="datatables.html">DataTables</a></li>
+            </ul>
+        </li>
+        <li>
+            <a class="dropdown-toggle ui-elements" href="#">
+                <i class="icon-code-fork"></i>
+                <span>UI Elements</span>
+                <i class="icon-chevron-down"></i>
+            </a>
+            <ul class="submenu">
+                <li><a href="ui-elements.html">UI Elements</a></li>
+                <li><a href="icons.html">Icons</a></li>
+            </ul>
+        </li>
+        <li>
+            <a href="personal-info.html">
+                <i class="icon-cog"></i>
+                <span>My Info</span>
+            </a>
+        </li>
+        <li>
+            <a class="dropdown-toggle" href="#">
+                <i class="icon-share-alt"></i>
+                <span>Extras</span>
+                <i class="icon-chevron-down"></i>
+            </a>
+            <ul class="submenu">
+                <li><a href="code-editor.html">Code editor</a></li>
+                <li><a href="grids.html">Grids</a></li>
+                <li><a href="signin.html">Sign in</a></li>
+                <li><a href="signup.html">Sign up</a></li>
+            </ul>
+        </li>
+				
+    </ul>
+</div>
+<!-- end sidebar -->

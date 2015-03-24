@@ -18,7 +18,7 @@ class Profile < ActiveRecord::Base
             :city,
             :sector,
             :province,
-            :country,
+            #:country,
             presence: true
             
   validates :personal_identification_number, presence: true,
