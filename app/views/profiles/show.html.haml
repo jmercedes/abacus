@@ -1,0 +1,238 @@
+= content_for :sidebar do 
+  = render 'shared/sidebar', user: @profile, tab: 'profile_show'
+
+#pad-wrapper
+  %h3 Información Personal
+  /%hr
+  .row
+    .span3
+      %strong Nombres:
+      = @profile.names
+      %br
+      %strong Apellidos:
+      = @profile.lastnames
+      %br
+      %strong Cédula:
+      = @profile.personal_identification_number
+      %br
+      %strong Fecha de nacimiento:
+      = @profile.date_of_birth
+      %br
+      %strong Nacionalidad:
+      = @profile.nationality
+      %br
+      %strong Status Social:
+      = @profile.social_status
+      %br
+      %strong Género:
+      = @profile.gender
+      %br
+      %strong Teléfono
+      %br
+      %strong Teléfono Móvil
+      %br
+    .span3      
+      %strong Residencia:
+      = @profile.residence_status
+      %br
+      %strong Años viviendo en residencia actual:
+      = @profile.time_living_in_current_residence
+      %br
+      %strong Dirección:
+      = @profile.address
+      %br
+      %strong Dirección 2:
+      = @profile.address_2
+      %br
+      %strong Referencia:
+      = @profile.address_reference
+      %br
+      %strong Ciudad:
+      = @profile.city
+      %br
+      %strong Sector:
+      = @profile.sector
+      %br
+      %strong Provincia:
+      = @profile.province
+      %br
+      %strong País:
+      = @profile.country
+      %br
+    .span3
+      %strong Nivel académico:
+      = @profile.scholar_degree
+      %br
+      %strong Profesión:
+      = @profile.profession
+      %br
+      %strong Estatus empleo:
+      = @profile.job_status
+      %br
+      %strong Nombre de la empresa:
+      = @profile.business_name
+      %br
+      %strong Razón social:
+      = @profile.business_social_reason
+      %br
+      %strong Posición:
+      = @profile.job_position
+      %br
+      %strong Salario mensual:
+      = @profile.monthly_income
+      %br
+      %strong Otro ingreso:
+      = @profile.other_income
+      %br
+      %strong Teléfono:
+      = @profile.business_phone
+      %br
+  %hr.separator
+
+  %h3 Activos
+  - @profile.assets.each do |asset|
+    .row
+      .span3
+        %strong Nombre:
+        = asset.name
+        %br
+        %strong Descripción:
+        = asset.description
+        %br
+      .span3
+        %strong Valor comercial:
+        = asset.commercial_value
+        %br
+        %strong Estatus de activo:
+        = asset.ownership_status
+        %br
+      .span3
+        %strong Monto pagado:
+        = asset.amount_owned
+        %br
+        %strong Monto adeudado:
+        = asset.amount_debt
+        %br
+    %hr
+  %h3 Información familiar
+  %h4 Información del padre
+  .row
+    .span3
+      %strong Nombres:
+      = @profile.father_names
+      %br
+      %strong Apellidos:
+      = @profile.father_lastnames
+      %br
+      %strong Cédula/Pasaporte:
+      = @profile.father_personal_identification_number
+      %br
+      %strong Fecha de nacimiento:
+      = @profile.father_birthdate
+      %br
+    .span3
+      %strong Teléfono:
+      = @profile.father_residence_phone_number
+      %br
+      %strong Teléfono móvil:
+      = @profile.father_mobile_phone_number
+      %br
+      %strong Dirección:
+      = @profile.father_address
+      %br
+      %strong Dirección 2:
+      = @profile.father_address_2
+      %br
+    .span3
+      %strong Ciudad:
+      = @profile.father_city
+      %br
+      %strong Sector:
+      = @profile.father_sector
+      %br
+      %strong Provincia:
+      = @profile.father_province
+      %br
+      %strong País:
+      = @profile.father_country
+  %hr
+
+  / MADRE
+  %h4 Información de la madre
+  .row
+    .span3
+      %strong Nombres
+      = @profile.mother_names
+      %br
+      %strong Apellidos
+      = @profile.mother_lastnames
+      %br
+      %strong Cédula/Pasaporte
+      = @profile.spouse_personal_identification_number
+      %br
+      %strong Teléfono
+      = @profile.mother_residence_phone_number
+      %br
+    .span3
+      %strong Teléfono móvil
+      = @profile.mother_mobile_phone_number
+      %br
+      %strong Fecha de nacimiento
+      = @profile.mother_birthdate
+      %br
+      %strong Dirección
+      = @profile.mother_address
+      %br
+      %strong Dirección 2
+      = @profile.mother_address_2
+      %br
+    .span3
+      %strong Ciudad
+      = @profile.mother_city
+      %br
+      %strong Sector
+      = @profile.mother_sector
+      %br
+      %strong Provincia
+      = @profile.mother_province
+      %br
+      %strong País
+      = @profile.mother_country
+      %br
+  %hr 
+  / ESPOSA
+  %h4 Información de conyuge
+  .row
+    .span3 
+      %strong Nombres:
+      = @profile.spouse_names
+      %br
+      %strong Apellidos:
+      = @profile.spouse_lastnames
+      %br
+      %strong Cédula/Pasaporte:
+      = @profile.spouse_personal_identification_number
+      %br
+      %strong Teléfono:
+      = @profile.spouse_mobile_phone_number
+      %br
+    .span3
+      %strong Teléfono móvil:
+      = @profile.spouse_mobile_phone_number
+      %br
+      %strong Fecha de nacimiento:
+      = @profile.spouse_birthdate
+      %br
+      %strong Lugar de trabajo:
+      = @profile.spouse_job_place
+      %br
+      %strong Posición:
+      = @profile.spouse_job_position
+      %br
+    .span3
+      %strong Salario mensual:
+      = @profile.spouse_monthly_salary
+      %br
+  / 
+  / 
+  /  = @profile.progress_status  

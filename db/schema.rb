@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150224174334) do
+ActiveRecord::Schema.define(version: 20150330205444) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -95,6 +95,8 @@ ActiveRecord::Schema.define(version: 20150224174334) do
     t.string   "social_status"
     t.string   "gender"
     t.date     "date_of_birth"
+    t.string   "profession"
+    t.string   "scholar_degree"
     t.string   "residence_phone_number"
     t.string   "mobile_phone_number"
     t.string   "office_phone_number"
@@ -102,12 +104,11 @@ ActiveRecord::Schema.define(version: 20150224174334) do
     t.integer  "time_living_in_current_residence"
     t.string   "address"
     t.string   "address_2"
+    t.string   "address_reference"
     t.string   "city"
     t.string   "sector"
     t.string   "province"
     t.string   "country"
-    t.string   "profession"
-    t.string   "scholar_degree"
     t.string   "job_status"
     t.boolean  "currently_working"
     t.string   "business_name"
@@ -120,22 +121,42 @@ ActiveRecord::Schema.define(version: 20150224174334) do
     t.string   "other_income"
     t.string   "father_names"
     t.string   "father_lastnames"
+    t.string   "father_personal_identification_number"
     t.string   "father_residence_phone_number"
     t.string   "father_mobile_phone_number"
     t.string   "father_birthdate"
+    t.string   "father_address"
+    t.string   "father_address_2"
+    t.string   "father_city"
+    t.string   "father_sector"
+    t.string   "father_province"
+    t.string   "father_country"
     t.string   "mother_names"
     t.string   "mother_lastnames"
     t.string   "mother_residence_phone_number"
     t.string   "mother_mobile_phone_number"
     t.string   "mother_birthdate"
+    t.string   "mother_address"
+    t.string   "mother_address_2"
+    t.string   "mother_city"
+    t.string   "mother_sector"
+    t.string   "mother_province"
+    t.string   "mother_country"
     t.string   "spouse_names"
     t.string   "spouse_lastnames"
     t.string   "spouse_personal_identification_number"
     t.string   "spouse_mobile_phone_number"
     t.string   "spouse_birthdate"
+    t.string   "spouse_job_place"
+    t.string   "spouse_job_position"
+    t.string   "spouse_monthly_salary"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "user_id"
+    t.integer  "progress_status", default: 0, null: false
   end
+
+  add_index "profiles", ["user_id"], name: "index_profiles_on_user_id", using: :btree
 
   create_table "references", force: true do |t|
     t.integer "profile_id"

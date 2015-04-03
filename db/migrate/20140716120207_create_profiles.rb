@@ -23,6 +23,7 @@ class CreateProfiles < ActiveRecord::Migration
       t.integer :time_living_in_current_residence
       t.string :address
       t.string :address_2
+      t.string :address_reference
       t.string :city
       t.string :sector
       t.string :province
@@ -60,30 +61,30 @@ class CreateProfiles < ActiveRecord::Migration
       #Family information
       t.string :father_names
       t.string :father_lastnames
+      t.string :father_personal_identification_number
       t.string :father_residence_phone_number
       t.string :father_mobile_phone_number
       t.string :father_birthdate
-
-      # t.string :father_address
-      # t.string :father_address_2
-      # t.string :father_city
-      # t.string :father_sector
-      # t.string :father_province
-      # t.string :father_country
+      t.string :father_address
+      t.string :father_address_2
+      t.string :father_city
+      t.string :father_sector
+      t.string :father_province
+      t.string :father_country
 
       # 
       t.string :mother_names
       t.string :mother_lastnames
+      t.string :father_personal_identification_number
       t.string :mother_residence_phone_number
       t.string :mother_mobile_phone_number
       t.string :mother_birthdate
-
-      # t.string :mother_address
-      # t.string :mother_address_2
-      # t.string :mother_city
-      # t.string :mother_sector
-      # t.string :mother_province
-      # t.string :mother_country
+      t.string :mother_address
+      t.string :mother_address_2
+      t.string :mother_city
+      t.string :mother_sector
+      t.string :mother_province
+      t.string :mother_country
 
       
       t.string :spouse_names
@@ -93,9 +94,9 @@ class CreateProfiles < ActiveRecord::Migration
       t.string :spouse_birthdate
       
       #En la parte del conyugue , donde labora, tel., posición, ingreso, celulares, etc
-      # t.string :spouse_work_place
-      # t.string :spouse_work_position
-      # t.string :spouse_monthly_salary
+      t.string :spouse_job_place
+      t.string :spouse_job_position
+      t.string :spouse_monthly_salary
 
       
       #Education information

@@ -3,20 +3,18 @@
         <div class="row-fluid form-wrapper">
             <!-- left column -->
             <div class="span11 column">
+								 <h1>Editar perfil</h1>
+								<hr>
+							
 
-							<%= simple_form_for(@profile, html: { class: 'form-vertical' }, defaults: { label_html: { class: 'span3' } }) do |f| %>
+							<%= simple_form_for(@profile, html: { class: 'form-vertical' } ) do |f| %>
 							
 							<% if @profile.errors.any? %>
-						    <div id="error_explanation">
-						      <h2><%= pluralize(@profile.errors.count, "error") %> prohibited this loan from being saved:</h2>
-
-						      <ul>
-						      <% @profile.errors.full_messages.each do |msg| %>
-						        <li><%= msg %></li>
-						      <% end %>
-						      </ul>
-						    </div>
-						  <% end %>
+							<div class="alert alert-danger hidden-tablet">
+							      <%= pluralize(@profile.errors.count, "error") %>
+								        prohibited this loan from being saved:
+						 </div>            
+						 <% end %>
 						  
 							
 	
@@ -29,23 +27,20 @@
  				        		<%#= f.input :country, label: 'Pais' %>
 										<%= f.input :social_status, collection: ['Soltero', 'Casado'], label: 'Estatus' %>
 					          <%= f.input :gender, collection: ['Hombre', 'Mujer'], label: 'Género' %>
-
 										<%= f.input :date_of_birth, as: :date, start_year: Date.today.year - 50,
 										                              end_year: Date.today.year - 18,
 										                              order: [:day, :month, :year],
 										 															label: 'Nacimiento' %>
-
 						        <%= f.input :residence_status, collection: ['Propia', 'Alquilada'], label: 'Estatus residencia' %>
-
-						        <%= f.input :time_living_in_current_residence, collection: 1..20,
-																placeholder: 'user@domain.com',
-																label: 'Tiempo viviendo en residencia' %>
+						        <%= f.input :time_living_in_current_residence, collection: 0..20,
+																label: 'Tiempo viviendo en residencia' %><br>
 																
 						        <%= f.input :residence_phone_number, label: 'Teléfono residencia' %>
 						        <%= f.input :mobile_phone_number, label: 'Teléfono móvil' %>
 						        <%= f.input :office_phone_number, label: 'Teléfono oficina'  %>
 						        <%= f.input :address, label: 'Dirección', input_html: { class: 'span6' } %>
 						        <%= f.input :address_2, label: 'Dirección',  input_html: { class: 'span6' } %>
+						        <%= f.input :address_reference, label: 'Referencia' %>
 						        <%= f.input :city, label: 'Ciudad' %>
 						        <%= f.input :sector, label: 'Sector' %>
 						        <%= f.input :province, label: 'Provincia' %>
@@ -101,10 +96,13 @@
 					        <%= f.input :spouse_lastnames, label: 'Apellidos' %>
 					        <%= f.input :spouse_personal_identification_number, label: 'Cédula/Pasaporte' %>
 					        <%= f.input :spouse_mobile_phone_number, label: 'Teléfono' %>
-					        <%#= f.input :spouse_date_of_birth,  as: :date, start_year: Date.today.year - 50,
+					        <%= f.input :spouse_birthdate,  as: :date, start_year: Date.today.year - 50,
 									                              end_year: Date.today.year - 18,
 									                              order: [:day, :month, :year],
 									 															label: 'Nacimiento' %>
+					        <%= f.input :spouse_job_place, label: 'Lugar de trabajo' %>
+					        <%= f.input :spouse_job_position, label: 'Posición de trabajo' %>
+					        <%= f.input :spouse_monthly_salary, label: 'Salario mensual' %>
 
 								<div class="form-subtitle">
 	                  <strong>Información del padre.</strong>
@@ -113,22 +111,28 @@
 					        <%= f.input :father_names, label: 'Nombres' %>
 					        <%= f.input :father_lastnames, label: 'Apellidos' %>
 					        <%#= f.input :father_personal_identification_number, label: 'Cédula/Pasaporte' %>
-					        <%#= f.input :father_mobile_phone_number, label: 'Teléfono' %>
-					        <%#= f.input :father_date_of_birth, label: 'Fecha de nacimiento' %>
-
+					        <%= f.input :father_residence_phone_number, label: 'Teléfono' %>
+					        <%= f.input :father_mobile_phone_number, label: 'Teléfono móvil' %>
+					        <%= f.input :father_address, label: 'Dirección' %>
+					        <%= f.input :father_address_2, label: 'Dirección 2' %>
+					        <%= f.input :father_city, label: 'Ciudad' %>
+					        <%= f.input :father_sector, label: 'Sector' %>
+					        <%= f.input :father_province, label: 'Provincia' %>
 
                 <div class="form-subtitle">
                 	  <strong>Información de la madre</strong>
                 </div>
 
-					        <%#= f.input :mother_names, label: 'Nombres' %>
-					        <%#= f.input :mother_lastnames, label: 'Apellidos' %>
-					        <%#= f.input :mother_personal_identification_number, label: 'Cédula/Pasaporte' %>
-					        <%#= f.input :mother_mobile_phone_number, label: 'Teléfono' %>
-					        <%#= f.input :mother_date_of_birth, label: 'Fecha de nacimiento' %>
-
-
-								
+					        <%= f.input :mother_names, label: 'Nombres' %>
+					        <%= f.input :mother_lastnames, label: 'Apellidos' %>
+					        <%= f.input :mother_residence_phone_number, label: 'Teléfono' %>
+					        <%= f.input :mother_mobile_phone_number, label: 'Teléfono móvil' %>
+					        <%= f.input :mother_birthdate, label: 'Fecha de nacimiento' %>
+					        <%= f.input :mother_address, label: 'Dirección' %>
+					        <%= f.input :mother_address_2, label: 'Dirección 2' %>
+					        <%= f.input :mother_city, label: 'Ciudad' %>
+					        <%= f.input :mother_sector, label: 'Sector' %>
+					        <%= f.input :mother_province, label: 'Provincia' %>
 						
 
 	                  <h3>Activos</h3>

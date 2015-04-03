@@ -5,16 +5,17 @@ class ProfilesController < ApplicationController
   before_action :set_profile, only: [:show, :edit, :update, :destroy]
   
   
-  
   def index
     @profiles = Profile.all
+    
+    @completion_average = Profile.completion_average
   end
 
   def new
     @profile = Profile.new
     
     # @profile.build_guarantor
-    2.times { @profile.assets.build }
+    @profile.assets.build
     # 2.times { @profile.references.build }
   end
   
@@ -42,6 +43,16 @@ class ProfilesController < ApplicationController
   end
 
   def update
+    respond_to do |format|
+      @profile = Profile.find(params[:id])
+      if @profile.update(profile_params)
+        format.html { redirect_to @profile, notice: 'Loan was successfully updated.' }
+        format.json { head :no_content }
+      else
+        format.html { render action: 'edit' }
+        format.json { render json: @profile.errors, status: :unprocessable_entity }
+      end
+    end
   end
 
   private
@@ -110,13 +121,11 @@ class ProfilesController < ApplicationController
       :ownership_status,
       :amount_owned,
       :amount_debt,
+      :progress_status,
       :assets_attributes => [:profile_id, :name, :description,
                              :commercial_value, :ownership_status,
                              :amount_owned, :amount_debt])
     end
     
-    
-
-
 end
 

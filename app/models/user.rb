@@ -6,5 +6,11 @@ class User < ActiveRecord::Base
          :recoverable, :rememberable, :trackable, :validatable
          
  has_one :profile
+ after_create :create_profile
  
+private
+
+  def create_profile
+   build_profile.save(validate: false)
+ end 
 end
