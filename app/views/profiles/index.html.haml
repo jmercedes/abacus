@@ -1,31 +1,3 @@
-= content_for :sidebar do
-  = render 'shared/sidebar', user: :current_user, tab: 'profiles_index'
-
-
-#main-stats
-  .row.row-fluid.stats-row
-    .span3.stat
-      .data
-        %span.number= "#{@completion_average}%"
-        Perfiles
-      %span.date Completados
-    .span3.stat
-      .data
-        %span.number 3240
-        Salario
-      %span.date promedio
-    .span3.stat
-      .data
-        %span.number 322
-        orders
-      %span.date This week
-    .span3.stat.last
-      .data
-        %span.number $2,340
-        sales
-      %span.date last 30 days
-
-
 #pad-wrapper
   / table sample
   / the script for the toggle all checkboxes from header is located in js/theme.js
