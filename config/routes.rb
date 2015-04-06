@@ -4,7 +4,8 @@ AbacusApp::Application.routes.draw do
   devise_scope :user do
     get 'registrations/awaiting_confirmation' => 'registrations#awaiting_confirmation'
   end
-  
+
+  resources :users
   resources :loans
   resources :profiles
   resources :investment_contracts

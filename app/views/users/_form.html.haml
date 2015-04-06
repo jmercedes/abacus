@@ -1,0 +1,42 @@
+= simple_form_for @user, html: { class: 'form-vertical' } do |f|
+  
+
+  = f.input :email, input_html: { disabled: @user.persisted? }
+
+  - if @user.new_record? 
+    = f.input :password, required: true 
+    = f.input :password_confirmation, required: true 
+
+  = f.simple_fields_for :profile, @user.profile do |ff|
+   
+    %h3 Información personal
+    %hr/
+    = render 'users/form_fields/personal_info_fields', f: ff
+   
+    %h3 Información profesional y laboral
+    %hr/
+    = render 'users/form_fields/professional_info_fields', f: ff
+
+    %h3 Información de garante
+    %hr/
+    = render 'users/form_fields/guarantor_fields', f: ff
+
+    %h3 Información familiar
+    %hr/
+    = render 'users/form_fields/family_info_fields', f: ff
+
+    %h3 Activos
+    %hr/
+    = ff.simple_fields_for :assets do |asset|
+      = render "users/form_fields/asset_fields", :f => asset
+
+    %h3 References
+    %hr/
+    = ff.simple_fields_for :references do |ref|
+      = render "users/form_fields/asset_fields", :f => ref      
+    
+  .pull-right
+    = f.submit 'Guardar perfil', :class => 'btn-flat success btn-finish'
+  .clearfix
+
+

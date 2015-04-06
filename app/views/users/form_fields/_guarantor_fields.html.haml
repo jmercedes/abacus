@@ -1,0 +1,16 @@
+= f.simple_fields_for :guarantor do |guarantor|
+  = guarantor.input :first_name, label: 'Nombres'
+  = guarantor.input :second_name, class: 'apellidos'
+  = guarantor.input :personal_identification_number, label: 'Cédula'
+  = guarantor.input :birth_date, as: :date, start_year: Date.today.year - 50, |
+    end_year: Date.today.year - 18,                                           |
+    order: [:day, :month, :year],                                             |
+    label: 'Nacimiento'                                                       |
+  = guarantor.input :gender, collection:['Hombre', 'Mujer']
+  = guarantor.input :nationality, label: 'Nacionalidad'
+  = guarantor.input :residence_phone_number, label: 'Teléfono residencia'
+  = guarantor.input :mobile_phone_number, label: 'Teléfono móvil'
+  = guarantor.input :address, label: 'dirección'
+  = guarantor.input :city, label: 'Ciudad'
+  = guarantor.input :province, label: 'Provincia'
+  = guarantor.input :zipcode, label: 'Código postal'
