@@ -1,8 +1,6 @@
 class Profile < ActiveRecord::Base
   
-  
   before_update :update_profile_progress, :if => Proc.new { |u| u.progress_status < 100 }
-  
   
   belongs_to :user
   has_many :assets, dependent: :destroy
@@ -10,6 +8,8 @@ class Profile < ActiveRecord::Base
   has_one :guarantor
 
   accepts_nested_attributes_for :assets
+  accepts_nested_attributes_for :references
+  accepts_nested_attributes_for :guarantor
 
   
   validates :names,
@@ -32,28 +32,14 @@ class Profile < ActiveRecord::Base
                                              length: { is: 11},
                                              numericality: /\A[+-]?\d+\Z/ 
   
-  # validate  :age_cannot_be_less_than_eighteen
-  
-  #Validate phones
-  # t.string   "residence_phone_number"
-  # t.string   "mobile_phone_number"
-  # t.string   "ofice_phone_number"
-  
-  
-  #validate user is has 18 years old or older
-  # def age_cannot_be_less_than_eighteen
-  #   #age = Date.today - :date_of_birth
-  #   #errors.add(:date_of_birth, "La edad debe ser mayor a los 18 años") if age < 18
-  #   underage = (Date.today - 18.years) < date_of_birth
-  #   errors.add(:date_of_birth, "La edad debe ser mayor a los 18 años") if underage 
-  # end
-  
-  
-  # validates :monthly_incomethly_income, numericality: true
+  def name
+    "#{names} #{lastnames}"
+  end
+
   private
   
 
-  def update_profile_progress
+    def update_profile_progress
       # All useful table fields
       profile_fields = Profile.column_names - ["id", "user_id"] 
 
@@ -73,11 +59,6 @@ class Profile < ActiveRecord::Base
 
       # calculate % of completence and store it in progress_status field
       self.progress_status = (progress * 100 / profile_fields.length).to_i
-  end
-  
-  def self.completion_average
-    profile_average = Profile.all(:select => :progress_status).collect(&:progress_status)
-    progress_average = profile_average.sum.to_f / profile_average.size
-  end
+    end
   
 end

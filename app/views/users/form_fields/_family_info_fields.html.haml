@@ -4,7 +4,7 @@
 = f.input :spouse_lastnames, label: 'Apellidos'
 = f.input :spouse_personal_identification_number, label: 'Cédula/Pasaporte'
 = f.input :spouse_mobile_phone_number, label: 'Teléfono'
-= f.input :spouse_birthdate,  as: :date, start_year: Date.today.year - 50, |
+//= f.input :spouse_birthdate,  as: :date, start_year: Date.today.year - 50, |
   end_year: Date.today.year - 18,                                          |
   order: [:day, :month, :year],                                            |
   label: 'Nacimiento'                                                      |

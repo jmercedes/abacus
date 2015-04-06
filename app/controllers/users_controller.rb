@@ -23,8 +23,7 @@ class UsersController < ApplicationController
 
   # GET /users/new
   def new
-    @user = User.new
-    @user.build_profile.assets.build
+    @user = User.prepare_new
   end
 
   # GET /users/1/edit
@@ -34,6 +33,7 @@ class UsersController < ApplicationController
   # POST /users
   # POST /users.json
   def create
+    # raise
     @user = User.new(user_params)
 
     respond_to do |format|
@@ -79,6 +79,6 @@ class UsersController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def user_params
-      params.require(:user).permit(:email)
+      params.fetch(:user).permit(User::UserPermittedParams)
     end
 end
