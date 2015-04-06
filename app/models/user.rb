@@ -6,7 +6,7 @@ class User < ActiveRecord::Base
   devise :database_authenticatable, :registerable, :confirmable,
          :recoverable, :rememberable, :trackable, :validatable
          
-  has_one :profile
+  has_one :profile, dependent: :destroy
 
   after_create :create_blank_profile, if: Proc.new { |u| u.profile.nil? }
 

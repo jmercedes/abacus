@@ -13,7 +13,7 @@
 
 ActiveRecord::Schema.define(version: 20150330205444) do
 
-  create_table "assets", force: true do |t|
+  create_table "assets", force: :cascade do |t|
     t.integer "profile_id"
     t.string  "name"
     t.text    "description"
@@ -23,7 +23,7 @@ ActiveRecord::Schema.define(version: 20150330205444) do
     t.float   "amount_debt"
   end
 
-  create_table "contract_templates", force: true do |t|
+  create_table "contract_templates", force: :cascade do |t|
     t.integer  "investment_contract_id"
     t.string   "type"
     t.text     "content"
@@ -31,13 +31,13 @@ ActiveRecord::Schema.define(version: 20150330205444) do
     t.datetime "updated_at"
   end
 
-  create_table "fund_assignments", force: true do |t|
+  create_table "fund_assignments", force: :cascade do |t|
     t.float "amount"
     t.float "rate"
     t.float "period_of_time"
   end
 
-  create_table "guarantors", force: true do |t|
+  create_table "guarantors", force: :cascade do |t|
     t.integer "profile_id"
     t.string  "first_name"
     t.string  "second_name"
@@ -55,7 +55,7 @@ ActiveRecord::Schema.define(version: 20150330205444) do
     t.string  "mobile_phone_number"
   end
 
-  create_table "investment_contracts", force: true do |t|
+  create_table "investment_contracts", force: :cascade do |t|
     t.integer  "user_id"
     t.float    "amount"
     t.float    "rate"
@@ -65,17 +65,17 @@ ActiveRecord::Schema.define(version: 20150330205444) do
     t.datetime "updated_at"
   end
 
-  create_table "loan_applications", force: true do |t|
+  create_table "loan_applications", force: :cascade do |t|
     t.float "amount"
     t.float "rate"
   end
 
-  create_table "loan_types", force: true do |t|
+  create_table "loan_types", force: :cascade do |t|
     t.integer "loan_id"
     t.string  "name"
   end
 
-  create_table "loans", force: true do |t|
+  create_table "loans", force: :cascade do |t|
     t.float    "amount"
     t.string   "status"
     t.float    "rate"
@@ -84,7 +84,7 @@ ActiveRecord::Schema.define(version: 20150330205444) do
     t.datetime "updated_at"
   end
 
-  create_table "profiles", force: true do |t|
+  create_table "profiles", force: :cascade do |t|
     t.string   "names"
     t.string   "lastnames"
     t.string   "personal_identification_number"
@@ -155,7 +155,7 @@ ActiveRecord::Schema.define(version: 20150330205444) do
 
   add_index "profiles", ["user_id"], name: "index_profiles_on_user_id"
 
-  create_table "references", force: true do |t|
+  create_table "references", force: :cascade do |t|
     t.integer "profile_id"
     t.string  "name"
     t.string  "last_name"
@@ -165,7 +165,7 @@ ActiveRecord::Schema.define(version: 20150330205444) do
     t.string  "linkage"
   end
 
-  create_table "roles", force: true do |t|
+  create_table "roles", force: :cascade do |t|
     t.string   "name"
     t.integer  "resource_id"
     t.string   "resource_type"
@@ -176,7 +176,7 @@ ActiveRecord::Schema.define(version: 20150330205444) do
   add_index "roles", ["name", "resource_type", "resource_id"], name: "index_roles_on_name_and_resource_type_and_resource_id"
   add_index "roles", ["name"], name: "index_roles_on_name"
 
-  create_table "users", force: true do |t|
+  create_table "users", force: :cascade do |t|
     t.string   "email",                  default: "", null: false
     t.string   "encrypted_password",     default: "", null: false
     t.string   "reset_password_token"
@@ -198,7 +198,7 @@ ActiveRecord::Schema.define(version: 20150330205444) do
   add_index "users", ["email"], name: "index_users_on_email", unique: true
   add_index "users", ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
 
-  create_table "users_roles", id: false, force: true do |t|
+  create_table "users_roles", id: false, force: :cascade do |t|
     t.integer "user_id"
     t.integer "role_id"
   end

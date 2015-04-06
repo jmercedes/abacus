@@ -5,7 +5,7 @@ class Profile < ActiveRecord::Base
   belongs_to :user
   has_many :assets, dependent: :destroy
   has_many :references, dependent: :destroy
-  has_one :guarantor
+  has_one :guarantor, dependent: :destroy
 
   accepts_nested_attributes_for :assets, :allow_destroy => true
   accepts_nested_attributes_for :references, :allow_destroy => true
