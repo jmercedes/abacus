@@ -87,7 +87,8 @@ module PermittableParams
         :commercial_value, 
         :ownership_status,
         :amount_owned, 
-        :amount_debt
+        :amount_debt,
+        :_destroy
       ],
       :references_attributes => [
         :name,
@@ -96,6 +97,7 @@ module PermittableParams
         :residence_phone_number,
         :mobile_phone_number,
         :linkage,
+        :_destroy
       ]                          
     ]
   ]  

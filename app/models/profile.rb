@@ -7,8 +7,8 @@ class Profile < ActiveRecord::Base
   has_many :references, dependent: :destroy
   has_one :guarantor
 
-  accepts_nested_attributes_for :assets
-  accepts_nested_attributes_for :references
+  accepts_nested_attributes_for :assets, :allow_destroy => true
+  accepts_nested_attributes_for :references, :allow_destroy => true
   accepts_nested_attributes_for :guarantor
 
   

@@ -28,6 +28,7 @@ gem 'rails_12factor', group: :production
 gem 'jquery-rails'
 gem 'figaro'
 gem 'rb-fsevent'
+gem "nested_form"
 
 group :assets do
   gem 'coffee-rails'
