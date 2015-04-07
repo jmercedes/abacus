@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150330205444) do
+ActiveRecord::Schema.define(version: 20150407121834) do
 
   create_table "assets", force: :cascade do |t|
     t.integer "profile_id"
@@ -44,7 +44,7 @@ ActiveRecord::Schema.define(version: 20150330205444) do
     t.string  "first_last_name"
     t.string  "second_last_name"
     t.string  "personal_identification_number"
-    t.string  "birth_date"
+    t.date    "birth_date"
     t.string  "gender"
     t.string  "nationality"
     t.string  "address"
@@ -121,7 +121,7 @@ ActiveRecord::Schema.define(version: 20150330205444) do
     t.string   "father_personal_identification_number"
     t.string   "father_residence_phone_number"
     t.string   "father_mobile_phone_number"
-    t.string   "father_birthdate"
+    t.date     "father_birthdate"
     t.string   "father_address"
     t.string   "father_address_2"
     t.string   "father_city"
@@ -132,7 +132,7 @@ ActiveRecord::Schema.define(version: 20150330205444) do
     t.string   "mother_lastnames"
     t.string   "mother_residence_phone_number"
     t.string   "mother_mobile_phone_number"
-    t.string   "mother_birthdate"
+    t.date     "mother_birthdate"
     t.string   "mother_address"
     t.string   "mother_address_2"
     t.string   "mother_city"
@@ -143,7 +143,7 @@ ActiveRecord::Schema.define(version: 20150330205444) do
     t.string   "spouse_lastnames"
     t.string   "spouse_personal_identification_number"
     t.string   "spouse_mobile_phone_number"
-    t.string   "spouse_birthdate"
+    t.date     "spouse_birthdate"
     t.string   "spouse_job_place"
     t.string   "spouse_job_position"
     t.string   "spouse_monthly_salary"

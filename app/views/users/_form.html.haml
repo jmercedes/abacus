@@ -1,4 +1,4 @@
-= simple_nested_form_for @user, url: @user.new_record? ? users_path : user_path(@user),  html: { class: 'form-vertical' } do |f|
+= simple_nested_form_for @user, url: @user.new_record? ? users_path : user_path(@user),  html: { class: 'form-vertical profile-form' } do |f|
   
 
   = f.input :email, input_html: { disabled: @user.persisted? }
@@ -30,13 +30,15 @@
     = ff.simple_fields_for :assets do |asset|
       = render "users/form_fields/asset_fields", :f => asset
     = ff.link_to_add "Add asset", :assets 
-
+    %hr/
+    
     %h3 References
     %hr/
     = ff.simple_fields_for :references do |ref|
       = render "users/form_fields/reference_fields", :f => ref
     = ff.link_to_add "Add reference", :references 
 
+  %hr/
   = f.submit 'Guardar perfil', :class => 'btn-flat success btn-finish'
 
 

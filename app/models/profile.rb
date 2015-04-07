@@ -1,6 +1,8 @@
 class Profile < ActiveRecord::Base
+
+  include PermittableParams
   
-  before_update :update_profile_progress, :if => Proc.new { |u| u.progress_status < 100 }
+  after_validation :update_profile_progress, :if => Proc.new { |u| u.progress_status < 100 }
   
   belongs_to :user
   has_many :assets, dependent: :destroy
@@ -41,24 +43,37 @@ class Profile < ActiveRecord::Base
 
     def update_profile_progress
       # All useful table fields
-      profile_fields = Profile.column_names - ["id", "user_id"] 
+      profile_fields =  ProfileAttributes
+      guarantor_fields = GuarantorAttributes
+      assets_fields = AssetsAttributes - [:_destroy]
+      references_fields = RefrencesAttributes - [:_destroy]
 
-      # iterator starts with 0
       progress = 0
 
-      #loop every field and if it has data add 1 to iterator
       profile_fields.each do |field|
-        progress += 1 unless field.blank?
+        progress += 1 unless self.send(field).blank?
       end
 
-      # add assets to be part of profile completence
-      profile_fields += ["assets"]
+      guarantor_fields.each do |field|
+        progress += 1 unless self.guarantor.send(field).blank?
+      end
 
-      # increment progress if it has any assets
-      progress += 1 if self.assets.any?
+      self.references.each do |ref|
+        references_fields.each do |field|
+          progress += 1 unless ref.send(field).blank?
+        end
+      end
+
+      self.assets.each do |ass|
+        assets_fields.each do |field|
+          progress += 1 unless ass.send(field).blank?
+        end
+      end
 
       # calculate % of completence and store it in progress_status field
-      self.progress_status = (progress * 100 / profile_fields.length).to_i
+      total_fields = profile_fields.length + guarantor_fields.length + (self.assets.length * assets_fields.length) + (self.references.length * references_fields.length)
+      self.progress_status = ((progress * 100) / total_fields ).to_i
+      raise
     end
   
 end

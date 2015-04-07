@@ -3,6 +3,7 @@
     %tr
       %th ID
       %th Email
+      %th % Completed 
       %th Actions
 
   %tbody
@@ -10,6 +11,7 @@
       %tr
         %td= user.id
         %td= user.email
+        %td= user.profile.progress_status
         %td
           = link_to 'Show', user
           = link_to 'Edit', edit_user_path(user)
