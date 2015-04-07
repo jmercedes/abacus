@@ -73,7 +73,6 @@ class Profile < ActiveRecord::Base
       # calculate % of completence and store it in progress_status field
       total_fields = profile_fields.length + guarantor_fields.length + (self.assets.length * assets_fields.length) + (self.references.length * references_fields.length)
       self.progress_status = ((progress * 100) / total_fields ).to_i
-      raise
     end
   
 end
