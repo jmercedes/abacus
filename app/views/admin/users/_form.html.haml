@@ -1,7 +1,11 @@
-= simple_nested_form_for @user, url: @user.new_record? ? users_path : user_path(@user),  html: { class: 'form-vertical profile-form' } do |f|
+= simple_nested_form_for @user, url: @user.new_record? ? admin_users_path : admin_user_path(@user),  html: { class: 'form-vertical profile-form' } do |f|
   
 
   = f.input :email, input_html: { disabled: @user.persisted? }
+
+  - if @user.new_record? 
+    = f.input :password, required: true 
+    = f.input :password_confirmation, required: true 
 
   = f.simple_fields_for :profile do |ff|
 

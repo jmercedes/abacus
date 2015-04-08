@@ -1,15 +1,9 @@
 class UsersController < ApplicationController
-  before_action :set_user, only: [:show, :edit, :update, :destroy]
+  before_action :authenticate_user!
+  before_action :set_user, only: [:show, :edit, :update, :destroy, :profile]
 
-  # GET /users
-  # GET /users.json
-  def index
-    @users = User.all.includes(:profile)
-
-    respond_to do |format|
-      format.html # index.html.erb
-      format.json { render json: @users }
-    end
+  def profile
+    render :show
   end
 
   # GET /users/1
@@ -21,30 +15,8 @@ class UsersController < ApplicationController
     end
   end
 
-  # GET /users/new
-  def new
-    @user = User.prepare_new
-  end
-
   # GET /users/1/edit
   def edit
-  end
-
-  # POST /users
-  # POST /users.json
-  def create
-    # raise
-    @user = User.new(user_params)
-
-    respond_to do |format|
-      if @user.save
-        format.html { redirect_to @user, notice: 'User was successfully created.' }
-        format.json { render json: @user, status: :created }
-      else
-        format.html { render action: 'new' }
-        format.json { render json: @user.errors, status: :unprocessable_entity }
-      end
-    end
   end
 
   # PATCH/PUT /users/1
@@ -61,24 +33,14 @@ class UsersController < ApplicationController
     end
   end
 
-  # DELETE /users/1
-  # DELETE /users/1.json
-  def destroy
-    @user.destroy
-    respond_to do |format|
-      format.html { redirect_to users_url }
-      format.json { head :no_content }
-    end
-  end
-
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_user
-      @user = User.includes(profile: [:guarantor, :assets, :references]).find(params[:id])
+      @user = current_user
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def user_params
-      params.fetch(:user).permit(User::UserPermittedParams)
+      params.require(:user).permit(:email)
     end
 end

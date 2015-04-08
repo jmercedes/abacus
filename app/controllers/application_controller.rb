@@ -7,13 +7,21 @@ class ApplicationController < ActionController::Base
   
   protected
   
-  def layout_by_resource
-    if devise_controller?
-      "devise"
-    else
-      "application"
+    def layout_by_resource
+      if devise_controller?
+        "devise"
+      else
+        "application"
+      end
+    end  
+
+    def after_sign_in_path_for(resource)
+      if resource.is_a?(User) 
+        user_path(resource)
+      else resource.is_a?(AdminUser)
+        admin_dashboard_url
+      end
     end
-  end  
   
   
 end
