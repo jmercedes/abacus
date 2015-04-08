@@ -17,8 +17,11 @@
 = f.input :father_lastnames, label: 'Apellidos'
 = f.input :father_residence_phone_number, label: 'Teléfono'
 = f.input :father_mobile_phone_number, label: 'Teléfono móvil'
+= f.input :father_personal_identification_number
+= f.input :father_birthdate, as: :date
 = f.input :father_address, label: 'Dirección'
 = f.input :father_address_2, label: 'Dirección 2'
+= f.input :father_country
 = f.input :father_city, label: 'Ciudad'
 = f.input :father_sector, label: 'Sector'
 = f.input :father_province, label: 'Provincia'
@@ -31,6 +34,7 @@
 = f.input :mother_birthdate, as: :date, label: 'Fecha de nacimiento'
 = f.input :mother_address, label: 'Dirección'
 = f.input :mother_address_2, label: 'Dirección 2'
+= f.input :mother_country
 = f.input :mother_city, label: 'Ciudad'
 = f.input :mother_sector, label: 'Sector'
 = f.input :mother_province, label: 'Provincia'
