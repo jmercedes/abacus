@@ -40,7 +40,6 @@ class Profile < ActiveRecord::Base
 
   private
   
-
     def update_profile_progress
       # All useful table fields
       profile_fields =  ProfileAttributes
