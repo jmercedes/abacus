@@ -21,18 +21,18 @@
       <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
   %body
     / navbar
-    = render 'shared/navbar'
+    = render '/admin/shared/navbar'
 
     /stats 
-    /= render 'shared/stats'
+    = render '/admin/shared/stats'
           
     /sidebar 
-    = render 'shared/sidebar'
+    = render '/admin/shared/sidebar'
     
     / main container
     .content
-      #pad-wrapper  
-        = yield       
+      = yield       
 
     = javascript_include_tag "application", "data-turbolinks-track" => true
+    %script{:src => "http://cdnjs.cloudflare.com/ajax/libs/raphael/2.1.0/raphael-min.js"}
       

@@ -68,6 +68,9 @@ module PermittableParams
   GuarantorAttributes = [
     :first_name,
     :second_name,
+    :first_last_name,
+    :second_last_name,
+    :second_name,
     :personal_identification_number,
     :birth_date,
     :gender,
@@ -81,7 +84,6 @@ module PermittableParams
   ]
 
   AssetsAttributes = [
-    :profile_id, 
     :name, 
     :description,
     :commercial_value, 

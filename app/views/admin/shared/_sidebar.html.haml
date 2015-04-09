@@ -1,0 +1,27 @@
+/ sidebar
+#sidebar-nav
+  %ul#dashboard-menu
+    %li{class: "#{'active' if controller_name == 'dashboard'}"}
+      - if controller_name == 'dashboard'
+        .pointer
+          .arrow
+          .arrow_border
+      = link_to admin_dashboard_path do 
+        %i.icon-home
+        %span Inicio
+    %li{class: "#{'active' if controller_name == 'users'}"}
+      - if controller_name == 'users'
+        .pointer
+          .arrow
+          .arrow_border
+      = link_to admin_users_path do 
+        %i.icon-user
+        %span Perfiles
+    / %li
+    /   %a{:href => profiles_path}
+    /     %i.icon-money
+    /     %span Préstamos
+    / %li
+    /   %a{:href => profiles_path}
+    /     %i.icon-edit
+    /     %span Solicitudes

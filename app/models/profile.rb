@@ -2,7 +2,7 @@ class Profile < ActiveRecord::Base
 
   include PermittableParams
   
-  after_validation :update_profile_progress, :if => Proc.new { |u| u.progress_status < 100 }
+  before_save :update_profile_progress
   
   belongs_to :user
   has_many :assets, dependent: :destroy
@@ -40,7 +40,6 @@ class Profile < ActiveRecord::Base
 
   private
   
-
     def update_profile_progress
       # All useful table fields
       profile_fields =  ProfileAttributes
@@ -51,22 +50,22 @@ class Profile < ActiveRecord::Base
       progress = 0
 
       profile_fields.each do |field|
-        progress += 1 unless self.send(field).blank?
+        progress += 1 if !self.send(field).nil? || self.send(field).present?
       end
 
       guarantor_fields.each do |field|
-        progress += 1 unless self.guarantor.send(field).blank?
+        progress += 1 if self.guarantor.send(field).present?
       end
 
       self.references.each do |ref|
         references_fields.each do |field|
-          progress += 1 unless ref.send(field).blank?
+          progress += 1 if ref.send(field).present?
         end
       end
 
       self.assets.each do |ass|
         assets_fields.each do |field|
-          progress += 1 unless ass.send(field).blank?
+          progress += 1 if ass.send(field).present?
         end
       end
 

@@ -114,24 +114,24 @@
 - @user.profile.references.each do |reference|
   .row
     .span3
-      %strong Nombres:
+      %strong name:
       = reference.name
       %br
-      %strong Apellidos:
+      %strong last_name:
       = reference.last_name
       %br
     .span3
-      %strong Cédula/Pasaporte:
+      %strong personal_identification_number:
       = reference.personal_identification_number
       %br
-      %strong Teléfono:
+      %strong residence_phone_number:
       = reference.residence_phone_number
       %br
     .span3
-      %strong Teléfono móvil:
+      %strong mobile_phone_number:
       = reference.mobile_phone_number
       %br
-      %strong Vínculo:
+      %strong linkage:
       = reference.linkage
       %br
   %hr  
@@ -254,6 +254,6 @@
     %strong Salario mensual:
     = @user.profile.spouse_monthly_salary
     %br
-
-= link_to 'Edit', edit_user_path(@user)
-
+/ 
+/ 
+/  = @user.profile.progress_status  
