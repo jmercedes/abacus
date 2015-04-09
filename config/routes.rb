@@ -22,6 +22,6 @@ AbacusApp::Application.routes.draw do
   resources :contract_templates
   resources :fund_assignments
 
-  root 'users#profile'
+  root "home#index", as: "user_dashboard"
 
 end

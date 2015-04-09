@@ -7,26 +7,7 @@
     = image_tag 'logo_crediclub.png', class: 'brand'
     %ul.nav.pull-right
       %li.dropdown
-        %a.dropdown-toggle.hidden-phone{"data-toggle" => "dropdown", :href => "#"}
-          Your account
-          %b.caret
-        %ul.dropdown-menu
-          %li
-            %a{:href => "personal-info.html"} Personal info
-          %li
-            %a{:href => "#"} Account settings
-          %li
-            %a{:href => "#"} Billing
-          %li
-            %a{:href => "#"} Export your data
-          %li
-            %a{:href => "#"} Send feedback
-      %li.settings.hidden-phone
-        %a{:href => "personal-info.html", :role => "button"}
-          %i.icon-cog
+        = link_to 'Your account', profile_users_path
       - if user_signed_in?
         %li.settings.hidden-phone
           = link_to('<i class="icon-share-alt"></i>'.html_safe, destroy_user_session_path, :method => :delete)
-      - else
-        %li.settings.hidden-phone
-          = link_to('Login', new_user_session_path)

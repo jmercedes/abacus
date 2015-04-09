@@ -17,6 +17,7 @@ class User < ActiveRecord::Base
   delegate :assets, to: :profile, prefix: false
   delegate :references, to: :profile, prefix: false
   delegate :garantor, to: :profile, prefix: false
+  delegate :editable?, to: :profile, prefix: false
 
   def self.prepare_new
     user = self.new
