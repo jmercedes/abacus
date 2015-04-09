@@ -17,15 +17,19 @@
       = link_to admin_users_path do 
         %i.icon-user
         %span Perfiles
-    %li
-      %a{:href => "#"}
+    %li{class: "#{'active' if controller_name == 'requests'}"}
+      - if controller_name == 'users'
+        .pointer
+          .arrow
+          .arrow_border
+      = link_to admin_requests_path do
         %i.icon-money
         %span Préstamos
-    %li
-      %a{:href => "#"}
-        %i.icon-edit
-        %span Solicitudes
-    %li
-      %a{:href => "#"}
-        %i.icon-edit
-        %span Cuentas
+    / %li
+    /   %a{:href => "#"}
+    /     %i.icon-edit
+    /     %span Solicitudes
+    / %li
+    /   %a{:href => "#"}
+    /     %i.icon-edit
+    /     %span Cuentas
