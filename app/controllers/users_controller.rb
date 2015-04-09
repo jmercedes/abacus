@@ -1,13 +1,12 @@
 class UsersController < ApplicationController
   before_action :authenticate_user!
-  before_action :set_user, only: [:show, :edit, :update, :destroy, :profile]
+  before_action :set_user, only: [:show, :edit, :update, :profile]
+  before_action :check_if_editable!, only: [:edit, :update]
 
   def profile
     render :show
   end
 
-  # GET /users/1
-  # GET /users/1.json
   def show
     respond_to do |format|
       format.html # show.html.erb
@@ -15,12 +14,9 @@ class UsersController < ApplicationController
     end
   end
 
-  # GET /users/1/edit
   def edit
   end
 
-  # PATCH/PUT /users/1
-  # PATCH/PUT /users/1.json
   def update
     respond_to do |format|
       if @user.update(user_params)
@@ -34,13 +30,16 @@ class UsersController < ApplicationController
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
+    
     def set_user
       @user = current_user
     end
 
-    # Never trust parameters from the scary internet, only allow the white list through.
     def user_params
       params.require(:user).permit(:email)
+    end
+
+    def check_if_editable!
+      redirect_to @user, notice: 'Unable to edit completed account' unless @user.profile.editable?
     end
 end

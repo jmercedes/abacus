@@ -24,9 +24,8 @@
       / %li.settings.hidden-phone
       /   %a{:href => "personal-info.html", :role => "button"}
       /     %i.icon-cog
+      %li.dropdown
+        = link_to 'Your account', profile_users_path
       - if user_signed_in?
         %li.settings.hidden-phone
           = link_to('<i class="icon-share-alt"></i>'.html_safe, destroy_user_session_path, :method => :delete)
-      - else
-        %li.settings.hidden-phone
-          = link_to('Login', new_user_session_path)

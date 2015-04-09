@@ -1,6 +1,14 @@
 / sidebar
 #sidebar-nav
   %ul#dashboard-menu
+    %li{class: "#{'active' if controller_name == 'home'}"}
+      - if controller_name == 'home'
+        .pointer
+          .arrow
+          .arrow_border
+      = link_to user_dashboard_path do 
+        %i.icon-home
+        %span Inicio
     %li{class: "#{'active' if controller_name == 'users'}"}
       - if controller_name == 'users'
         .pointer

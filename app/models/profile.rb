@@ -38,6 +38,10 @@ class Profile < ActiveRecord::Base
     "#{names} #{lastnames}"
   end
 
+  def editable?
+    !(self.progress_status == 100)
+  end
+
   private
   
     def update_profile_progress
