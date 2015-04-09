@@ -11,7 +11,15 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150408154152) do
+ActiveRecord::Schema.define(version: 20150409130410) do
+
+  create_table "accounts", force: :cascade do |t|
+    t.string  "name"
+    t.string  "number"
+    t.text    "description"
+    t.float   "amount"
+    t.integer "user_id"
+  end
 
   create_table "admin_users", force: :cascade do |t|
     t.string   "email",                  default: "", null: false
@@ -47,6 +55,11 @@ ActiveRecord::Schema.define(version: 20150408154152) do
     t.text     "content"
     t.datetime "created_at"
     t.datetime "updated_at"
+  end
+
+  create_table "deposits", force: :cascade do |t|
+    t.string "account_id"
+    t.float  "amount"
   end
 
   create_table "fund_assignments", force: :cascade do |t|
@@ -181,6 +194,13 @@ ActiveRecord::Schema.define(version: 20150408154152) do
     t.string  "residence_phone_number"
     t.string  "mobile_phone_number"
     t.string  "linkage"
+  end
+
+  create_table "requests", force: :cascade do |t|
+    t.float   "amount"
+    t.integer "financing_time"
+    t.float   "financing_rate"
+    t.integer "user_id"
   end
 
   create_table "roles", force: :cascade do |t|
