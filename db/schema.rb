@@ -11,15 +11,17 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150409130410) do
+ActiveRecord::Schema.define(version: 20150409140651) do
 
   create_table "accounts", force: :cascade do |t|
     t.string  "name"
     t.string  "number"
     t.text    "description"
-    t.float   "amount"
-    t.integer "user_id"
+    t.decimal "amount",      precision: 8, scale: 2
+    t.integer "company_id"
   end
+
+  add_index "accounts", ["company_id"], name: "index_accounts_on_company_id"
 
   create_table "admin_users", force: :cascade do |t|
     t.string   "email",                  default: "", null: false
@@ -49,6 +51,10 @@ ActiveRecord::Schema.define(version: 20150409130410) do
     t.float   "amount_debt"
   end
 
+  create_table "companies", force: :cascade do |t|
+    t.string "name"
+  end
+
   create_table "contract_templates", force: :cascade do |t|
     t.integer  "investment_contract_id"
     t.string   "type"
@@ -58,9 +64,13 @@ ActiveRecord::Schema.define(version: 20150409130410) do
   end
 
   create_table "deposits", force: :cascade do |t|
-    t.string "account_id"
-    t.float  "amount"
+    t.decimal  "amount",     precision: 8, scale: 2
+    t.integer  "account_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
+
+  add_index "deposits", ["account_id"], name: "index_deposits_on_account_id"
 
   create_table "fund_assignments", force: :cascade do |t|
     t.float "amount"
@@ -197,11 +207,16 @@ ActiveRecord::Schema.define(version: 20150409130410) do
   end
 
   create_table "requests", force: :cascade do |t|
-    t.float   "amount"
-    t.integer "financing_time"
-    t.float   "financing_rate"
-    t.integer "user_id"
+    t.integer  "financing_time"
+    t.float    "financing_rate"
+    t.integer  "user_id"
+    t.decimal  "amount",         precision: 8, scale: 2
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.boolean  "is_approved",                            default: false
   end
+
+  add_index "requests", ["user_id"], name: "index_requests_on_user_id"
 
   create_table "roles", force: :cascade do |t|
     t.string   "name"
