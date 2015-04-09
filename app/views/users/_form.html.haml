@@ -24,25 +24,15 @@
     %h3 Activos
     %hr/
     = ff.simple_fields_for :assets do |asset|
-<<<<<<< HEAD
-      = render "users/form_fields/asset_fields", :f => asset
-    = ff.link_to_add "Añadir activo", :assets 
-=======
       = render "user_form_fields/asset_fields", :f => asset
-    = ff.link_to_add "Add asset", :assets 
->>>>>>> d4e43fa875618d7acd9504fecf3ae71269836af5
+    = ff.link_to_add "Añadir activo", :assets 
     %hr/
     
     %h3 References
     %hr/
     = ff.simple_fields_for :references do |ref|
-<<<<<<< HEAD
-      = render "users/form_fields/reference_fields", :f => ref
-    = ff.link_to_add "Añadir referencia", :references 
-=======
       = render "user_form_fields/reference_fields", :f => ref
-    = ff.link_to_add "Add reference", :references 
->>>>>>> d4e43fa875618d7acd9504fecf3ae71269836af5
+    = ff.link_to_add "Añadir referencia", :references 
 
   %hr/
   = f.submit 'Guardar perfil', :class => 'btn-flat success btn-finish'
