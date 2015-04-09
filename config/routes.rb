@@ -1,5 +1,9 @@
 AbacusApp::Application.routes.draw do
   
+  namespace :admin do
+  get 'loans/index'
+  end
+
   devise_for :admin_users
   devise_for :users, :controllers => { :registrations => "registrations" }
 
