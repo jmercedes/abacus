@@ -8,6 +8,8 @@ class User < ActiveRecord::Base
          
   has_one :profile, dependent: :destroy
 
+  has_many :requests
+
   after_create :create_blank_profile, if: Proc.new { |u| u.profile.nil? }
 
   accepts_nested_attributes_for :profile

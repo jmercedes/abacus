@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150409140651) do
+ActiveRecord::Schema.define(version: 20150410132501) do
 
   create_table "accounts", force: :cascade do |t|
     t.string  "name"
@@ -208,12 +208,12 @@ ActiveRecord::Schema.define(version: 20150409140651) do
 
   create_table "requests", force: :cascade do |t|
     t.integer  "financing_time"
-    t.float    "financing_rate"
+    t.integer  "financing_rate",                         default: 0
     t.integer  "user_id"
     t.decimal  "amount",         precision: 8, scale: 2
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.boolean  "is_approved",                            default: false
+    t.string   "status",                                 default: "pending"
   end
 
   add_index "requests", ["user_id"], name: "index_requests_on_user_id"

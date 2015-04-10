@@ -1,0 +1,23 @@
+%p
+  %b Amount:
+  = number_to_currency @request.amount
+  %br
+
+  %b Financing Rate:
+  = number_to_percentage(@request.financing_rate, precision: 0)   
+  %br
+
+  %b Financing Time:
+  = pluralize @request.financing_time, 'month'
+  %br
+
+  %b Status:
+  = @request.status
+  %br
+
+  %b Created At:
+  = @request.created_at.strftime('%e %b %Y %H:%M:%S')
+  %br
+
+
+= link_to 'Back', user_requests_path
