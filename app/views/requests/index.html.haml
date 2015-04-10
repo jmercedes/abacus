@@ -1,0 +1,22 @@
+%table.table.table-bordered.table-striped
+  %thead
+    %tr
+      %th Amount
+      %th Status
+      %th Financing Time
+      %th Created At
+      %th       
+
+  %tbody
+    - @requests.each do |request|
+      %tr
+        %td= number_to_currency request.amount
+        %td= request.status
+        %td= pluralize request.financing_time, 'month'
+        %td= request.created_at.strftime('%e %b %Y %H:%M:%S')
+        %td
+          = link_to 'Show', [@user, request]
+
+%br
+
+= link_to 'New Request', new_user_request_path(@user)

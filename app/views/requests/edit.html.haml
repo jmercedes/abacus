@@ -1,0 +1,9 @@
+.form-page
+  .row-fluid.form-wrapper
+    %h3 Edit Request
+
+    = render 'form'
+
+    = link_to 'Show', [@user, @request]
+    \|
+    = link_to 'Back', user_requests_path(@user)

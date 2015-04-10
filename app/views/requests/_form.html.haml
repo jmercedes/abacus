@@ -1,0 +1,8 @@
+= simple_form_for [@user, @request], html: { class: 'form-vertical' }  do |f|
+
+  = f.input :amount, input_html:  {value: f.object.amount || '1'}
+  = f.input :financing_time, input_html:  {value: f.object.financing_time || '1'}
+
+    
+  .actions
+    = f.submit 'Save', :class => 'btn-flat success btn-finish'

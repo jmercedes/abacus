@@ -15,6 +15,7 @@ AbacusApp::Application.routes.draw do
 
   resources :users, only: [:show, :edit, :update] do
     get 'profile', on: :collection, as: 'profile'
+    resources :requests, except: [:destroy, :edit, :update]
   end
 
   resources :loans
