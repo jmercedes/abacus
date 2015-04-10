@@ -3,6 +3,10 @@
   = number_to_currency @request.amount
   %br
 
+  %b Financing Rate:
+  = number_to_percentage(@request.financing_rate, precision: 0)   
+  %br
+
   %b Financing Time:
   = pluralize @request.financing_time, 'month'
   %br
