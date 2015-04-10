@@ -1,6 +1,38 @@
-%h1 Admin::Requests#index
-%p Find me in app/views/admin/requests/index.html.haml
+%h1 Solicitudes
 
 #container-fluid
   #pad-wrapper  
     .row-fluid
+      .span
+
+.class.table-wrapper.user-table
+  .row-fluid.head
+    .span12
+    .row-fluid.filter-block
+      .pull-right
+    .row-fluid
+      %table.table.table-hover
+        %thead
+          %tr
+            %th.span4
+              Solicitante
+            %th.span3
+              %span.line>
+              Fecha de solicitud
+            %th.span2
+              %span.line>
+              Monto solicitado
+            %th.span3.align-right
+              %span.line>
+              Correo Electrónico
+        %tbody
+          %tr
+            %td
+              /%img.img-circle.avatar.hidden-phone{:src => "img/contact-img.png"}/
+              %span.subtext Manuel Corripio
+            %td
+              Jan 11, 2015
+            %td
+              10,000
+            %td.align-right
+              ejemplo@usuario.com

@@ -23,13 +23,19 @@
           .arrow
           .arrow_border
       = link_to admin_requests_path do
-        %i.icon-money
+        %i.icon-edit
+        %span Solicitudes
+    %li{class: "#{'active' if controller_name == 'loans'}"}
+      - if controller_name == 'loans'
+        .pointer
+          .arrow
+            .arrow_border
+      = link_to admin_loans_path do
+        %i.icon-edit
         %span Préstamos
-    / %li
-    /   %a{:href => "#"}
-    /     %i.icon-edit
-    /     %span Solicitudes
-    / %li
+    %li{class: "#{'active' if controller_name == 'accounts'}"} 
+     - if controller_name == 'accounts'
+     
     /   %a{:href => "#"}
     /     %i.icon-edit
     /     %span Cuentas
