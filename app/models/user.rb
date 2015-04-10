@@ -30,6 +30,10 @@ class User < ActiveRecord::Base
     user
   end
 
+  def self.for_select
+    all.map{|user| [user.name, user.id] }
+  end
+
   private 
 
     def create_blank_profile

@@ -1,0 +1,30 @@
+%table.table.table-bordered.table-striped
+  %thead
+    %tr
+      %th ID
+      %th Amount
+      %th User
+      %th Status
+      %th Financing Time
+      %th Financing Rate
+      %th Created At
+      %th       
+
+  %tbody
+    - @requests.each do |request|
+      %tr
+        %td= request.id
+        %td= request.user.name
+        %td= number_to_currency request.amount
+        %td= request.status
+        %td= pluralize request.financing_time, 'month'
+        %td= number_to_percentage(request.financing_rate, precision: 0)   
+        %td= request.created_at.strftime('%e %b %Y %H:%M:%S')
+        %td
+          = link_to 'Show', admin_request_path(request)
+          = link_to 'Edit', edit_admin_request_path(request)
+          = link_to 'Destroy', admin_request_path(request), :method => :delete, :data => { :confirm => 'Are you sure?' }
+
+%br
+
+= link_to 'New Request', new_admin_request_path
