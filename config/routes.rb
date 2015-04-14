@@ -18,7 +18,7 @@ AbacusApp::Application.routes.draw do
   namespace :admin do 
     get '/', to: 'dashboard#index', as: 'dashboard'
     resources :users, controller: 'users'
-    resources :loans
+    resources :loans, controller: 'loans'
     resources :accounts
     resources :deposits
     resources :requests, controller: 'requests'

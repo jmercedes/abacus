@@ -1,2 +1,38 @@
-%h1 Admin::Loans#index
-%p Find me in app/views/admin/loans/index.html.haml
+%h1 Préstamos
+
+#container-fluid
+  #pad-wrapper  
+    .row-fluid
+      .span
+
+.class.table-wrapper.user-table
+  .row-fluid.head
+    .span12
+    .row-fluid.filter-block
+      .pull-right
+    .row-fluid
+      %table.table.table-hover
+        %thead
+          %tr
+            %th.span4
+              Deudor
+            %th.span3
+              %span.line>
+              Fecha de emisión
+            %th.span2
+              %span.line>
+              Monto
+            %th.span3.align-right
+              %span.line>
+              Correo Electrónico
+        %tbody
+          %tr
+            %td
+              /%img.img-circle.avatar.hidden-phone{:src => "img/contact-img.png"}/
+              %span.subtext Manuel Corripio
+            %td
+              Jan 11, 2015
+            %td
+              10,000
+            %td.align-right
+              ejemplo@usuario.com
