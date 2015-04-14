@@ -1,0 +1,9 @@
+.form-page
+  .row-fluid.form-wrapper
+    %h3 Edit Loan
+
+    = render 'form'
+
+    = link_to 'Show', [@user, @loan]
+    \|
+    = link_to 'Back', user_loans_path(@user)

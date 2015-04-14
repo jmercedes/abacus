@@ -4,9 +4,7 @@
 %table.table.table-bordered.table-striped
   %thead
     %tr
-      %th ID
       %th Amount
-      %th User
       %th Status
       %th Financing Time
       %th Financing Rate
@@ -17,8 +15,6 @@
   %tbody
     - @loans.each do |loan|
       %tr
-        %td= loan.id
-        %td= loan.user.name
         %td= number_to_currency loan.amount
         %td= loan.status
         %td= pluralize loan.financing_time, 'month'
@@ -26,10 +22,8 @@
         %td= loan.emision_date.try :strftime, '%e %b %Y'
         %td= loan.created_at.strftime('%e %b %Y %H:%M:%S')
         %td
-          = link_to 'Show', admin_loan_path(loan)
-          = link_to 'Edit', edit_admin_loan_path(loan)
-          = link_to 'Destroy', admin_loan_path(loan), :method => :delete, :data => { :confirm => 'Are you sure?' }
+          = link_to 'Show', [@user, loan]
 
 %br
 
-= link_to 'New Loan', new_admin_loan_path
+= link_to 'New Loan', new_user_loan_path(@user)

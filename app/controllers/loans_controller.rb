@@ -1,38 +1,35 @@
 class LoansController < ApplicationController
-  #before_action :authenticate_user!
-
-  before_action :set_loan, only: [:show, :edit, :update, :destroy]
+  before_action :set_user
+  before_action :set_loan, only: [:show]
   
-
-  # GET /loans
-  # GET /loans.json
   def index
-    @loans = Loan.all
+    @loans = @user.loans
+
+    respond_to do |format|
+      format.html # index.html.erb
+      format.json { render json: @loans }
+    end
   end
 
-  # GET /loans/1
-  # GET /loans/1.json
   def show
+    respond_to do |format|
+      format.html # show.html.erb
+      format.json { render json: @loan }
+    end
   end
 
-  # GET /loans/new
   def new
     @loan = Loan.new
   end
 
-  # GET /loans/1/edit
-  def edit
-  end
-
-  # POST /loans
-  # POST /loans.json
   def create
     @loan = Loan.new(loan_params)
+    @loan.user = @user
 
     respond_to do |format|
       if @loan.save
-        format.html { redirect_to @loan, notice: 'Loan was successfully created.' }
-        format.json { render action: 'show', status: :created, location: @loan }
+        format.html { redirect_to [@user, @loan], notice: 'Loan was successfully created.' }
+        format.json { render json: @loan, status: :created }
       else
         format.html { render action: 'new' }
         format.json { render json: @loan.errors, status: :unprocessable_entity }
@@ -40,38 +37,17 @@ class LoansController < ApplicationController
     end
   end
 
-  # PATCH/PUT /loans/1
-  # PATCH/PUT /loans/1.json
-  def update
-    respond_to do |format|
-      if @loan.update(loan_params)
-        format.html { redirect_to @loan, notice: 'Loan was successfully updated.' }
-        format.json { head :no_content }
-      else
-        format.html { render action: 'edit' }
-        format.json { render json: @loan.errors, status: :unprocessable_entity }
-      end
-    end
-  end
-
-  # DELETE /loans/1
-  # DELETE /loans/1.json
-  def destroy
-    @loan.destroy
-    respond_to do |format|
-      format.html { redirect_to loans_url }
-      format.json { head :no_content }
-    end
-  end
-
   private
-    # Use callbacks to share common setup or constraints between actions.
+
     def set_loan
-      @loan = Loan.find(params[:id])
+      @loan = @user.loans.find(params[:id])
     end
 
-    # Never trust parameters from the scary internet, only allow the white list through.
+    def set_user
+      @user = User.find(params[:user_id])
+    end
+
     def loan_params
-      params.require(:loan).permit(:amount)
+      params.require(:loan).permit(:amount, :financing_time, :emision_date)
     end
 end

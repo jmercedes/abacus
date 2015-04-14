@@ -5,7 +5,7 @@ class RequestsController < ApplicationController
   # GET /requests
   # GET /requests.json
   def index
-    @requests = Request.all
+    @requests = @user.requests
 
     respond_to do |format|
       format.html # index.html.erb

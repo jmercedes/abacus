@@ -17,11 +17,20 @@
       = link_to profile_users_path do 
         %i.icon-user
         %span Perfiles
-    / %li{class: "#{'active' if controller_name == 'requests'}"}
-    /   - if controller_name == 'requests'
-    /     .pointer
-    /       .arrow
-    /       .arrow_border
-    /   = link_to user_requests_path(current_user) do 
-    /     %i.icon-user
-    /     %span Requests    
+    %li{class: "#{'active' if controller_name == 'requests'}"}
+      - if controller_name == 'requests'
+        .pointer
+          .arrow
+          .arrow_border
+      = link_to user_requests_path(current_user) do 
+        %i.icon-user
+        %span Requests
+
+    %li{class: "#{'active' if controller_name == 'loans'}"}
+      - if controller_name == 'loans'
+        .pointer
+          .arrow
+          .arrow_border
+      = link_to user_loans_path(current_user) do 
+        %i.icon-user
+        %span Préstamos         

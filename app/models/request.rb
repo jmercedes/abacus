@@ -13,9 +13,9 @@ class Request < ActiveRecord::Base
   before_validation :set_default_financing_rate, if: Proc.new { self.financing_rate.blank? }
 
   validates :user_id, presence: true
-  validates :amount, presence: true, inclusion: { in: 1..100 }
+  validates :amount, presence: true
   validates :financing_time, presence: true, numericality: {greater_than: 0}
-  validates :financing_rate, presence: true, numericality: {greater_than: 0}
+  validates :financing_rate, presence: true, inclusion: { in: 1..100 }
   validates :status, presence: true, inclusion: {in: Statuses }
 
   Statuses.each do |status|

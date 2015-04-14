@@ -9,6 +9,7 @@ class User < ActiveRecord::Base
   has_one :profile, dependent: :destroy
 
   has_many :requests
+  has_many :loans  
 
   after_create :create_blank_profile, if: Proc.new { |u| u.profile.nil? }
 
