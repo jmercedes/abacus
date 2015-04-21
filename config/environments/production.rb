@@ -88,4 +88,6 @@ AbacusApp::Application.configure do
     :domain         => 'heroku.com',
     :enable_starttls_auto => true
   }
+  config.assets.precompile += %w( admin/dashboard.css.scss )
+  
 end
