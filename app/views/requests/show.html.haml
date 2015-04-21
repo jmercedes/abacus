@@ -1,23 +1,23 @@
 %p
-  %b Amount:
+  %b Monto:
   = number_to_currency @request.amount
   %br
 
-  %b Financing Rate:
+  %b Tasa:
   = number_to_percentage(@request.financing_rate, precision: 0)   
   %br
 
-  %b Financing Time:
+  %b Tiempo:
   = pluralize @request.financing_time, 'month'
   %br
 
-  %b Status:
+  %b Estatus:
   = @request.status
   %br
 
-  %b Created At:
+  %b Fecha:
   = @request.created_at.strftime('%e %b %Y %H:%M:%S')
   %br
 
 
-= link_to 'Back', user_requests_path
+= link_to 'Retroceder', user_requests_path

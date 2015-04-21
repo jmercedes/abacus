@@ -2,12 +2,12 @@
   .row.row-fluid.stats-row
     .span3.stat
       .data
-        %span.number= "40.34"  "#{@completion_average}"
+        %span.number= @loans_count
         
       %span.date Préstamos activos
     .span3.stat
       .data
-        %span.number 0
+        %span.number= number_to_currency(@total_lending, unit: '$')
         
       %span.date Capital en préstamos
     .span3.stat
@@ -24,12 +24,12 @@
   .row.row-fluid.stats-row
     .span3.stat
       .data
-        %span.number 68
+        %span.number 0
         
       %span.date Efectivo en caja
     .span3.stat
       .data
-        %span.number 20
+        %span.number= number_to_currency(@available_for_loans, unit: '$')
         
       %span.date Cuotas en atraso
     .span3.stat

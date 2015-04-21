@@ -1,33 +1,34 @@
 %h1 Solicitudes
 %hr
 
-%table.table.table-bordered.table-striped
-  %thead
-    %tr
-      %th ID
-      %th Amount
-      %th User
-      %th Status
-      %th Financing Time
-      %th Financing Rate
-      %th Created At
-      %th       
+.table-wrapper.users-table.section
+  .row-fluid
+    %table.table.table-hover
+      %thead
+        %tr
+          %th ID
+          %th Usuario
+          %th Monto
+          %th Estatus
+          %th Tiempo
+          %th Tasa
+          %th Fecha
+          %th Acciones
 
-  %tbody
-    - @requests.each do |request|
-      %tr
-        %td= request.id
-        %td= request.user.name
-        %td= number_to_currency request.amount
-        %td= request.status
-        %td= pluralize request.financing_time, 'month'
-        %td= number_to_percentage(request.financing_rate, precision: 0)   
-        %td= request.created_at.strftime('%e %b %Y %H:%M:%S')
-        %td
-          = link_to 'Show', admin_request_path(request)
-          = link_to 'Edit', edit_admin_request_path(request)
-          = link_to 'Destroy', admin_request_path(request), :method => :delete, :data => { :confirm => 'Are you sure?' }
+      %tbody
+        - @requests.each do |request|
+          %tr
+            %td= request.id
+            %td= request.user.name
+            %td= number_to_currency(request.amount, delimeter: ',', unit: 'RD$', separator: '.') 
+            %td= request.status
+            %td= pluralize request.financing_time, 'month'
+            %td= number_to_percentage(request.financing_rate, precision: 0)
+            %td= request.created_at.strftime('%e %b %Y %H:%M:%S')
+            %td
+              = link_to 'Ver', admin_request_path(request)
+              = link_to 'Editar', edit_admin_request_path(request)
+              = link_to 'Eliminar', admin_request_path(request), :method => :delete, :data => { :confirm => '¿Estas seguro?' }
 
-%br
-
-= link_to 'New Request', new_admin_request_path
+%hr
+= link_to 'Nueva solicitud', new_admin_request_path

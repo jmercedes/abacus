@@ -1,12 +1,13 @@
 class Admin::Dashboard < ActiveRecord::Base
   
-
   def active_loans_count
-      #active = Loan.select { |l| l.status == 'Activo' } 
+      Loan.count
+     #active = Loan.select { |l| l.status == 'Activo' } 
   end
 
   #Resumen de capital en prestamos
-  def loan_capital_amount
+  def total_lending
+      Loan.sum(:amount)
       #Take all the loans and substract all that have been paid
   end
 

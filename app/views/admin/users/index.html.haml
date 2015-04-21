@@ -1,25 +1,27 @@
-%h1 Perfiles
+%h1 Usuarios
 %hr
 
-%table.table.table-striped.table-bordered
-  %thead
-    %tr
-      %th ID
-      %th Email
-      %th % Completed 
-      %th Actions
+.table-wrapper.users-table.section
+  .row-fluid
+    %table.table.table-hover
+      %thead
+        %tr
+          %th ID
+          %th Correo Electrónico
+          %th % Completado
+          %th Acciones
 
-  %tbody
-    - @users.each do |user|
-      %tr
-        %td= user.id
-        %td= user.email
-        %td= user.profile.progress_status
-        %td
-          = link_to 'Show', admin_user_path(user)
-          = link_to 'Edit', edit_admin_user_path(user)
-          = link_to 'Destroy', admin_user_path(user), :method => :delete, :data => { :confirm => 'Are you sure?' }
+      %tbody
+        - @users.each do |user|
+          %tr
+            %td= user.id
+            %td= user.email
+            %td= user.profile.progress_status
+            %td
+              = link_to 'Ver', admin_user_path(user)
+              = link_to 'Editar', edit_admin_user_path(user)
+              = link_to 'Eliminar', admin_user_path(user), :method => :delete, :data => { :confirm => '¿Estas seguro?' }
 
-%br
 
-= link_to 'New User', new_admin_user_path
+= link_to 'Nuevo usuario', new_admin_user_path
+

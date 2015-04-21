@@ -1,0 +1,41 @@
+%h1 Cuentas
+
+
+
+.table-wrapper.users-table.section
+  .row-fluid
+    %table.table.table-hover
+      %thead
+        %tr
+          %th.span1
+            ID
+          %th.span2
+            Nombre
+          %th.span2
+            %span.line>
+            Número
+          %th.span3
+            %span.line>
+            Descripción
+          %th.span3
+            %span.line>
+            Monto
+          %th.span2
+            Acciones
+      %tbody
+        - @accounts.each do |account|
+          %tr
+            %td= account.id
+            %td= account.name
+            %td= account.number
+            %td= account.description
+            %td= number_to_currency(account.amount, delimiter: ',', separator: '.', unit: 'RD$')
+            %td
+              %ul.actions
+                %li
+                  = link_to 'ver', admin_account_path(account)
+                  = link_to 'Editar', edit_admin_account_path(account)
+                  = link_to 'Eliminar', admin_account_path(account), :method => :delete, :data => { :confirm => '¿Estas seguro?' }
+
+
+= link_to 'Nueva cuenta', new_admin_account_path

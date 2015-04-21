@@ -1,0 +1,11 @@
+
+= simple_form_for [:admin, @payment], html: { class: 'form-vertical' }  do |f|
+  
+  = f.association :loan, collection: Loan.approved_loans, prompt: "Seleccionar préstamo", label_method: :user_id
+  = f.input :amount, label: "Monto"
+  = f.input :payment_day, label: "Fecha"
+    
+  .actions
+    = f.submit 'registrar', :class => 'btn-flat success btn-finish'
+
+%hr

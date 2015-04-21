@@ -1,0 +1,22 @@
+%p
+  
+  %b Nombre:
+  = @account.name
+  %br
+
+  %b Número:
+  = @account.number   
+  %br
+
+  %b Descripción:
+  =  @account.description
+  %br
+
+  %b Monto:
+  = number_to_currency(@account.amount)
+  %br
+
+
+= link_to 'Edit', edit_admin_account_path(@account)
+\|
+= link_to 'Back', admin_accounts_path

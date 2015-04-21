@@ -1,8 +1,8 @@
 class Loan < ActiveRecord::Base
 
-  Pending = 'pending'
-  Approved = 'approved'
-  Declined = 'declined'
+  Pending = 'Pendiente'
+  Approved = 'Aprobado'
+  Declined = 'Declinado'
 
   DefaultFinancingRate = 7
 
@@ -31,5 +31,13 @@ class Loan < ActiveRecord::Base
       self.financing_rate = DefaultFinancingRate
     end
 
-
+    scope :approved_loans, lambda { where(status: Loan::Approved) }
+    
+    def update_account_balance
+      #with_lock do
+      #  loan_amount = self.account.amount - self.loan.amount
+      #end
+    end
+    
+    
 end

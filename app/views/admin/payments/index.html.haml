@@ -1,0 +1,35 @@
+%h1 Pagos
+
+
+
+.table-wrapper.users-table.section
+  .row-fluid
+    %table.table.table-hover
+      %thead
+        %tr
+          %th.span1
+            ID Préstamo
+          %th.span3
+            %span.line>
+            Monto
+          %th.span3
+            %span.line>
+            Fecha de pago
+          %th.span3
+            Acciones
+      %tbody
+        - @payments.each do |payment|
+          %tr
+            %td= payment.loan_id
+            %td= number_to_currency(payment.amount, delimeter: ",", unit: "RD$", presicion: 2, separator: ".")
+            %td= payment.payment_day 
+            %td
+              %ul.actions
+                %li
+                  = link_to 'ver', admin_payment_path(payment)
+                  = link_to 'Editar', edit_admin_payment_path(payment)
+                  = link_to 'Eliminar', admin_payment_path(payment), :method => :delete, :data => { :confirm => '¿Estas seguro?' }
+
+
+%hr
+= link_to 'Nuevo pago', new_admin_payment_path

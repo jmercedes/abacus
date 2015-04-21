@@ -1,8 +1,8 @@
 class Request < ActiveRecord::Base
 
-  Pending = 'pending'
-  Approved = 'approved'
-  Declined = 'declined'
+  Pending = 'Pendiente'
+  Approved = 'Aprobada'
+  Declined = 'Declinada'
 
   DefaultFinancingRate = 7
 

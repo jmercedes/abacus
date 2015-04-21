@@ -2,6 +2,10 @@
   .navbar-inner
     = image_tag 'logo_crediclub.png', class: 'brand'
     %ul.nav.pull-right
+
       - if admin_user_signed_in?
+        %li.dropdown
+          %a.dropdown-toggle.hidden-phone{"data-toggle" => "dropdown", :href => "#"}
+            = current_user
         %li.settings
           = link_to('<i class="icon-share-alt"></i>'.html_safe, destroy_user_session_path, :method => :delete)

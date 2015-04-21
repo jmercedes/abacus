@@ -1,0 +1,14 @@
+
+= simple_form_for [:admin, @deposit], html: { class: 'form-vertical' }  do |f|
+  
+  = f.association :account, collection: Account.all, prompt: "Seleccionar cuenta", label: "Cuenta"
+  /= f.input :account, as: :select, collection: Account.for_select, include_blank: 'Seleccionar cuenta'
+  /= f.input :account_id, as: :select, collection: Account.for_select, include_blank: 'Seleccionar cuenta'
+  = f.input :amount, label: "Monto"
+    
+  .actions
+    = f.submit 'Registrar', :class => 'btn-flat success btn-finish'
+
+
+
+

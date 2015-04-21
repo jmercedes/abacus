@@ -15,7 +15,7 @@
           .arrow
           .arrow_border
       = link_to admin_users_path do 
-        %i.icon-user
+        %i.icon-group
         %span Perfiles
     %li{class: "#{'active' if controller_name == 'requests'}"}
       - if controller_name == 'users'
@@ -31,5 +31,29 @@
           .arrow
           .arrow_border
       = link_to admin_loans_path do
-        %i.icon-edit
+        %i.icon-money
         %span Préstamos
+    %li{class: "#{'active' if controller_name == 'accounts'}"}
+      - if controller_name == 'accounts'
+        .pointer
+          .arrow
+          .arrow_border
+      = link_to admin_accounts_path do 
+        %i.icon-reorder
+        %span Cuentas
+    %li{class: "#{'active' if controller_name == 'accounts'}"}
+      - if controller_name == 'accounts'
+        .pointer
+          .arrow
+          .arrow_border
+      = link_to admin_payments_path do
+        %i.icon-edit
+        %span Pagos
+    %li{class: "#{'active' if controller_name == 'deposits'}"}
+      - if controller_name == 'deposits'
+        .pointer
+          .arrow
+          .arrow_border
+      = link_to admin_deposits_path do
+        %i.icon-edit
+        %span Depósitos	

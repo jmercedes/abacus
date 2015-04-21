@@ -1,0 +1,9 @@
+= simple_form_for [:admin, @account], html: { class: 'form-vertical' }  do |f|
+  
+  = f.input :name
+  = f.input :number
+  = f.input :description
+  = f.input :amount
+    
+  .actions
+    = f.submit 'Save', :class => 'btn-flat success btn-finish'
