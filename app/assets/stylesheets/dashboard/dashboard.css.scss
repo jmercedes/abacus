@@ -1,0 +1,17 @@
+/*
+ *= require_self
+ *= require dashboard/bootstrap
+ *= require dashboard/bootstrap.min
+ *= require dashboard/bootstrap-responsive
+ *= require dashboard/bootstrap-overrides
+ *= require dashboard/font-awesome
+ *= require dashboard/index
+ *= require dashboard/layout
+ *= require dashboard/elements
+ *= require dashboard/icons
+ *= require dashboard/form-showcase
+ */
+
+.profile-form .form-group {
+  min-height: 45px;
+}
