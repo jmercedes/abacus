@@ -88,6 +88,6 @@ AbacusApp::Application.configure do
     :domain         => 'heroku.com',
     :enable_starttls_auto => true
   }
-  #config.assets.precompile += %w( admin/admin.css admin/admin.js )
+  config.assets.precompile += %w(*.png *.jpg *.jpeg *.gif dashboard.css)
   
 end
