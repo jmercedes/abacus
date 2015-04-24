@@ -18,7 +18,7 @@
 = f.input :father_residence_phone_number, label: 'Teléfono'
 = f.input :father_mobile_phone_number, label: 'Teléfono móvil'
 = f.input :father_personal_identification_number
-= f.input :father_birthdate, as: :date
+= f.input :father_birthdate, as: :date, start_year: Date.today.year - 50
 = f.input :father_address, label: 'Dirección'
 = f.input :father_address_2, label: 'Dirección 2'
 = f.input :father_country
@@ -31,7 +31,7 @@
 = f.input :mother_lastnames, label: 'Apellidos'
 = f.input :mother_residence_phone_number, label: 'Teléfono'
 = f.input :mother_mobile_phone_number, label: 'Teléfono móvil'
-= f.input :mother_birthdate, as: :date, label: 'Fecha de nacimiento'
+= f.input :mother_birthdate, as: :date, start_year: Date.today.year - 50, label: 'Fecha de nacimiento'
 = f.input :mother_address, label: 'Dirección'
 = f.input :mother_address_2, label: 'Dirección 2'
 = f.input :mother_country

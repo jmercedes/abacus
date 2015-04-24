@@ -6,6 +6,6 @@
       - if admin_user_signed_in?
         %li.dropdown
           %a.dropdown-toggle.hidden-phone{"data-toggle" => "dropdown", :href => "#"}
-            = current_user
+            = current_admin_user.email
         %li.settings
           = link_to('<i class="icon-share-alt"></i>'.html_safe, destroy_user_session_path, :method => :delete)

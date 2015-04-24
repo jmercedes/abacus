@@ -14,7 +14,7 @@
       .data
         %span.number 0
         
-      %span.date  Préstamos en atraso
+      %span.date  -
     .span3.stat.last
       .data
         %span.number 0
@@ -45,11 +45,13 @@
 
 
 
-#container-fluid
-  #pad-wrapper  
+
+.container-fluid
+  #pad-wrapper
+    / morris stacked chart
     .row-fluid
-      %h4.title Histórico de pagos
+      %h4.title Pagos
       .span12
-        %h5 xxx
+        %h5 Cumplimiento de pagos
         %br/
         #hero-area{:style => "height: 250px;"}

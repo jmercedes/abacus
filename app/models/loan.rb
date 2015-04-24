@@ -18,6 +18,8 @@ class Loan < ActiveRecord::Base
   validates :financing_time, presence: true, numericality: {greater_than: 0}
   validates :financing_rate, presence: true, inclusion: { in: 1..100 }
   validates :status, presence: true, inclusion: {in: Statuses }
+  
+  #validates :funds_availability
 
   Statuses.each do |status|
     define_method "#{status}?" do 
@@ -34,10 +36,15 @@ class Loan < ActiveRecord::Base
     scope :approved_loans, lambda { where(status: Loan::Approved) }
     
     def update_account_balance
-      #with_lock do
-      #  loan_amount = self.account.amount - self.loan.amount
-      #end
+      with_lock do
+        loan_amount = self.account.amount - self.loan.amount
+      end
     end
+    
+    #Validate if there are funds available before granting the loan.
+    #def self.funds_availability
+      #self.loan.amount > Account.sum(:amount)
+    #end
     
     
 end
