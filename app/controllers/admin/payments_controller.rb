@@ -4,6 +4,7 @@ class Admin::PaymentsController < Admin::BaseController
   
   def index
     @payments = ::Payment.all
+    
   end
   
   def new
@@ -18,6 +19,9 @@ class Admin::PaymentsController < Admin::BaseController
 
     respond_to do |format|
       if @payment.save
+         loan = Loan.find(@payment.loan_id)
+         @user = User.find(loan.user_id)
+         Notification.payment_notification(@user).deliver
         format.html { redirect_to [:admin, @payment], notice: 'Loan was successfully created.' }
         format.json { render json: @payment, status: :created }
       else

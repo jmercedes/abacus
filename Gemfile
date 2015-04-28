@@ -34,6 +34,8 @@ gem 'figaro'
 gem 'rb-fsevent'
 gem "nested_form"
 
+gem 'finance_math'
+
 group :assets do
   gem 'coffee-rails'
   gem 'therubyracer', :platforms => :ruby

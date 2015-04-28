@@ -19,7 +19,7 @@ AbacusApp::Application.routes.draw do
   namespace :admin do
   get 'deposits/index'
   end
-
+  
 
   devise_for :admin_users
   devise_for :users, :controllers => { :registrations => "registrations" }
@@ -36,6 +36,13 @@ AbacusApp::Application.routes.draw do
     resources :payments, controller: 'payments'
     resources :deposits, controller: 'deposits'
     resources :requests, controller: 'requests'
+
+    resources :loans do
+      member do
+        get :amortization
+      end
+    end
+
   end
 
 

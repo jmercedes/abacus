@@ -1,5 +1,5 @@
 class Admin::LoansController <  Admin::BaseController
-  before_action :set_admin_loan, only: [:show, :edit, :update, :destroy]
+  before_action :set_admin_loan, only: [:show, :edit, :update, :destroy, :amortization]
 
   def index
     @loans = ::Loan.all
@@ -56,6 +56,10 @@ class Admin::LoansController <  Admin::BaseController
       format.html { redirect_to admin_loans_url }
       format.json { head :no_content }
     end
+  end
+  
+  def amortization
+    @amortization = Loan.amortization_calculation(@loan)
   end
 
   private

@@ -1,0 +1,30 @@
+= @amortization
+%h1 Amortización - Préstamos
+%hr
+
+%table.table.table-bordered.table-striped
+  %thead
+    %tr
+      %th Cuota no.
+      %th Saldo inicial
+      %th Interés
+      %th Abono
+      %th Pago total
+      %th Saldo final
+      %th       
+
+  %tbody
+    - @amortization.each do |a|
+      %tr
+        %td= a
+        %td
+        %td
+        %td
+        %td
+        %td
+        %td
+  /        = link_to 'Show', [@user, loan]
+
+%br
+
+/= link_to 'New Loan', new_user_loan_path(@user)
