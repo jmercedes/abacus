@@ -59,7 +59,7 @@ class Admin::LoansController <  Admin::BaseController
   end
   
   def amortization
-    @amortization = Loan.amortization_calculation(@loan)
+    @amortization = Loan.amortization_calculation
   end
 
   private

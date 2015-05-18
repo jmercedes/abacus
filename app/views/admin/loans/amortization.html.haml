@@ -1,4 +1,5 @@
-= @amortization
+= #debug @amortization
+
 %h1 Amortización - Préstamos
 %hr
 
@@ -6,23 +7,24 @@
   %thead
     %tr
       %th Cuota no.
-      %th Saldo inicial
+      %th Fecha de pago
+      %th Pago
+      %th Capital
       %th Interés
-      %th Abono
-      %th Pago total
-      %th Saldo final
-      %th       
+      %th Balance
+      %th Total interest
 
   %tbody
-    - @amortization.each do |a|
+    - @amortization.each_with_index do |a, x|
       %tr
-        %td= a
+        %td= a[0]
+        %td= a[1]
+        %td= number_to_currency(a[2], unit: "$")
+        %td= number_to_currency(a[3], unit: "$")
+        %td= number_to_currency(a[4], unit: "$")
         %td
-        %td
-        %td
-        %td
-        %td
-        %td
+          %strong= number_to_currency(a[5], unit: "$")
+        %td= number_to_currency(a[6], unit: "$")
   /        = link_to 'Show', [@user, loan]
 
 %br
