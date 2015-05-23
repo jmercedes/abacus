@@ -69,6 +69,6 @@ class Admin::LoansController <  Admin::BaseController
     end
 
     def admin_loan_params
-      params.require(:loan).permit(:amount, :financing_rate, :financing_time, :emision_date, :user_id, :status)
+      params.require(:loan).permit(:late_fee, :capital_payment,:amount, :financing_rate, :financing_time, :emision_date, :user_id, :status)
     end
 end
