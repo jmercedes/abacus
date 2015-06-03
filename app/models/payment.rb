@@ -11,5 +11,12 @@ class Payment < ActiveRecord::Base
     end
   end
   
+  def self.calculate_late_fee
+      loan = Loan.last
+      late_fee_rate = 0.05
+      payment_day = loan.emision_date.strftime("%d")
+      puts payment_day 
+  end
+  
   
 end

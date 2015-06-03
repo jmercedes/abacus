@@ -3,8 +3,8 @@
   
   = f.association :loan, collection: Loan.approved_loans, prompt: "Seleccionar préstamo", label_method: :user_id
   = f.input :amount, label: "Monto"
-  = f.input :payment_day, label: "Fecha"
-  = f.input :late_fee
+  = f.input :payment_date, label: "Fecha"
+  = f.input :late_fee, input_html: { disabled: true }
   = f.input :capital_payment
     
   .actions

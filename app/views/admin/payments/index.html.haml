@@ -22,7 +22,7 @@
           %tr
             %td= payment.loan_id
             %td= number_to_currency(payment.amount, delimeter: ",", unit: "RD$", presicion: 2, separator: ".")
-            %td= payment.payment_day 
+            %td= payment.payment_date 
             %td
               %ul.actions
                 %li

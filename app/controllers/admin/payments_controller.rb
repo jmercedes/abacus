@@ -5,6 +5,8 @@ class Admin::PaymentsController < Admin::BaseController
   def index
     @payments = ::Payment.all
     
+    @late_fee = Payment.calculate_late_fee
+    
   end
   
   def new
@@ -52,6 +54,6 @@ class Admin::PaymentsController < Admin::BaseController
   end
 
   def admin_payment_params
-    params.require(:payment).permit(:amount, :payment_day, :loan_id)
+    params.require(:payment).permit(:amount, :payment_date, :loan_id, :late_fee)
   end
 end
