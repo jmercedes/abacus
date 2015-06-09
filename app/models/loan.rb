@@ -30,13 +30,12 @@ class Loan < ActiveRecord::Base
   end
 
   def amortization_calculation
-    rate = self.financing_rate / (1200)
-    self.financing_time = 60
+    rate = self.financing_rate / 1200
     total_interest = 0
-    payment_day = Date.today 
+    payment_day = self.emision_date
 
     # Monthly payment amount - the same for each month
-    payment_amount = self.amount * ( (rate * ( 1 + rate)**self.financing_time)  / ( ( 1 + rate )**self.financing_time - 1) ) 
+    payment_amount = self.amount * ( (rate * ( 1 + rate)**self.financing_time) / ( ( 1 + rate )**self.financing_time - 1) ) 
     debt = self.amount
 
     period_values = []
@@ -56,7 +55,7 @@ class Loan < ActiveRecord::Base
 
       payment_day += 1.month
 
-      period_values << [payment_counter+1, payment_day, payment_amount.to_f, capital, interest, debt, total_interest ]
+      period_values << [ payment_counter + 1, payment_day, payment_amount.to_f, capital, interest, debt, total_interest ]
     end
 
     period_values
