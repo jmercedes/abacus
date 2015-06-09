@@ -21,73 +21,61 @@ class Loan < ActiveRecord::Base
   
   #validates :funds_availability
 
+  scope :approved_loans, lambda { where(status: Loan::Approved) }
+
   Statuses.each do |status|
     define_method "#{status}?" do 
       self.status == status
     end
   end
 
+  def amortization_calculation
+    rate = self.financing_rate / (1200)
+    self.financing_time = 60
+    total_interest = 0
+    payment_day = Date.today 
+
+    # Monthly payment amount - the same for each month
+    payment_amount = self.amount * ( (rate * ( 1 + rate)**self.financing_time)  / ( ( 1 + rate )**self.financing_time - 1) ) 
+    debt = self.amount
+
+    period_values = []
+
+    self.financing_time.times do |payment_counter|
+      # Remaining debt after payment
+      debt = debt * (1 + rate) - payment_amount
+
+      # Interest
+      interest = debt * rate
+
+      # Principal / Capital
+      capital = payment_amount - interest
+       
+      #Total interest
+      total_interest += interest
+
+      payment_day += 1.month
+
+      period_values << [payment_counter+1, payment_day, payment_amount.to_f, capital, interest, debt, total_interest ]
+    end
+
+    period_values
+  end
+
   private 
 
-    def set_default_financing_rate
-      self.financing_rate = DefaultFinancingRate
+  def set_default_financing_rate
+    self.financing_rate = DefaultFinancingRate
+  end
+
+  def update_account_balance
+    with_lock do
+      loan_amount = self.account.amount - self.loan.amount
     end
-
-    scope :approved_loans, lambda { where(status: Loan::Approved) }
-    
-    def update_account_balance
-      with_lock do
-        loan_amount = self.account.amount - self.loan.amount
-      end
-    end
-    
-    #Validate if there are funds available before granting the loan.
-    #def self.funds_availability
-      #self.loan.amount > Account.sum(:amount)
-    #end
-    
-    def self.amortization_calculation
-      loan_amount = 250000
-      rate = 0.42 / 12
-      periods = 60
-      payment_counter = 0
-      total_interest = 0
-      payment_day = Date.today 
-
-      #Monthly payment amount
-      payment_amount = loan_amount * ( (rate * ( 1 + rate)**periods)  / ( ( 1 + rate )**periods - 1) ) 
-
-      amortization_table = []
-      period_values = []
-
-      periods.times do |period|
-          
-          payment_counter += 1
-          
-          #Monthly payment
-          payment = payment_amount
-
-          #Remaining debt after payment
-          loan_amount = loan_amount * (1 + rate) - payment_amount
-
-          #Interest
-          interest = loan_amount * rate
-
-          #Principal
-          capital = payment - interest
-           
-          #Total interest
-          total_interest = total_interest + interest
-          
-          payment_day += 1.month
-
-          period_values << [payment_counter, payment_day, payment, capital, interest, loan_amount, total_interest ]
-
-          #amortization_table << period_values
-      end
-          period_values
-          #amortization_table
-      
-    end
-    
+  end
+  
+  #Validate if there are funds available before granting the loan.
+  #def self.funds_availability
+    #self.loan.amount > Account.sum(:amount)
+  #end
 end

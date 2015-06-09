@@ -57,18 +57,19 @@ class Admin::LoansController <  Admin::BaseController
       format.json { head :no_content }
     end
   end
-  
+
   def amortization
-    @amortization = Loan.amortization_calculation
+    @amortization = @loan.amortization_calculation
   end
 
   private
 
-    def set_admin_loan
-      @loan = ::Loan.find(params[:id])
-    end
+  def set_admin_loan
+    @loan = ::Loan.find(params[:id])
+  end
 
-    def admin_loan_params
-      params.require(:loan).permit(:late_fee, :capital_payment,:amount, :financing_rate, :financing_time, :emision_date, :user_id, :status)
-    end
+  def admin_loan_params
+    params.require(:loan).permit(:amount, :financing_rate, :financing_time, :emision_date, :user_id, :status)
+  end
+
 end
