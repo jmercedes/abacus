@@ -43,6 +43,12 @@ class Admin::PaymentsController < Admin::BaseController
   end
   
   def destroy
+    @payment.destroy
+
+    respond_to do |format|
+      format.html { redirect_to admin_payments_url }
+      format.json { head :no_content }
+    end
   end
 
   def set_admin_payment
