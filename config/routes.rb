@@ -1,26 +1,4 @@
 AbacusApp::Application.routes.draw do
-  
-  namespace :admin do
-  get 'requests/index'
-  end
-
-  namespace :admin do
-  get 'loans/index'
-  end
-
-  namespace :admin do
-  get 'accounts/index'
-  end
-
-  namespace :admin do
-  get 'payments/index'
-  end
-
-  namespace :admin do
-  get 'deposits/index'
-  end
-  
-
   devise_for :admin_users
   devise_for :users, :controllers => { :registrations => "registrations" }
 
@@ -30,21 +8,22 @@ AbacusApp::Application.routes.draw do
 
   namespace :admin do 
     get '/', to: 'dashboard#index', as: 'dashboard'
-    resources :users, controller: 'users'
-    resources :loans, controller: 'loans'
-    resources :accounts, controller: 'accounts'
-    resources :payments, controller: 'payments'
-    resources :deposits, controller: 'deposits'
-    resources :requests, controller: 'requests'
+
+    resources :users
 
     resources :loans do
-      member do
-        get :amortization
-      end
+      get :amortization, on: :member
     end
 
-  end
+    resources :accounts
 
+    resources :payments do
+      get :calculate_late_fee
+    end
+
+    resources :deposits
+    resources :requests
+  end
 
   resources :users, only: [:show, :edit, :update] do
     get 'profile', on: :collection, as: 'profile'
@@ -58,5 +37,4 @@ AbacusApp::Application.routes.draw do
   resources :fund_assignments
 
   root "home#index", as: "user_dashboard"
-
 end
