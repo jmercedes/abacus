@@ -24,7 +24,7 @@ class Admin::PaymentsController < Admin::BaseController
          loan = Loan.find(@payment.loan_id)
          @user = User.find(loan.user_id)
          Notification.payment_notification(@user).deliver
-        format.html { redirect_to [:admin, @payment], notice: 'Loan was successfully created.' }
+        format.html { redirect_to [:admin, :payments], notice: 'Payment was successfully created.' }
         format.json { render json: @payment, status: :created }
       else
         format.html { render action: 'new' }
