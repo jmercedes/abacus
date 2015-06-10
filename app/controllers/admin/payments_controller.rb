@@ -1,12 +1,8 @@
 class Admin::PaymentsController < Admin::BaseController
   before_action :set_admin_payment, only: [:show, :edit, :update, :destroy]
   
-  
   def index
     @payments = ::Payment.all
-    
-    @late_fee = Payment.calculate_late_fee
-    
   end
   
   def new

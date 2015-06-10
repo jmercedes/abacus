@@ -10,10 +10,10 @@ class Loan < ActiveRecord::Base
 
   before_validation :set_default_financing_rate, if: Proc.new { self.financing_rate.blank? }
 
-  has_many :payments
+  has_many :payments, dependent: :destroy
   belongs_to :user
 
-  validates :user_id, :emision_date, presence: true
+  validates :user_id, :emission_date, presence: true
   validates :amount, presence: true
   validates :financing_time, presence: true, numericality: {greater_than: 0}
   validates :financing_rate, presence: true, inclusion: { in: 1..100 }
@@ -32,7 +32,7 @@ class Loan < ActiveRecord::Base
   def amortization_calculation
     monthly_rate = self.financing_rate / 1200
     total_interest = 0
-    payment_day = self.emision_date
+    payment_day = self.emission_date
 
     # Monthly payment amount - the same for each month
     payment_amount = self.amount * ( (monthly_rate * ( 1 + monthly_rate)**self.financing_time) / ( ( 1 + monthly_rate )**self.financing_time - 1) ) 

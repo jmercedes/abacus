@@ -8,7 +8,7 @@
       %th Status
       %th Financing Time
       %th Financing Rate
-      %th Emision Date
+      %th Emission Date
       %th Created At
       %th       
 
@@ -19,7 +19,7 @@
         %td= loan.status
         %td= pluralize loan.financing_time, 'month'
         %td= number_to_percentage(loan.financing_rate, precision: 0)   
-        %td= loan.emision_date.try :strftime, '%e %b %Y'
+        %td= loan.emission_date.try :strftime, '%e %b %Y'
         %td= loan.created_at.strftime('%e %b %Y %H:%M:%S')
         %td
           = link_to 'Show', [@user, loan]

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150609191246) do
+ActiveRecord::Schema.define(version: 20150610193435) do
 
   create_table "accounts", force: :cascade do |t|
     t.string  "name"
@@ -122,7 +122,7 @@ ActiveRecord::Schema.define(version: 20150609191246) do
     t.decimal  "amount"
     t.decimal  "financing_rate"
     t.integer  "financing_time"
-    t.date     "emision_date"
+    t.date     "emission_date"
     t.integer  "user_id"
     t.string   "status",         default: "pending"
   end

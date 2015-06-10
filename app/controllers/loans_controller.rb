@@ -48,6 +48,6 @@ class LoansController < ApplicationController
     end
 
     def loan_params
-      params.require(:loan).permit(:amount, :financing_time, :emision_date)
+      params.require(:loan).permit(:amount, :financing_time, :emission_date)
     end
 end
