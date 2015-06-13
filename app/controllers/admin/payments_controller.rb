@@ -11,7 +11,7 @@ class Admin::PaymentsController < Admin::BaseController
   
   def edit
   end
-  
+
   def create
     @payment = ::Payment.new(admin_payment_params)
 
@@ -50,6 +50,35 @@ class Admin::PaymentsController < Admin::BaseController
       format.json { head :no_content }
     end
   end
+
+  def calculate_late_fee
+    loan = Loan.find(params[:loan_id])
+    payment_date = Date.parse(params[:payment_date])
+
+    late_fee = 0
+
+    # loan_payment_date = loan.payment_days.find{|loan_payment| loan_payment > (payment_date - 1.month) }
+
+    # # there would be a penalty if a payment date is made after a 5 days of loan payment date
+    # days_diff = (payment_date - loan_payment_date).to_i
+
+    # # late_fee = all previous debt * 5%
+    # late_fee = if days_diff > 5
+      
+    # else
+    #   0
+    # end
+
+    # payment = Payment.where {
+    #     (payment_date.lteq my{loan_payment_date}) &
+    #     (payment_date.gteq my{payment_date + 1.month}) &
+    #     (loan_id.eq my{loan.id})
+    #   }
+
+    render text: late_fee
+  end
+
+  private
 
   def set_admin_payment
     @payment = ::Payment.find(params[:id])

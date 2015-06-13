@@ -18,7 +18,7 @@ AbacusApp::Application.routes.draw do
     resources :accounts
 
     resources :payments do
-      get :calculate_late_fee
+      get :calculate_late_fee, on: :collection
     end
 
     resources :deposits

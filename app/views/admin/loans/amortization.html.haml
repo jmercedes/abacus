@@ -1,5 +1,3 @@
-= #debug @amortization
-
 %h1 Amortización - Préstamos
 %hr
 
@@ -13,18 +11,24 @@
       %th Interés
       %th Balance
       %th Total interest
+      %th Paid in fact
+      %th Late fee
+      %th Extra capital
 
   %tbody
-    - @amortization.each_with_index do |a, x|
+    - @amortization.each do |period|
       %tr
-        %td= a[0]
-        %td= a[1]
-        %td= number_to_currency(a[2], unit: "$")
-        %td= number_to_currency(a[3], unit: "$")
-        %td= number_to_currency(a[4], unit: "$")
+        %td= period[:payment_counter]
+        %td= period[:payment_day]
+        %td= number_to_currency(period[:monthly_payment], unit: "$")
+        %td= number_to_currency(period[:capital], unit: "$")
+        %td= number_to_currency(period[:interest], unit: "$")
         %td
-          %strong= number_to_currency(a[5], unit: "$")
-        %td= number_to_currency(a[6], unit: "$")
+          %strong= number_to_currency(period[:balance], unit: "$")
+        %td= number_to_currency(period[:total_interest], unit: "$")
+        %td= number_to_currency(period[:paid_in_fact], unit: "$")
+        %td= number_to_currency(period[:late_fee], unit: "$")
+        %td= number_to_currency(period[:extra_capital], unit: "$")
   /        = link_to 'Show', [@user, loan]
 
 %br
