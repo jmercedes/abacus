@@ -4,7 +4,6 @@
   = f.input :amount, label: "Monto"
   = f.input :payment_date, label: "Fecha"
   = f.input :late_fee, input_html: { disabled: true, 'data-lfee-url' => calculate_late_fee_admin_payments_path }
-  / = f.input :capital_payment
     
   .actions
     = f.submit 'registrar', :class => 'btn-flat success btn-finish'

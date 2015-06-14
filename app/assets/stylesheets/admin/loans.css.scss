@@ -1,3 +1,13 @@
-// Place all the styles related to the admin/loans controller here.
-// They will automatically be included in application.css.
-// You can use Sass (SCSS) here: http://sass-lang.com/
+table#amortization-table.table-striped {
+  tr.highlighted {
+    background-color: #ffff99 !important;
+  }
+
+  > tbody > tr:nth-child(odd).highlighted > td {
+    background-color: #ffff99;
+  }
+
+  > tbody > tr:nth-child(odd) > td.highlighted {
+    background-color: #ffff99;
+  }
+}

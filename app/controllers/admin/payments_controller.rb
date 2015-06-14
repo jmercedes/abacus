@@ -55,25 +55,11 @@ class Admin::PaymentsController < Admin::BaseController
     loan = Loan.find(params[:loan_id])
     payment_date = Date.parse(params[:payment_date])
 
-    late_fee = 0
+    period = loan.amortization_calculation(current_date: payment_date)[:periods].select do |payment_day, period|
+      (payment_day ... payment_day + 1.month) === payment_date
+    end.values.first
 
-    # loan_payment_date = loan.payment_days.find{|loan_payment| loan_payment > (payment_date - 1.month) }
-
-    # # there would be a penalty if a payment date is made after a 5 days of loan payment date
-    # days_diff = (payment_date - loan_payment_date).to_i
-
-    # # late_fee = all previous debt * 5%
-    # late_fee = if days_diff > 5
-      
-    # else
-    #   0
-    # end
-
-    # payment = Payment.where {
-    #     (payment_date.lteq my{loan_payment_date}) &
-    #     (payment_date.gteq my{payment_date + 1.month}) &
-    #     (loan_id.eq my{loan.id})
-    #   }
+    late_fee = period.try(:[], :late_fee).try(:round, 2) || 0
 
     render text: late_fee
   end

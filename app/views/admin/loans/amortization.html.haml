@@ -1,7 +1,7 @@
 %h1 Amortización - Préstamos
 %hr
 
-%table.table.table-bordered.table-striped
+%table.table.table-bordered.table-striped#amortization-table
   %thead
     %tr
       %th Cuota no.
@@ -16,10 +16,10 @@
       %th Extra capital
 
   %tbody
-    - @amortization.each do |period|
-      %tr
-        %td= period[:payment_counter]
-        %td= period[:payment_day]
+    - @amortization[:periods].each_with_index do |(payment_day, period), payment_counter |
+      %tr{ class: (payment_day ... payment_day + 1.month) === @amortization[:current_date] && 'highlighted' }
+        %td= payment_counter
+        %td= payment_day
         %td= number_to_currency(period[:monthly_payment], unit: "$")
         %td= number_to_currency(period[:capital], unit: "$")
         %td= number_to_currency(period[:interest], unit: "$")
