@@ -414,6 +414,3 @@ DEPENDENCIES
   twitter-bootstrap-rails
   uglifier
   validates_timeliness (~> 3.0)
-
-BUNDLED WITH
-   1.10.3
