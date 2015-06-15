@@ -109,9 +109,11 @@ class Loan < ActiveRecord::Base
 
       balance = balance <= 0 ? 0.0 : balance
 
+# binding.pry if payment_counter == 11
+
       period_values[:periods][payment_day] = {
         monthly_payment: monthly_payment,
-        capital: capital,
+        capital: capital < 0 ? 0 : capital,
         interest: interest,
         balance: balance,
         total_interest: total_interest,
@@ -121,7 +123,7 @@ class Loan < ActiveRecord::Base
       }
 
       payment_counter += 1
-      break if balance == 0
+      break if balance == 0 || (monthly_payment < interest && (payment_day + 1.month) > current_date)
     end
 
     period_values

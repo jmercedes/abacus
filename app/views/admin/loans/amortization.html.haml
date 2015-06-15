@@ -18,7 +18,7 @@
   %tbody
     - @amortization[:periods].each_with_index do |(payment_day, period), payment_counter |
       %tr{ class: (payment_day ... payment_day + 1.month) === @amortization[:current_date] && 'highlighted' }
-        %td= payment_counter
+        %td= payment_counter + 1
         %td= payment_day
         %td= number_to_currency(period[:monthly_payment], unit: "$")
         %td= number_to_currency(period[:capital], unit: "$")
