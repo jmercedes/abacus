@@ -1,23 +1,24 @@
-%p
-  %b Monto:
-  = number_to_currency @request.amount
-  %br
+#pad-wrapper
+  %p
+    %h1 Monto:
+    %h1= number_to_currency(@request.amount, unit: '$', delimeter: ',', separator: '.')
+    %br
 
-  %b Tasa:
-  = number_to_percentage(@request.financing_rate, precision: 0)   
-  %br
+    %b Tasa:
+    = number_to_percentage(@request.financing_rate, precision: 0)   
+    %br
 
-  %b Tiempo:
-  = pluralize @request.financing_time, 'month'
-  %br
+    %b Tiempo:
+    = pluralize @request.financing_time, 'month'
+    %br
 
-  %b Estatus:
-  = @request.status
-  %br
+    %b Estatus:
+    = @request.status
+    %br
 
-  %b Fecha:
-  = @request.created_at.strftime('%e %b %Y %H:%M:%S')
-  %br
+    %b Fecha:
+    = @request.created_at.strftime('%e %b %Y %H:%M:%S')
+    %br
 
 
-= link_to 'Retroceder', user_requests_path
+  = link_to 'Retroceder', user_requests_path

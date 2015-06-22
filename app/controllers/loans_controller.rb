@@ -3,7 +3,8 @@ class LoansController < ApplicationController
   before_action :set_loan, only: [:show]
   
   def index
-    @loans = @user.loans
+    @loan = @user.loan.nil? ? 0 : @user.loan
+    @payments = @loan.payments
 
     respond_to do |format|
       format.html # index.html.erb

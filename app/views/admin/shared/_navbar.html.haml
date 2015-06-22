@@ -1,11 +1,22 @@
-.navbar.navbar-inverse
-  .navbar-inner
-    = image_tag 'logo_crediclub.png', class: 'brand'
-    %ul.nav.pull-right
+%header.navbar.navbar-inverse{:role => "banner"}
+  .navbar-header
+    %button#menu-toggler.navbar-toggle{"data-toggle" => "collapse", :type => "button"}
+      %span.sr-only Toggle navigation
+      %span.icon-bar
+      %span.icon-bar
+      %span.icon-bar
+    = image_tag 'logo_crediclub.png', class: 'navbar-brand'
+  %ul.nav.navbar-nav.pull-right.hidden-xs
+    - if admin_user_signed_in?
+      %li.dropdown
+        %a.dropdown-toggle.hidden-xs.hidden-sm{"data-toggle" => "dropdown", :href => "#"}
+          Tu cuenta
+          %b.caret
+        %ul.dropdown-menu
+          %li
+            %a{:href => "personal-info.html"} Información personal
+      %li.settings.hidden-xs.hidden-sm
+      %li.settings.hidden-xs.hidden-sm
+        = link_to('<i class="icon-share-alt"></i>'.html_safe, destroy_user_session_path, :method => :delete)
 
-      - if admin_user_signed_in?
-        %li.dropdown
-          %a.dropdown-toggle.hidden-phone{"data-toggle" => "dropdown", :href => "#"}
-            = current_admin_user.email
-        %li.settings
-          = link_to('<i class="icon-share-alt"></i>'.html_safe, destroy_user_session_path, :method => :delete)
+

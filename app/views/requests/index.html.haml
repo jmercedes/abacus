@@ -1,27 +1,47 @@
-%h1 Solicitudes
-%hr
+#pad-wrapper.users-list
+  .row.header
+    %h3 Solicitud
+    .col-md-10.col-sm-12.col-xs-12.pull-right
+      = link_to new_user_request_path(@user), :class => 'btn-flat success pull-right' do
+        %span +
+        Nueva solicitud
 
-%table.table.table-bordered.table-striped
-  %thead
-    %tr
-      %th Monto
-      %th Estatus
-      %th Tiempo
-      %th Tasa
-      %th Fecha
-      %th       
+  .row
+    .col-md-12
+      %table.table.table-hover
+        %thead
+          %tr
+            %th.col-md-2
+              Monto
+            %th.col-md-1
+              %span.line>
+              Estatus
+            %th.col-md-2
+              %span.line>
+              Financiamiento
+            %th.col-md-1
+              %span.line> 
+              Tasa anual
+            %th.col-md-2
+              %span.line> 
+              Fecha
+            %th.col-md-2
+              %span.line> 
+              ACCIONES
 
-  %tbody
-    - @requests.each do |request|
-      %tr
-        %td= number_to_currency request.amount
-        %td= request.status
-        %td= pluralize request.financing_time, 'month'
-        %td= number_to_percentage(request.financing_rate, precision: 0)   
-        %td= request.created_at.strftime('%e %b %Y %H:%M:%S')
-        %td
-          = link_to 'Ver', [@user, request]
-
-%br
-
-= link_to 'Nueva solicitud', new_user_request_path(@user)
+        %tbody
+          - @requests.each do |request|
+            %tr.first
+              %td
+                = number_to_currency(request.amount, unit: '$', separator: '.', delimiter: ',') 
+              %td
+                = request.status
+              %td
+                = pluralize request.financing_time, 'month'
+              %td
+                = number_to_percentage(request.financing_rate, precision: 0)
+              %td
+                = request.created_at.strftime('%e %b %Y %H:%M:%S')
+              %td
+                = link_to 'Ver', [@user, request]
+                

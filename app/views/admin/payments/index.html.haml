@@ -1,35 +1,53 @@
-%h1 Pagos
+#pad-wrapper.users-list
+  .row.header
+    %h3 Pagos
+    .col-md-10.col-sm-12.col-xs-12.pull-right
 
-
-
-.table-wrapper.users-table.section
-  .row-fluid
-    %table.table.table-hover
-      %thead
-        %tr
-          %th.span1
-            ID Préstamo
-          %th.span3
-            %span.line>
-            Monto
-          %th.span3
-            %span.line>
-            Fecha de pago
-          %th.span3
-            Acciones
-      %tbody
-        - @payments.each do |payment|
+  .row
+    .col-md-12
+      %table.table.table-hover
+        %thead
           %tr
-            %td= payment.loan_id
-            %td= number_to_currency(payment.amount, delimeter: ",", unit: "RD$", presicion: 2, separator: ".")
-            %td= payment.payment_date 
-            %td
-              %ul.actions
-                %li
-                  = link_to 'ver', admin_payment_path(payment)
-                  = link_to 'Editar', edit_admin_payment_path(payment)
-                  = link_to 'Eliminar', admin_payment_path(payment), :method => :delete, :data => { :confirm => '¿Estas seguro?' }
+            %th.col-md-1
+              ID
+            %th.col-md-2
+
+              Fecha
+            %th.col-md-1
+              %span.line>
+              Monto
+            %th.col-md-2
+              %span.line>
+              Cargo por mora
+            %th.col-md-1
+              %span.line> 
+              Pago a capital
+            %th.col-md-2
+              %span.line> 
+              Pago interés
+
+        %tbody
+          - @payments.each do |payment|
+            %tr.first
+              %td
+                = payment.loan_id 
+              %td
+                = number_to_currency(payment.amount, delimeter: ",", unit: "RD$", presicion: 2, separator: ".") 
+              %td
+                = payment.payment_date
+              %td
+                = number_to_currency(payment.late_fee, delimeter: ",", unit: "RD$", presicion: 2, separator: ".")
+              %td
+                1
+              %td
+                %ul.actions
+                  %li
+                    = link_to 'ver', admin_payment_path(payment)
+                    = link_to 'Editar', edit_admin_payment_path(payment)
+                    = link_to 'Eliminar', admin_payment_path(payment), :method => :delete, :data => { :confirm => '¿Estas seguro?' }
+                
 
 
-%hr
-= link_to 'Nuevo pago', new_admin_payment_path
+
+  %hr
+  = link_to 'Nuevo pago', new_admin_payment_path

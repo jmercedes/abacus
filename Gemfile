@@ -14,7 +14,6 @@ gem 'active_model_serializers'
 gem 'sass-rails', '~> 4.0.0'
 gem 'font-awesome-rails'
 gem 'bootstrap-sass', '~> 3.2.0'
-gem "less-rails"
 gem "twitter-bootstrap-rails"
 gem 'autoprefixer-rails'
 gem 'simple_form'
@@ -39,7 +38,7 @@ gem 'finance_math'
 
 group :assets do
   gem 'coffee-rails'
-  gem 'therubyracer', :platforms => :ruby
+  #gem 'therubyracer', :platforms => :ruby
   gem 'uglifier'
 end
 

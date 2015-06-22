@@ -1,2 +1,4 @@
-%h1 Home#index
-%p Find me in app/views/home/index.html.haml
+- if current_user.requests.empty?
+  = render 'no_data'
+- else
+  = render 'loan_data'

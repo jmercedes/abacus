@@ -1,27 +1,32 @@
-%h1 Usuarios
-%hr
+#pad-wrapper.user-profile
+  .row.header
+    .col-md-8
+      %h2.name Clientes 
+      %span.area
+    = link_to 'Nuevo cliente', new_admin_user_path, class: 'btn btn-flat success'
 
-.table-wrapper.users-table.section
-  .row-fluid
-    %table.table.table-hover
-      %thead
-        %tr
-          %th ID
-          %th Correo Electrónico
-          %th % Completado
-          %th Acciones
-
-      %tbody
-        - @users.each do |user|
+  .table-wrapper.users-table
+    .row-fluid
+      %table.table.table-hover
+        %thead
           %tr
-            %td= user.id
-            %td= user.email
-            %td= user.profile.progress_status
-            %td
-              = link_to 'Ver', admin_user_path(user)
-              = link_to 'Editar', edit_admin_user_path(user)
-              = link_to 'Eliminar', admin_user_path(user), :method => :delete, :data => { :confirm => '¿Estas seguro?' }
+            %th ID
+            %th Nombre
+            %th Correo Electrónico
+            %th % Completado
+            %th Acciones
+
+        %tbody
+          - @users.each do |user|
+            %tr
+              %td= user.id
+              %td= user.name
+              %td= user.email
+              %td= user.profile.progress_status
+              %td
+                = link_to 'Ver', admin_user_path(user)
+                = link_to 'Editar', edit_admin_user_path(user)
+                = link_to 'Eliminar', admin_user_path(user), :method => :delete, :data => { :confirm => '¿Estas seguro?' }
 
 
-= link_to 'Nuevo usuario', new_admin_user_path
 

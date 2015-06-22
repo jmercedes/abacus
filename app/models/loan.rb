@@ -128,6 +128,7 @@ class Loan < ActiveRecord::Base
 
     period_values
   end
+  
 
   private 
 

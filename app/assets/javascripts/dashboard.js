@@ -1,27 +1,31 @@
 // Morris Area Chart
 $(document).ready(function() { 
 
-Morris.Area({
-    element: 'hero-area',
-    behaveLikeLine: true,
-    data: [
-        {period: '2010 Q1', iphone: 2666, ipad: null},
-        {period: '2010 Q2', iphone: 2778, ipad: 2294},
-        {period: '2010 Q3', iphone: 4912, ipad: 1969},
-        {period: '2010 Q4', iphone: 3767, ipad: 3597},
-        {period: '2011 Q1', iphone: 6810, ipad: 1914},
-        {period: '2011 Q2', iphone: 5670, ipad: 4293},
-        {period: '2011 Q3', iphone: 4820, ipad: 3795},
-        {period: '2011 Q4', iphone: 15073, ipad: 5967},
-        {period: '2012 Q1', iphone: 10687, ipad: 4460},
-        {period: '2012 Q2', iphone: 8432, ipad: 5713}
-    ],
-    xkey: 'period',
-    ykeys: ['iphone', 'ipad'],
-    labels: ['Pagos en fecha', 'Pagos Atrasado'],
-    lineWidth: 2,
-    hideHover: 'auto',
+  new Morris.Area({
+	  // ID of the element in which to draw the chart.
+	  element: 'hero-area',
+	  // Chart data records -- each entry in this array corresponds to a point on
+	  // the chart.
+	  data: [
+	    { year: '2015-05-01', Cuota: 10022.16, Mora: 10522.16 },
+	    { year: '2015-06-01', Cuota: 10022.16, Mora: 10022.16 },
+	    { year: '2015-07-01', Cuota: 10022.16, Mora: 10522.16 },
+	    { year: '2015-08-01', Cuota: 10022.16, Mora: 10522.16 },
+	    { year: '2015-09-01', Cuota: 10022.16, Mora: 10522.16 },
+	    { year: '2015-10-01', Cuota: 10022.16, Mora: 10522.16 },
+	    { year: '2015-11-01', Cuota: 10022.16, Mora: 10522.16 },
+	    { year: '2015-12-01', Cuota: 10022.16, Mora: 10522.16 },
+	    { year: '2016-01-01', Cuota: 10022.16, Mora: 10522.16 },
+	    { year: '2016-02-01', Cuota: 10022.16, Mora: 10522.16 }
+
+	  ],
+	  xkey: 'year',
+	  ykeys: ['Cuota', 'Mora'],
+	  // Labels for the ykeys -- will be displayed when you hover over the
+	  // chart.
+	  labels: ['Cuota'],
     lineColors: ["#81d5d9", "#a6e182"]
-  });
+
+	});;
 
 });

@@ -9,10 +9,6 @@
     %meta{:content => "text/html; charset=utf-8", "http-equiv" => "Content-Type"}/
     /
       <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    / bootstrap
-    / libraries
-    / global styles
-    / this page specific styles
     / open sans font
     %link{:href => "http://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800", :rel => "stylesheet", :type => "text/css"}/
     / lato font
@@ -31,10 +27,9 @@
     
     / main container
     .content
-      #pad-wrapper 
-        = bootstrap_flash
+      /#pad-wrapper 
+      = bootstrap_flash
 
-        = yield       
+      = yield       
 
     = javascript_include_tag "application", "data-turbolinks-track" => true
-      

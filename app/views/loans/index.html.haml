@@ -1,29 +1,44 @@
-%h1 Préstamos
-%hr
+#pad-wrapper.users-list
+  .row.header
+    %h3 Préstamo
+    .col-md-10.col-sm-12.col-xs-12.pull-right
 
-%table.table.table-bordered.table-striped
-  %thead
-    %tr
-      %th Amount
-      %th Status
-      %th Financing Time
-      %th Financing Rate
-      %th Emission Date
-      %th Created At
-      %th       
+  .row
+    .col-md-12
+      %table.table.table-hover
+        %thead
+          %tr
+            %th.col-md-2
+              Monto
+            %th.col-md-1
+              %span.line>
+              Estatus
+            %th.col-md-1
+              %span.line>
+              Financiamiento
+            %th.col-md-1
+              %span.line> 
+              Tasa anual
+            %th.col-md-2
+              %span.line> 
+              Fecha
+            %th.col-md-2
+              %span.line> 
+              ACCIONES
 
-  %tbody
-    - @loans.each do |loan|
-      %tr
-        %td= number_to_currency loan.amount
-        %td= loan.status
-        %td= pluralize loan.financing_time, 'month'
-        %td= number_to_percentage(loan.financing_rate, precision: 0)   
-        %td= loan.emission_date.try :strftime, '%e %b %Y'
-        %td= loan.created_at.strftime('%e %b %Y %H:%M:%S')
-        %td
-          = link_to 'Show', [@user, loan]
-
-%br
-
-= link_to 'New Loan', new_user_loan_path(@user)
+        %tbody
+          - @payments.each do |loan|
+            %tr.first
+              %td
+                /= number_to_currency(loan.amount, unit: '$', separator: '.', delimiter: ',') 
+              %td
+                /= loan.status
+              %td
+                /= pluralize loan.financing_time, 'month'
+              %td
+                /= number_to_percentage(loan.financing_rate, precision: 0)
+              %td
+                /= loan.created_at.strftime('%e %b %Y %H:%M:%S')
+              %td
+                /= link_to 'Histórico de pagos', [@user, loan]
+                

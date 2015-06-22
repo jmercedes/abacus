@@ -1,0 +1,101 @@
+#main-stats
+  .row.row-fluid.stats-row
+    .span3.stat
+      .data
+        %span.number= number_to_currency(@remaining_balance, unit: '$', separator: '.', delimiter: ',')
+        
+      %span.date Balance a la fecha
+    .span3.stat
+      .data
+        %span.number= @payments_count
+        
+      %span.date Cuotas Pagadas
+    .span3.stat
+      .data
+        %span.number= number_to_currency(@monthly_payment, unit: '$')
+        
+      %span.date  Cuota mensual
+    .span3.stat.last
+      .data
+        %span.number= number_to_currency(@borrowed_amount, unit: '$', separator: '.', delimiter: ',')
+        
+      %span.date Monto prestado
+
+#main-stats
+  .row.row-fluid.stats-row
+    .span3.stat
+      .data
+        %span.number= @delayed_payments_quantity
+        
+      %span.date Cuotas atrasadas
+    .span3.stat
+      .data
+        %span.number= @remaining_payments
+        
+      %span.date Cuotas pendientes
+    .span3.stat
+      .data
+        %span.number= pluralize(@loan_financing_time, 'Month')
+        
+      %span.date Financiamiento
+    .span3.stat.last
+      .data
+        %span.number= @loan_emission_date.strftime('%e %B %Y')
+        
+      %span.date Fecha de emisión
+
+#pad-wrapper.users-list
+  .row.header
+    %h3 Pagos realizados
+
+.container-fluid
+  #pad-wrapper
+    / morris stacked chart
+    .row-fluid
+      #hero-area{:style => "height: 250px;"}
+
+#pad-wrapper.users-list
+  .row.header
+    %h3 Pagos realizados
+    .col-md-10.col-sm-12.col-xs-12.pull-right
+
+  .row
+    .col-md-12
+      %table.table.table-hover
+        %thead
+          %tr
+          %th.col-md-1
+            Cuota No.
+            %th.col-md-1
+              %span.line> 
+              Fecha
+            %th.col-md-2
+              %span.line>
+              Monto
+            %th.col-md-2
+              %span.line>
+              Cargo por mora
+            %th.col-md-2
+              %span.line> 
+              Pago a capital
+            %th.col-md-2
+              %span.line> 
+              Pago a interés
+        
+        %body
+          - @all_payments.each do |payment|
+            %tr
+              %td
+                0
+              %td
+                = payment.payment_date
+              %td
+                = number_to_currency(payment.amount, unit: '$', delimeter: ',', separator: '.')
+              %td
+                = number_to_currency(payment.late_fee, unit: '$', delimeter: ',', separator: '.')
+              %td
+                0
+              %td
+                0
+                 
+/= @loan_payment_history 
