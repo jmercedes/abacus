@@ -2,7 +2,7 @@
   .row.row-fluid.stats-row
     .span3.stat
       .data
-        %span.number= number_to_currency(@remaining_balance, unit: '$', separator: '.', delimiter: ',')
+        %span.number= number_to_currency(@remaining_balance, unit: '$', separator: '.', delimiter: ',', format: "%u %n")
         
       %span.date Balance a la fecha
     .span3.stat
@@ -12,12 +12,12 @@
       %span.date Cuotas Pagadas
     .span3.stat
       .data
-        %span.number= number_to_currency(@monthly_payment, unit: '$')
+        %span.number= number_to_currency(@monthly_payment, unit: "$", format: "%u %n")
         
       %span.date  Cuota mensual
     .span3.stat.last
       .data
-        %span.number= number_to_currency(@borrowed_amount, unit: '$', separator: '.', delimiter: ',')
+        %span.number= number_to_currency(@borrowed_amount, unit: '$', separator: '.', delimiter: ',', format: "%u %n")
         
       %span.date Monto prestado
 
@@ -53,6 +53,8 @@
     / morris stacked chart
     .row-fluid
       #hero-area{:style => "height: 250px;"}
+      = content_tag :div, "", id: "payment_chart", data: {payments: @all_payments}
+		  
 
 #pad-wrapper.users-list
   .row.header
@@ -98,4 +100,6 @@
               %td
                 0
                  
-/= @loan_payment_history 
+
+/= @loan_payment_history
+/= @loan_track.to_json 

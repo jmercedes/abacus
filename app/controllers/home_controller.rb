@@ -48,13 +48,18 @@ class HomeController < ApplicationController
        
        #delayed monthly balance amount
        
-       
-       @loan_payment_history = amortization[:periods].each do |payment_day, period|
-         puts period[:balance] # getting balance
-         puts period[:late_fee] # getting late fee
+         
+        @loan_track = []
+        amortization[:periods].each do |payment_day, period|
+         @loan_track << period[:balance] # getting balance
+         @loan_track << period[:payment_day]
        end
        
+       @loan_track
+       
        @amortization = amortization
+       
+       @all_payments = current_user.loan.payments.all
        
     end   
     
