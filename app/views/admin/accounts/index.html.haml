@@ -1,9 +1,10 @@
-#pad-wrapper.user-profile
+#pad-wrapper.users-list
   .row.header
-    .col-md-8
-      %h3.name
-        Cuentas
-      %span.area
+    %h3 Cuentas
+    .col-md-10.col-sm-12.col-xs-12.pull-right
+      = link_to new_admin_account_path, :class => 'btn-flat success pull-right' do
+        %span +
+        Nueva Cuenta
 
   .table-wrapper.users-table
     .row-fluid

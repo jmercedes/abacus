@@ -1,7 +1,9 @@
-.form-page
-  .row-fluid.form-wrapper
-    %h3 Nueva cuenta
-    
-    = render 'form'
+#pad-wrapper.new-user
+  .row.header
+    .col-md-12
+      %h3 Nueva Cuenta
+  .row.form-wrapper
+    .col-md-9.with-sidebar
+      = render 'form'
 
-    = link_to 'Regresar', admin_accounts_path
+      /= link_to 'Regresar', admin_accounts_path
