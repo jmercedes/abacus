@@ -16,7 +16,7 @@ class Loan < ActiveRecord::Base
   validates :user_id, :emission_date, presence: true
   validates :amount, presence: true
   validates :financing_time, presence: true, numericality: {greater_than: 0}
-  validates :financing_rate, presence: true, inclusion: { in: 1..100 }
+  validates :financing_rate, presence: true, inclusion: { in: 0..100 }
   validates :status, presence: true, inclusion: {in: Statuses }
   validate  :not_enough_balance_to_grant_loan
   
