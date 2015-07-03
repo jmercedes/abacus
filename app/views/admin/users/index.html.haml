@@ -1,9 +1,10 @@
-#pad-wrapper.user-profile
+#pad-wrapper.users-list
   .row.header
-    .col-md-8
-      %h2.name Clientes 
-      %span.area
-    = link_to 'Nuevo cliente', new_admin_user_path, class: 'btn btn-flat success'
+    %h3 Clientes
+    .col-md-10.col-sm-12.col-xs-12.pull-right
+      = link_to new_admin_user_path, :class => 'btn-flat success pull-right' do
+        %span +
+        Nuevo Cliente
 
   .table-wrapper.users-table
     .row-fluid

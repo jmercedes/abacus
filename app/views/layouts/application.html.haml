@@ -33,3 +33,11 @@
       = yield       
 
     = javascript_include_tag "application", "data-turbolinks-track" => true
+    %script{:src => "http://cdnjs.cloudflare.com/ajax/libs/raphael/2.1.0/raphael-min.js"}
+
+    - if content_for?(:on_ready)
+      :javascript
+        $(function(){
+          #{yield :on_ready}
+        });
+

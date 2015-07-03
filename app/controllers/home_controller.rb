@@ -55,9 +55,14 @@ class HomeController < ApplicationController
          @loan_track << period[:payment_day]
        end
        
-       @loan_track
        
        @amortization = amortization
+       
+       @morris_chart = @amortization[:periods].inject([]) do |json_data, (key,value)|
+         json_data << { payment_date: key, balance: value[:balance].round(2), payment: value[:paid_in_fact] }
+         json_data
+       end.to_json
+       
        
        @all_payments = current_user.loan.payments.all
        

@@ -1,7 +1,7 @@
-.form-page
-  .row-fluid.form-wrapper
-    %h3 Nuevo préstamo
-    
-    = render 'form'
-
-    = link_to 'Retroceder', admin_loans_path
+#pad-wrapper.new-user
+  .row.header
+    .col-md-12
+      %h3 Nuevo préstamo
+  .row.form-wrapper
+    .col-md-9.with-sidebar
+      = render 'form'

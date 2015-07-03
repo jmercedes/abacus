@@ -1,30 +1,40 @@
-%p
-  
-  %b Usuario:
-  = @request.user.name
-  %br
-
-  %b Monto:
-  = number_to_currency( @request.amount, unit: "$" )
-  %br
-
-  %b Tasa de financiamiento:
-  = number_to_percentage(@request.financing_rate, precision: 0)   
-  %br
-
-  %b Tiempo de financioamiento:
-  = pluralize @request.financing_time, 'month'
-  %br
-
-  %b Estatus:
-  = @request.status
-  %br
-
-  %b Creado:
-  = @request.created_at.strftime('%e %b %Y %H:%M:%S')
-  %br
+#pad-wrapper.user-profile
+  .row.header
+    .col-md-8
+      %h3.name
+        = @request.user.name
+      %span.area= number_to_currency( @request.amount, unit: "$", format: "%u %n" )
+    = link_to edit_admin_request_path(@request) , class: 'btn-flat success pull-right' do
+      Editar perfil
+      %span
 
 
-= link_to 'Editar', edit_admin_request_path(@request)
-\|
-= link_to 'Regresar', admin_requests_path
+
+  .table-wrapper.users-table
+    .row-fluid
+      %table.table.table-hover
+        %thead
+          %tr
+            %th ID
+            %th Usuario
+            %th Monto
+            %th Estatus
+            %th Tiempo
+            %th Tasa
+            %th Fecha
+            %th Acciones
+
+        %tbody
+          %tr
+            %td= @request.id
+            %td= @request.user.name
+            %td= number_to_currency(@request.amount, delimeter: ',', unit: 'RD$', separator: '.', format: "%u %n") 
+            %td= @request.status
+            %td= pluralize @request.financing_time, 'month'
+            %td= number_to_percentage(@request.financing_rate, precision: 0)
+            %td= @request.created_at.strftime('%e %b %Y %H:%M:%S')
+            %td
+              = link_to 'Ver', admin_request_path(@request)
+              = link_to 'Editar', edit_admin_request_path(@request)
+              = link_to 'Eliminar', admin_request_path(@request), :method => :delete, :data => { :confirm => '¿Estas seguro?' }
+

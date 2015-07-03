@@ -1,7 +1,67 @@
-#pad-wrapper.users-list
+
+#pad-wrapper.user-profile
   .row.header
-    %h3 Pagos
-    .col-md-10.col-sm-12.col-xs-12.pull-right
+    .col-md-8
+      %h3.name
+        Prestamos emitidos
+      %span.area
+
+  .row
+    .col-md-12
+      %table.table.table-hover
+        %thead
+          %tr
+            %th.col-md-1
+              ID
+            %th.col-md-2
+
+              Cliente
+            %th.col-md-2
+              %span.line>
+              Monto
+            %th.col-md-2
+              %span.line>
+              Cargo por mora
+            %th.col-md-1
+              %span.line> 
+              Pago a capital
+            %th.col-md-2
+              %span.line> 
+              Pago interés
+
+        %tbody
+          - @loans.each do |loan|
+            %tr.first
+              %td
+                = loan.id 
+              %td
+                = loan.user.name
+              %td
+                %strong
+                  = number_to_currency(loan.amount, delimeter: ",", unit: "RD$", presicion: 2, separator: ".", format: "%u %n")
+                /= payment.payment_date
+              %td
+                /= number_to_currency(payment.late_fee, delimeter: ",", unit: "RD$", presicion: 2, separator: ".")
+              %td
+                1
+              %td
+                %ul.actions
+                  %li
+                    = link_to 'Realizar pago', new_admin_payment_path(loan_id: loan.id)
+                    /= link_to 'ver', admin_payment_path(payment)
+                    /= link_to 'Editar', edit_admin_payment_path(payment)
+                    /= link_to 'Eliminar', admin_payment_path(payment), :method => :delete, :data => { :confirm => '¿Estas seguro?' }
+
+
+#pad-wrapper.user-profile
+  .row.header
+    .col-md-8
+      %h3.name
+        Pagos realizados
+      %span.area
+    = link_to new_admin_payment_path, class: 'btn-flat success pull-right' do
+      + Nuevo Pago
+      %span
 
   .row
     .col-md-12
@@ -46,8 +106,3 @@
                     = link_to 'Editar', edit_admin_payment_path(payment)
                     = link_to 'Eliminar', admin_payment_path(payment), :method => :delete, :data => { :confirm => '¿Estas seguro?' }
                 
-
-
-
-  %hr
-  = link_to 'Nuevo pago', new_admin_payment_path

@@ -1,9 +1,23 @@
-.form-page
-  .row-fluid.form-wrapper
-    %h3 Nuevo pago
-    
-    = render 'form'
+#pad-wrapper.user-profile
+  .row.header
+    .col-md-8
+      /= image_tag 'contact-profile.png', class: 'img avatar img-circle'
+      %h3.name
+        = @loan.user.name
+      %span.area= "ID préstamo #{@loan.id} | #{number_to_currency(@loan.amount, unit: "$", format: "%u %n")} | #{@loan.emission_date}"
+    /= link_to edit_profile_path, class: 'btn-flat icon large pull-right edit' do
+    /  Editar perfil
+    /  %span
 
-    = link_to 'Show', @admin_payment
-    \|
-    = link_to 'Back', admin_payments_path
+
+#pad-wrapper.new-user
+  .row.header
+    .col-md-12
+  .row.form-wrapper
+    .col-md-9.with-sidebar
+    
+      = render 'form'
+
+      = link_to 'Show', @admin_payment
+      \|
+      = link_to 'Back', admin_payments_path

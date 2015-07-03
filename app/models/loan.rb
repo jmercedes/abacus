@@ -4,7 +4,7 @@ class Loan < ActiveRecord::Base
   Approved = 'Aprobado'
   Declined = 'Declinado'
 
-  DefaultFinancingRate = 7
+  DefaultFinancingRate = 42
 
   Statuses = [Pending, Approved, Declined]
 

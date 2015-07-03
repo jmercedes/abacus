@@ -3,10 +3,18 @@ class Admin::PaymentsController < Admin::BaseController
   
   def index
     @payments = ::Payment.all
+    @loans = ::Loan.all
   end
   
   def new
-    @payment = ::Payment.new
+    
+    @loan = ::Loan.find(params[:loan_id])
+    @payment = @loan::payments.build
+    
+    #@payment = ::Payment.new
+    #@prescription = @patient.prescriptions.build #Prescription.new
+    
+    
   end
   
   def edit

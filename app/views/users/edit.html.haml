@@ -1,7 +1,15 @@
-.form-page
-  .row-fluid.form-wrapper
-    %h3 Edit User
+#pad-wrapper.user-profile
+  .row.header
+    .col-md-8
+      %h3.name
+        Perfil
+        /= @profile.name
+      %span.area xx
+    = link_to '#', class: 'btn-flat success pull-right' do
+      Guardar
 
-    = render 'form'
+  .row.form-wrapper
+    .col-md-9.with-sidebar
+      = render 'form'
 
 

@@ -1,4 +1,14 @@
-%h2= "Completado #{user.profile.progress_status}%"
+#pad-wrapper.user-profile
+  .row.header
+    .col-md-8
+      %h3.name
+        Perfil
+        /= @profile.name
+      %span.area= "Completado en un #{user.profile.progress_status}%"
+    = link_to edit_user_path(@user), class: 'btn-flat success pull-right' do
+      Editar perfil
+
+
 
 #pad-wrapper
   %hr

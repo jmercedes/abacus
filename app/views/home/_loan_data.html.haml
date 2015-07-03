@@ -1,3 +1,18 @@
+- content_for :on_ready do
+  Morris.Area({
+  element: 'amortization-area',
+  behaveLikeLine: true,
+  data: #{raw @morris_chart},
+  xkey: 'payment_date',
+  ykeys: ['balance', 'payment'],
+  labels: ['Balance', 'Pagado'],
+  lineWidth: 2,
+  hideHover: 'auto',
+  lineColors: ["#81d5d9", "#a6e182"]
+  });
+
+
+
 #main-stats
   .row.row-fluid.stats-row
     .span3.stat
@@ -35,25 +50,25 @@
       %span.date Cuotas pendientes
     .span3.stat
       .data
-        %span.number= pluralize(@loan_financing_time, 'Month')
+        %span.number= pluralize(@loan_financing_time, 'Mes')
         
       %span.date Financiamiento
     .span3.stat.last
       .data
-        %span.number= @loan_emission_date.strftime('%e %B %Y')
+        %span.number= l @loan_emission_date, format: :long
         
       %span.date Fecha de emisión
 
 #pad-wrapper.users-list
   .row.header
-    %h3 Pagos realizados
+    %h3 Proyección de saldo
 
 .container-fluid
   #pad-wrapper
-    / morris stacked chart
     .row-fluid
-      #hero-area{:style => "height: 250px;"}
-      = content_tag :div, "", id: "payment_chart", data: {payments: @all_payments}
+      .span12
+        %br/
+        #amortization-area{:style => "height: 250px;"}
 		  
 
 #pad-wrapper.users-list
@@ -66,40 +81,25 @@
       %table.table.table-hover
         %thead
           %tr
-          %th.col-md-1
-            Cuota No.
-            %th.col-md-1
+          %th.col-md-2
+            Monto Pagado
+            %th.col-md-3
               %span.line> 
-              Fecha
-            %th.col-md-2
-              %span.line>
-              Monto
-            %th.col-md-2
-              %span.line>
               Cargo por mora
-            %th.col-md-2
-              %span.line> 
-              Pago a capital
-            %th.col-md-2
-              %span.line> 
-              Pago a interés
+            %th.col-md-4
+              %span.line>
+              Pago realizado
         
         %body
           - @all_payments.each do |payment|
             %tr
               %td
-                0
-              %td
-                = payment.payment_date
-              %td
                 = number_to_currency(payment.amount, unit: '$', delimeter: ',', separator: '.')
               %td
                 = number_to_currency(payment.late_fee, unit: '$', delimeter: ',', separator: '.')
               %td
-                0
-              %td
-                0
+                = "#{distance_of_time_in_words(payment.payment_date, Time.now)} / #{l payment.payment_date, format: :long }"
                  
 
 /= @loan_payment_history
-/= @loan_track.to_json 
+/= @loan_track.to_json

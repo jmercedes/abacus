@@ -1,9 +1,11 @@
 = simple_form_for [:admin, @payment], html: { class: 'form-vertical' }  do |f|
 
-  = f.association :loan, collection: Loan.approved_loans, prompt: "Seleccionar préstamo", label_method: :user_id
-  = f.input :loan_id
+  /= f.association :loan, collection: Loan.approved_loans, prompt: "Seleccionar préstamo", label_method: :user_id
+  = f.input :loan_id, as: :hidden
   = f.input :amount, label: "Monto"
-  = f.input :payment_date, label: "Fecha"
+  %br
+  = f.input_field :payment_date, label: "Fecha"
+  %br
   = f.input :late_fee, input_html: { disabled: true, 'data-lfee-url' => calculate_late_fee_admin_payments_path }
     
   .actions

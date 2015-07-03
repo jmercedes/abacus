@@ -28,7 +28,7 @@
     = ff.link_to_add "Añadir activo", :assets 
     %hr/
     
-    %h3 References
+    %h3 Referencias
     %hr/
     = ff.simple_fields_for :references do |ref|
       = render "user_form_fields/reference_fields", :f => ref

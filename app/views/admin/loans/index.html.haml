@@ -1,49 +1,39 @@
-%h1 Préstamos
+#pad-wrapper.user-profile
+  .row.header
+    .col-md-8
+      %h3.name
+        Préstamos
+      %span.area= @loans_count
+    = link_to new_admin_loan_path, class: 'btn-flat success pull-right' do
+      Nuevo Préstamo
+      %span
 
-.table-wrapper.users-table.section
-  .row-fluid
-    %table.table.table-hover
-      %thead
-        %tr
-          %th.span1
-            ID
-          %th.span4
-            Usuario
-          %th.span3
-            %span.line>
-            Monto
-          %th.span2
-            %span.line>
-            Status
-          %th.span3
-            %span.line>
-            Tiempo
-          %th.span2
-            %span.line>
-            Tasa
-          %th.span3
-            %span.line>
-            Fecha
-          %th.span3
-            %span.lin3>
-            Acciones
-
-      %tbody
-        - @loans.each do |loan|
+  .table-wrapper.users-table
+    .row-fluid
+      %table.table.table-hover
+        %thead
           %tr
-            %td= loan.id
-            %td= loan.user.name
-            %td= number_to_currency(loan.amount, delimeter: ",", unit: "RD$", presicion: 2, separator: ".")
-            %td= loan.status
-            %td= pluralize loan.financing_time, 'month'
-            %td= number_to_percentage(loan.financing_rate, precision: 0)   
-            %td= loan.emission_date.try :strftime, '%e %b %Y'
-            %td
-              = link_to 'Ver', admin_loan_path(loan)
-              = link_to 'Editar', edit_admin_loan_path(loan)
-              = link_to 'Eliminar', admin_loan_path(loan), :method => :delete, :data => { :confirm => '¿Estas seguro?' }
-              = link_to 'Amortización', amortization_admin_loan_path(loan)
+            %th ID
+            %th Usuario
+            %th Monto
+            %th Estatus
+            %th Tiempo
+            %th Tasa
+            %th Fecha
+            %th Acciones
 
-%br
-%hr
-= link_to 'Nuevo préstamo', new_admin_loan_path
+        %tbody
+          - @loans.each do |loan|
+            %tr
+              %td= loan.id
+              %td= loan.user.name
+              %td= number_to_currency(loan.amount, delimeter: ',', unit: 'RD$', separator: '.', format: "%u %n") 
+              %td= loan.status
+              %td= pluralize loan.financing_time, 'month'
+              %td= number_to_percentage(loan.financing_rate, precision: 0)
+              %td= loan.created_at.strftime('%e %b %Y %H:%M:%S')
+              %td
+                = link_to 'Amortización', amortization_admin_loan_path(loan)
+                = link_to 'Ver', admin_loan_path(loan)
+                = link_to 'Editar', edit_admin_loan_path(loan)
+                = link_to 'Eliminar', admin_loan_path(loan), :method => :delete, :data => { :confirm => '¿Estas seguro?' }

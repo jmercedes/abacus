@@ -1,3 +1,16 @@
+- content_for :on_ready do
+  Morris.Area({
+  element: 'amortization-area',
+  behaveLikeLine: true,
+  data: #{raw @morris_chart},
+  xkey: 'payment_date',
+  ykeys: ['balance', 'payment'],
+  labels: ['Pagos en fecha', 'Pagos Atrasado'],
+  lineWidth: 2,
+  hideHover: 'auto',
+  lineColors: ["#81d5d9", "#a6e182"]
+  });
+
 %h1 Amortización - Préstamos
 %hr
 
@@ -35,3 +48,12 @@
 %br
 
 /= link_to 'New Loan', new_user_loan_path(@user)
+
+.container-fluid
+  #pad-wrapper
+    .row-fluid
+      %h4.title Pagos
+      .span12
+        %h5 Cumplimiento de pagos
+        %br/
+        #amortization-area{:style => "height: 250px;"}

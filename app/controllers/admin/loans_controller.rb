@@ -3,6 +3,7 @@ class Admin::LoansController <  Admin::BaseController
 
   def index
     @loans = ::Loan.all
+    @loans_count = @loans.count
 
     respond_to do |format|
       format.html # index.html.erb
@@ -60,6 +61,11 @@ class Admin::LoansController <  Admin::BaseController
 
   def amortization
     @amortization = @loan.amortization_calculation
+
+    @morris_chart = @amortization[:periods].inject([]) do |json_data, (key,value)|
+      json_data << { payment_date: key, balance: value[:balance].round(2), payment: value[:paid_in_fact] }
+      json_data
+    end.to_json
   end
 
   private

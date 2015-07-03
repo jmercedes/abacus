@@ -4,10 +4,11 @@
 = f.input :spouse_lastnames, label: 'Apellidos'
 = f.input :spouse_personal_identification_number, label: 'Cédula/Pasaporte'
 = f.input :spouse_mobile_phone_number, label: 'Teléfono'
-= f.input :spouse_birthdate,  as: :date, start_year: Date.today.year - 50, |
-  end_year: Date.today.year - 18,                                          |
-  order: [:day, :month, :year],                                            |
-  label: 'Nacimiento'                                                      |
+%p
+  %strong Fecha de nacimiento
+= f.input_field :spouse_birthdate, start_year: Date.today.year - 95, end_year: Date.today.year - 18, order: [:day, :month, :year], label: 'Nacimiento'
+%br
+%br
 = f.input :spouse_job_place, label: 'Lugar de trabajo'
 = f.input :spouse_job_position, label: 'Posición de trabajo'
 = f.input :spouse_monthly_salary, label: 'Salario mensual'
@@ -18,7 +19,11 @@
 = f.input :father_residence_phone_number, label: 'Teléfono'
 = f.input :father_mobile_phone_number, label: 'Teléfono móvil'
 = f.input :father_personal_identification_number
-= f.input :father_birthdate, as: :date, start_year: Date.today.year - 50
+%p
+  %strong Fecha de nacimiento
+= f.input_field :father_birthdate, start_year: Date.today.year - 95, end_year: Date.today.year - 18, order: [:day, :month, :year], label: 'Nacimiento'
+%br
+%br
 = f.input :father_address, label: 'Dirección'
 = f.input :father_address_2, label: 'Dirección 2'
 = f.input :father_country
@@ -31,7 +36,11 @@
 = f.input :mother_lastnames, label: 'Apellidos'
 = f.input :mother_residence_phone_number, label: 'Teléfono'
 = f.input :mother_mobile_phone_number, label: 'Teléfono móvil'
-= f.input :mother_birthdate, as: :date, start_year: Date.today.year - 50, label: 'Fecha de nacimiento'
+%p
+  %strong Fecha de nacimiento
+= f.input_field :mother_birthdate, start_year: Date.today.year - 95, end_year: Date.today.year - 18, order: [:day, :month, :year], label: 'Nacimiento'
+%br
+%br
 = f.input :mother_address, label: 'Dirección'
 = f.input :mother_address_2, label: 'Dirección 2'
 = f.input :mother_country

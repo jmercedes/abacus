@@ -27,10 +27,55 @@
               ACCIONES
 
         %tbody
-          - @payments.each do |loan|
+          %tr.first
+            %td
+              /= number_to_currency(payment.amount, unit: '$', separator: '.', delimiter: ',') 
+            %td
+              /= loan.status
+            %td
+              /= pluralize loan.financing_time, 'month'
+            %td
+              /= number_to_percentage(loan.financing_rate, precision: 0)
+            %td
+              /= loan.created_at.strftime('%e %b %Y %H:%M:%S')
+            %td
+              /= link_to 'Histórico de pagos', [@user, loan]
+
+
+
+#pad-wrapper.users-list
+  .row.header
+    %h3 Pagos
+    .col-md-10.col-sm-12.col-xs-12.pull-right
+
+  .row
+    .col-md-12
+      %table.table.table-hover
+        %thead
+          %tr
+            %th.col-md-2
+              Monto
+            %th.col-md-1
+              %span.line>
+              Estatus
+            %th.col-md-1
+              %span.line>
+              Financiamiento
+            %th.col-md-1
+              %span.line> 
+              Tasa anual
+            %th.col-md-2
+              %span.line> 
+              Fecha
+            %th.col-md-2
+              %span.line> 
+              ACCIONES
+
+        %tbody
+          - @payments.each do |payment|
             %tr.first
               %td
-                /= number_to_currency(loan.amount, unit: '$', separator: '.', delimiter: ',') 
+                = number_to_currency(payment.amount, unit: '$', separator: '.', delimiter: ',') 
               %td
                 /= loan.status
               %td

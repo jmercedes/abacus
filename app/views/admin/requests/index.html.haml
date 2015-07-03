@@ -1,34 +1,36 @@
-%h1 Solicitudes
-%hr
+#pad-wrapper.users-list
+  .row.header
+    %h3 Solicitudes
+    .col-md-10.col-sm-12.col-xs-12.pull-right
+      = link_to new_admin_request_path, :class => 'btn-flat success pull-right' do
+        %span +
+        Nueva Solicitud
 
-.table-wrapper.users-table.section
-  .row-fluid
-    %table.table.table-hover
-      %thead
-        %tr
-          %th ID
-          %th Usuario
-          %th Monto
-          %th Estatus
-          %th Tiempo
-          %th Tasa
-          %th Fecha
-          %th Acciones
-
-      %tbody
-        - @requests.each do |request|
+  .table-wrapper.users-table
+    .row-fluid
+      %table.table.table-hover
+        %thead
           %tr
-            %td= request.id
-            %td= request.user.name
-            %td= number_to_currency(request.amount, delimeter: ',', unit: 'RD$', separator: '.') 
-            %td= request.status
-            %td= pluralize request.financing_time, 'month'
-            %td= number_to_percentage(request.financing_rate, precision: 0)
-            %td= request.created_at.strftime('%e %b %Y %H:%M:%S')
-            %td
-              = link_to 'Ver', admin_request_path(request)
-              = link_to 'Editar', edit_admin_request_path(request)
-              = link_to 'Eliminar', admin_request_path(request), :method => :delete, :data => { :confirm => '¿Estas seguro?' }
+            %th ID
+            %th Usuario
+            %th Monto
+            %th Estatus
+            %th Tiempo
+            %th Tasa
+            %th Fecha
+            %th Acciones
 
-%hr
-= link_to 'Nueva solicitud', new_admin_request_path
+        %tbody
+          - @requests.each do |request|
+            %tr
+              %td= request.id
+              %td= request.user.name
+              %td= number_to_currency(request.amount, delimeter: ',', unit: 'RD$', separator: '.', format: "%u %n") 
+              %td= request.status
+              %td= pluralize request.financing_time, 'month'
+              %td= number_to_percentage(request.financing_rate, precision: 0)
+              %td= request.created_at.strftime('%e %b %Y %H:%M:%S')
+              %td
+                = link_to 'Ver', admin_request_path(request)
+                = link_to 'Editar', edit_admin_request_path(request)
+                = link_to 'Eliminar', admin_request_path(request), :method => :delete, :data => { :confirm => '¿Estas seguro?' }

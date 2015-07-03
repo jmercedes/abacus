@@ -2,10 +2,12 @@
   = guarantor.input :first_name, label: 'Nombres'
   = guarantor.input :second_name, label: 'Apellidos'
   = guarantor.input :personal_identification_number, label: 'Cédula'
-  = guarantor.input :birth_date, as: :date, start_year: Date.today.year - 50, |
-	  end_year: Date.today.year - 18,                                          |
-	  order: [:day, :month, :year],                                            |
-	  label: 'Nacimiento' 
+  %p
+    %strong
+      Fecha de nacimiento
+  %br
+  %br
+  = guarantor.input_field :birth_date, start_year: Date.today.year - 95, end_year: Date.today.year - 18, order: [:day, :month, :year], label: 'Nacimiento'
   = guarantor.input :gender, collection:['Hombre', 'Mujer']
   = guarantor.input :nationality, label: 'Nacionalidad'
   = guarantor.input :residence_phone_number, label: 'Teléfono residencia'
