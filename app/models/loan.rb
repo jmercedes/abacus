@@ -18,6 +18,7 @@ class Loan < ActiveRecord::Base
   validates :financing_time, presence: true, numericality: {greater_than: 0}
   validates :financing_rate, presence: true, inclusion: { in: 1..100 }
   validates :status, presence: true, inclusion: {in: Statuses }
+  validate  :not_enough_balance_to_grant_loan
   
   #validates :funds_availability
 
@@ -134,6 +135,12 @@ class Loan < ActiveRecord::Base
 
   def set_default_financing_rate
     self.financing_rate = DefaultFinancingRate
+  end
+  
+  def not_enough_balance_to_grant_loan
+    if self.amount > Account.sum(:amount)
+      errors.add(:amount, "No hay balance suficiente para otorgar el préstamo")
+    end
   end
   
   #Validate if there are funds available before granting the loan.
