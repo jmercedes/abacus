@@ -1,36 +1,33 @@
-%h1 Depósitos
+#pad-wrapper.user-profile
+  .row.header
+    .col-md-8
+      %h3.name
+        Depósitos
+      %span.area= @loans_count
+    = link_to new_admin_deposit_path, class: 'btn-flat success pull-right' do
+      Nuevo Depósito
+      %span
 
-
-
-.table-wrapper.users-table.section
-  .row-fluid
-    %table.table.table-hover
-      %thead
-        %tr
-          %th.span4
-            ID Cuenta
-          %th.span3
-            %span.line>
-            Monto
-          %th.span3
-            %span.line>
-            Fecha de pago
-          %th.span3
-            %span.lin3>
-            Acciones
-      %tbody
-        - @deposits.each do |deposit|
+  .table-wrapper.users-table
+    .row-fluid
+      %table.table.table-hover
+        %thead
           %tr
-            %td= deposit.account_id
-            %td= number_to_currency(deposit.amount, precision: 2, separator: ".", unit: 'RD$', delimiter: ',')
-            %td= deposit.created_at
-            %td
-              %ul.actions
-                %li
-                  = link_to 'ver', admin_deposit_path(deposit)
-                  = link_to 'Editar', edit_admin_deposit_path(deposit)
-                  = link_to 'Eliminar', admin_deposit_path(deposit), :method => :delete, :data => { :confirm => '¿Estas seguro?' }
+            %th ID
+            %th Monto
+            %th Fecha
+            %th Acciones
+
+        %tbody
+          - @deposits.each do |deposit|
+            %tr
+              %td= deposit.account_id
+              %td= number_to_currency(deposit.amount, precision: 2, separator: ".", unit: 'RD$', delimiter: ',', format: "%u %n")
+              %td= deposit.created_at
+              %td
+                = link_to 'ver', admin_deposit_path(deposit)
+                = link_to 'Editar', edit_admin_deposit_path(deposit)
+                /= link_to 'Eliminar', admin_deposit_path(deposit), :method => :delete, :data => { :confirm => '¿Estas seguro?' }
+                
 
 
-%hr
-= link_to 'Nuevo depósito', new_admin_deposit_path

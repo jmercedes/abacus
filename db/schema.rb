@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150614123847) do
+ActiveRecord::Schema.define(version: 20150709132058) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -20,7 +20,7 @@ ActiveRecord::Schema.define(version: 20150614123847) do
     t.string  "name"
     t.string  "number"
     t.text    "description"
-    t.decimal "amount",      precision: 8, scale: 2
+    t.decimal "amount",      precision: 10, scale: 2
     t.integer "company_id"
   end
 
@@ -67,7 +67,7 @@ ActiveRecord::Schema.define(version: 20150614123847) do
   end
 
   create_table "deposits", force: :cascade do |t|
-    t.decimal  "amount",     precision: 8, scale: 2
+    t.decimal  "amount",     precision: 10, scale: 2
     t.integer  "account_id"
     t.datetime "created_at"
     t.datetime "updated_at"
@@ -122,12 +122,12 @@ ActiveRecord::Schema.define(version: 20150614123847) do
   create_table "loans", force: :cascade do |t|
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.decimal  "amount"
-    t.decimal  "financing_rate", precision: 8, scale: 2
+    t.decimal  "amount",         precision: 10, scale: 2
+    t.decimal  "financing_rate", precision: 8,  scale: 2
     t.integer  "financing_time"
     t.date     "emission_date"
     t.integer  "user_id"
-    t.string   "status",                                 default: "pending"
+    t.string   "status",                                  default: "pending"
   end
 
   create_table "payments", force: :cascade do |t|

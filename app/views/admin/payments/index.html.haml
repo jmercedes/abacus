@@ -1,4 +1,3 @@
-
 #pad-wrapper.user-profile
   .row.header
     .col-md-8
@@ -92,9 +91,9 @@
               %td
                 = payment.loan_id 
               %td
-                = number_to_currency(payment.amount, delimeter: ",", unit: "RD$", presicion: 2, separator: ".") 
-              %td
                 = payment.payment_date
+              %td
+                = number_to_currency(payment.amount, delimeter: ",", unit: "RD$", presicion: 2, separator: ".")                
               %td
                 = number_to_currency(payment.late_fee, delimeter: ",", unit: "RD$", presicion: 2, separator: ".")
               %td

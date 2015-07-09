@@ -142,9 +142,5 @@ class Loan < ActiveRecord::Base
       errors.add(:amount, "No hay balance suficiente para otorgar el préstamo")
     end
   end
-  
-  #Validate if there are funds available before granting the loan.
-  #def self.funds_availability
-    #self.loan.amount > Account.sum(:amount)
-  #end
+ 
 end
