@@ -8,7 +8,7 @@
       %span.date Préstamos activos
     .span3.stat
       .data
-        %span.number= number_to_currency(@total_lending, unit: '$')
+        %span.number= number_to_currency(@total_lending, unit: '$', format: " %u %n", delimiter: ",", separator: ".")
         
       %span.date Capital en préstamos
     .span3.stat
@@ -30,9 +30,9 @@
       %span.date Efectivo en caja
     .span3.stat
       .data
-        %span.number= number_to_currency(@available_for_loans, unit: '$')
+        %span.number= number_to_currency(@available_for_loans, unit: 'RD$', format: " %u %n", delimiter: ",", separator: ".")
         
-      %span.date Cuotas en atraso
+      %span.date Efectivo en Caja
     .span3.stat
       .data
         %span.number 0

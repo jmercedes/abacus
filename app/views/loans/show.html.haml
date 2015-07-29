@@ -1,27 +1,28 @@
-%p
-  %b Monto:
-  = number_to_currency( @loan.amount, unit: "$" )
-  %br
+#pad-wrapper.user-profile 
+  %p
+    %b Monto:
+    = number_to_currency( @loan.amount, unit: "$" )
+    %br
 
-  %b Tasa de financiamiento:
-  = number_to_percentage(@loan.financing_rate, precision: 0)   
-  %br
+    %b Tasa de financiamiento:
+    = number_to_percentage(@loan.financing_rate, precision: 0)   
+    %br
 
-  %b Tiempo de de financiamiento:
-  = pluralize @loan.financing_time, 'month'
-  %br
+    %b Tiempo de de financiamiento:
+    = pluralize @loan.financing_time, 'month'
+    %br
 
-  %b Fecha de emisión:
-  = @loan.emission_date.strftime('%e %b %Y')
-  %br
+    %b Fecha de emisión:
+    = @loan.emission_date.strftime('%e %b %Y')
+    %br
 
-  %b Estatus:
-  = @loan.status
-  %br
+    %b Estatus:
+    = @loan.status
+    %br
 
-  %b Fecha de creación:
-  = @loan.created_at.strftime('%e %b %Y %H:%M:%S')
-  %br
+    %b Fecha de creación:
+    = @loan.created_at.strftime('%e %b %Y %H:%M:%S')
+    %br
 
 
-= link_to 'Regresar', user_loans_path
+  = link_to 'Regresar', user_loans_path

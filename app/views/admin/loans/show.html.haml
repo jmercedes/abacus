@@ -1,5 +1,6 @@
-%h1 Préstamo
-%hr  
+#pad-wrapper
+  %h1= "Préstamo No. #{@loan.id}"
+  %hr  
   %b Usuario:
   = @loan.user.name
   %br
@@ -29,6 +30,6 @@
   %br
 
 
-= link_to 'Editar', edit_admin_loan_path(@loan)
-\|
-= link_to 'Regresar', admin_loans_path
+  = link_to 'Editar', edit_admin_loan_path(@loan)
+  \|
+  = link_to 'Regresar', admin_loans_path
