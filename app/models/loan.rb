@@ -45,12 +45,11 @@ class Loan < ActiveRecord::Base
     period_values = { current_date: current_date, periods: {} }
     is_current_month = false
 
-    total_fines = 0
+    unpaid_balance = 0
+    late_fee = 0
+    to_pay = 0
 
     payment_counter = 1
-    total_late_debt = 0
-    total_debt = 0
-    net_balance = 0
 
     loop do
       payment_day = self.emission_date + payment_counter.month
@@ -67,13 +66,13 @@ class Loan < ActiveRecord::Base
       total_interest += interest
 
       # Principal / Capital
-      # capital = monthly_payment - interest
+      capital = monthly_payment - interest
 
       # if the last payment, then monthly payment is smaller
-      # if capital > balance
-      #   monthly_payment = balance + interest
-      #   capital = balance
-      # end
+      if capital > balance
+        monthly_payment = balance + interest
+        capital = balance
+      end
 
       # get all payments in this month
       payments_in_this_month = Payment.where {
@@ -94,16 +93,18 @@ class Loan < ActiveRecord::Base
       amount_without_fee = monthly_payment if is_future_period
 
       paid_in_fact = amount_without_fee + amount_with_fee
-      monthly_debt = monthly_payment - amount_without_fee
-      Rails.logger.info "monthly_debt = #{monthly_debt}"
-      net_balance += monthly_debt
-      late_fee = net_balance * late_fee_rate
-      net_balance += late_fee
 
-      # calculate late fee if a client has any monthly debt
-      # late_fee = monthly_debt > 0 && current_date >= (payment_day + 5.days) ? (monthly_debt) * late_fee_rate : 0
+      Rails.logger.info "------ paid_in_fact = #{paid_in_fact}"
+      late_fee = (monthly_payment - amount_without_fee + unpaid_balance) * late_fee_rate
+      Rails.logger.info "------ late_fee = #{late_fee}"
+      to_pay = unpaid_balance + monthly_payment + late_fee
+      Rails.logger.info "------ to_pay = #{to_pay}"
+      unpaid_balance = to_pay - paid_in_fact
+      Rails.logger.info "------ unpaid_balance = #{unpaid_balance}"
 
-      capital = paid_in_fact - interest
+      late_fee = 0 if is_future_period
+
+      extra_capital_payment = [ paid_in_fact - to_pay, 0 ].max
 
       # Remaining debt after payment
       balance = balance * (1 + monthly_rate) - paid_in_fact
@@ -122,14 +123,14 @@ class Loan < ActiveRecord::Base
         total_interest: total_interest,
         paid_in_fact: is_future_period ? 0 : amount_without_fee + amount_with_fee,
         late_fee: late_fee,
-        total_late_debt: total_late_debt,
         extra_capital: extra_capital_payment,
-        net_balance: net_balance
+        net_balance: is_future_period ? 0 : unpaid_balance
       }
 
       payment_counter += 1
       Rails.logger.info "---------------------------------------------------------------------------"
       break if balance == 0 || (monthly_payment < interest && (payment_day + 1.month) > current_date)
+      # break if (payment_day + 1.month) > current_date
     end
 
     period_values
