@@ -87,7 +87,7 @@ class Loan < ActiveRecord::Base
         p.payment_date <= payment_day + late_fee_days ? :without_fee : :with_fee
       end
 
-      amount_without_fee = (payments_by_fee[:without_fee] || []).sum(&:amount)
+      amount_without_fee = (payments_by_fee[:without_fee] || []).inject(0){ |sum, x| sum + (x.amount || 0) }
       amount_with_fee = (payments_by_fee[:with_fee] || []).sum(&:amount)
 
       amount_without_fee = monthly_payment if is_future_period
