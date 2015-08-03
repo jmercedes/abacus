@@ -99,7 +99,7 @@ class Loan < ActiveRecord::Base
       Rails.logger.info "------ late_fee = #{late_fee}"
       to_pay = unpaid_balance + monthly_payment + late_fee
       Rails.logger.info "------ to_pay = #{to_pay}"
-      unpaid_balance = to_pay - paid_in_fact
+      unpaid_balance = [to_pay - paid_in_fact, 0].max
       Rails.logger.info "------ unpaid_balance = #{unpaid_balance}"
 
       late_fee = 0 if is_future_period
