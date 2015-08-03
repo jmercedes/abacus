@@ -95,7 +95,7 @@ class Loan < ActiveRecord::Base
       paid_in_fact = amount_without_fee + amount_with_fee
 
       Rails.logger.info "------ paid_in_fact = #{paid_in_fact}"
-      late_fee = (monthly_payment - amount_without_fee + unpaid_balance) * late_fee_rate
+      late_fee = ([monthly_payment - amount_without_fee, 0].max + unpaid_balance) * late_fee_rate
       Rails.logger.info "------ late_fee = #{late_fee}"
       to_pay = unpaid_balance + monthly_payment + late_fee
       Rails.logger.info "------ to_pay = #{to_pay}"
