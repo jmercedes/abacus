@@ -19,13 +19,13 @@ class Loan < ActiveRecord::Base
   validates :financing_rate, presence: true, inclusion: { in: 0..100 }
   validates :status, presence: true, inclusion: {in: Statuses }
   validate  :not_enough_balance_to_grant_loan
-  
+
   #validates :funds_availability
 
   scope :approved_loans, lambda { where(status: Loan::Approved) }
 
   Statuses.each do |status|
-    define_method "#{status}?" do 
+    define_method "#{status}?" do
       self.status == status
     end
   end
@@ -45,11 +45,15 @@ class Loan < ActiveRecord::Base
     period_values = { current_date: current_date, periods: {} }
     is_current_month = false
 
+    unpaid_balance = 0
+    late_fee = 0
+    to_pay = 0
+
     payment_counter = 1
 
     loop do
       payment_day = self.emission_date + payment_counter.month
-
+      balance_start_of_month = balance
       is_future_period = payment_day > current_date
 
       monthly_debt = 0
@@ -83,30 +87,29 @@ class Loan < ActiveRecord::Base
         p.payment_date <= payment_day + late_fee_days ? :without_fee : :with_fee
       end
 
-      amount_without_fee = (payments_by_fee[:without_fee] || []).sum(&:amount)
+      amount_without_fee = (payments_by_fee[:without_fee] || []).inject(0){ |sum, x| sum + (x.amount || 0) }
       amount_with_fee = (payments_by_fee[:with_fee] || []).sum(&:amount)
 
       amount_without_fee = monthly_payment if is_future_period
 
       paid_in_fact = amount_without_fee + amount_with_fee
 
-      monthly_debt = monthly_payment - amount_without_fee
+      Rails.logger.info "------ paid_in_fact = #{paid_in_fact}"
+      late_fee = ([monthly_payment - amount_without_fee, 0].max + unpaid_balance) * late_fee_rate
+      Rails.logger.info "------ late_fee = #{late_fee}"
+      to_pay = unpaid_balance + monthly_payment + late_fee
+      Rails.logger.info "------ to_pay = #{to_pay}"
+      unpaid_balance = [to_pay - paid_in_fact, 0].max
+      Rails.logger.info "------ unpaid_balance = #{unpaid_balance}"
 
-      # calculate late fee if a client has any monthly debt
-      late_fee = monthly_debt > 0 && current_date >= (payment_day + 5.days) ? monthly_debt * late_fee_rate : 0
+      late_fee = 0 if is_future_period
 
-      monthly_debt -= amount_with_fee - late_fee
-
-      if monthly_debt <= 0
-        extra_capital_payment = monthly_debt.abs
-      # TODO: alternative code for balance calculation
-      #   balance -= capital + extra_capital_payment
-      # else # monthly_debt > 0
-      #   balance += monthly_debt - capital
-      end
+      extra_capital_payment = [ paid_in_fact - to_pay, 0 ].max
 
       # Remaining debt after payment
-      balance = balance * (1 + monthly_rate) - paid_in_fact + late_fee
+      balance = balance * (1 + monthly_rate) - paid_in_fact
+
+      # total_late_debt = 0
 
       balance = balance <= 0 ? 0.0 : balance
 
@@ -116,31 +119,34 @@ class Loan < ActiveRecord::Base
         monthly_payment: monthly_payment,
         capital: capital < 0 ? 0 : capital,
         interest: interest,
-        balance: balance,
+        balance: balance_start_of_month,
         total_interest: total_interest,
         paid_in_fact: is_future_period ? 0 : amount_without_fee + amount_with_fee,
         late_fee: late_fee,
-        extra_capital: extra_capital_payment
+        extra_capital: extra_capital_payment,
+        net_balance: is_future_period ? 0 : unpaid_balance
       }
 
       payment_counter += 1
+      Rails.logger.info "---------------------------------------------------------------------------"
       break if balance == 0 || (monthly_payment < interest && (payment_day + 1.month) > current_date)
+      # break if (payment_day + 1.month) > current_date
     end
 
     period_values
   end
-  
 
-  private 
+
+  private
 
   def set_default_financing_rate
     self.financing_rate = DefaultFinancingRate
   end
-  
+
   def not_enough_balance_to_grant_loan
     if self.amount > Account.sum(:amount)
       errors.add(:amount, "No hay balance suficiente para otorgar el préstamo")
     end
   end
- 
+
 end
