@@ -30,7 +30,7 @@ class Loan < ActiveRecord::Base
     end
   end
 
-  def amortization_calculation current_date: Date.today
+  def amortization_calculation current_date: Date.today, current_payment_amount: 0
     late_fee_days = 5.days
     late_fee_rate = 0.05
 
@@ -89,18 +89,22 @@ class Loan < ActiveRecord::Base
 
       amount_without_fee = (payments_by_fee[:without_fee] || []).inject(0){ |sum, x| sum + (x.amount || 0) }
       amount_with_fee = (payments_by_fee[:with_fee] || []).sum(&:amount)
+      if current_payment_amount.to_f > 0 && (current_date >= payment_day) && (current_date < payment_day + 1.month)
+        if current_date <= payment_day + late_fee_days
+          amount_without_fee += current_payment_amount.to_f
+        else
+          amount_with_fee += current_payment_amount.to_f
+        end
+      end
+
 
       amount_without_fee = monthly_payment if is_future_period
 
       paid_in_fact = amount_without_fee + amount_with_fee
 
-      Rails.logger.info "------ paid_in_fact = #{paid_in_fact}"
       late_fee = ([monthly_payment - amount_without_fee, 0].max + unpaid_balance) * late_fee_rate
-      Rails.logger.info "------ late_fee = #{late_fee}"
       to_pay = unpaid_balance + monthly_payment + late_fee
-      Rails.logger.info "------ to_pay = #{to_pay}"
       unpaid_balance = [to_pay - paid_in_fact, 0].max
-      Rails.logger.info "------ unpaid_balance = #{unpaid_balance}"
 
       late_fee = 0 if is_future_period
 
@@ -128,7 +132,6 @@ class Loan < ActiveRecord::Base
       }
 
       payment_counter += 1
-      Rails.logger.info "---------------------------------------------------------------------------"
       break if balance == 0 || (monthly_payment < interest && (payment_day + 1.month) > current_date)
       # break if (payment_day + 1.month) > current_date
     end
