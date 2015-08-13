@@ -3,7 +3,8 @@ class LoansController < ApplicationController
   before_action :set_loan, only: [:show]
   
   def index
-    @loan = @user.loan.nil? ? 0 : @user.loan
+    @loan = @user.loan
+    return redirect_to user_dashboard_path unless @loan
     @payments = @loan.payments
 
     respond_to do |format|
