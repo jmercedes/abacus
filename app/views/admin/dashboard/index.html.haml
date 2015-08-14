@@ -22,7 +22,7 @@
     .col-md-3.col-sm-3.stat
       .data
         %span.number= @total_payments_on_delay
-      %span.date Préstamos en atraso
+      %span.date Pagos en atraso
     .col-md-3.col-sm-3.stat
       .data
         %span.number= @total_loans_with_delay_payments
@@ -30,7 +30,7 @@
     .col-md-3.col-sm-3.stat
       .data
         %span.number 0
-      %span.date xx
+      %span.date --
     .col-md-3.col-sm-3.stat.last
       .data
         %span.number= "#{@loan_with_one_late_p} / #{@loan_with_two_late_p} / #{@loan_with_three_late_p}"
@@ -38,63 +38,6 @@
         
         
 
-
-#main-stats
-  .row.row-fluid.stats-row
-    .span25.stat
-      .data
-        %span.number= @active_loans_count
-        
-      %span.date  Préstamos activos
-    .span25.stat
-      .data
-        %span.number= @requests_count
-      %span.date  Solicitudes
-
-    .span25.stat
-      .data
-        %span.number= number_to_currency(@total_lending, unit: '$', format: " %u %n", delimiter: ",", separator: ".")
-      %span.date Capital prestado
-    .span25.stat
-      .data
-        %span.number= number_to_currency(@total_interested_generated, unit: '$')
-
-      %span.date Total interested generated
-
-    .span25.stat
-      .data
-        %span.number= number_to_currency(@total_late_fee_amount, unit: '$')
-
-      %span.date Total late fee amount
-
-#main-stats
-  .row.row-fluid.stats-row
-    .span25.stat
-      .data
-        %span.number= @total_payments_on_delay
-        
-      %span.date Payments on delay
-    .span25.stat
-      .data
-        %span.number= @total_loans_with_delay_payments
-        
-      %span.date Loans with delay payments
-    .span25.stat
-      .data
-        %span.number= @loan_with_one_late_p
-        
-      %span.date loan with one late payment
-    .span25.stat.last
-      .data
-        %span.number= @loan_with_two_late_p
-        
-      %span.date loan with two late payment
-
-    .span25.stat.last
-      .data
-        %span.number= @loan_with_three_late_p
-
-      %span.date loan with three late payment
 
 
 
