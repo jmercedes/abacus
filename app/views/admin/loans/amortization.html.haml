@@ -26,6 +26,7 @@
         %th Extra capital
         %th Balance
         %th Net balance
+        %th Actual payment date
 
     %tbody
       - @amortization[:periods].each_with_index do |(payment_day, period), payment_counter |
@@ -39,7 +40,8 @@
           %td
             %strong= number_to_currency(period[:balance], unit: "$", format: " %u %n", delimiter: ",", separator: ".")
           %td= number_to_currency(period[:net_balance], unit: "$", format: " %u %n", delimiter: ",", separator: ".")
-  /        = link_to 'Show', [@user, loan]
+          %td
+            = period[:actual_payment_date]
 
 %br
 
