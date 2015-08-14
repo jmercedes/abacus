@@ -1,22 +1,22 @@
 class Admin::PaymentsController < Admin::BaseController
   before_action :set_admin_payment, only: [:show, :edit, :update, :destroy]
-  
+
   def index
     @payments = ::Payment.all
     @loans = ::Loan.all
   end
-  
+
   def new
-    
+
     @loan = ::Loan.find(params[:loan_id])
     @payment = @loan::payments.build
-    
+
     #@payment = ::Payment.new
     #@prescription = @patient.prescriptions.build #Prescription.new
-    
-    
+
+
   end
-  
+
   def edit
   end
 
@@ -35,9 +35,9 @@ class Admin::PaymentsController < Admin::BaseController
         format.json { render json: @payment.errors, status: :unprocessable_entity }
       end
     end
-    
+
   end
-  
+
   def update
     respond_to do |format|
       if @payment.update(admin_payment_params)
@@ -49,7 +49,7 @@ class Admin::PaymentsController < Admin::BaseController
       end
     end
   end
-  
+
   def destroy
     @payment.destroy
 
@@ -63,7 +63,7 @@ class Admin::PaymentsController < Admin::BaseController
     loan = Loan.find(params[:loan_id])
     payment_date = Date.parse(params[:payment_date])
 
-    period = loan.amortization_calculation(current_date: payment_date)[:periods].select do |payment_day, period|
+    period = loan.amortization_calculation(current_date: payment_date, current_payment_amount: params[:amount])[:periods].select do |payment_day, period|
       (payment_day ... payment_day + 1.month) === payment_date
     end.values.first
 

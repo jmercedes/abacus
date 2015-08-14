@@ -1,49 +1,62 @@
 
 #main-stats
   .row.row-fluid.stats-row
-    .span3.stat
+    .span25.stat
       .data
-        %span.number= @loans_count
+        %span.number= @active_loans_count
         
-      %span.date Préstamos activos
-    .span3.stat
+      %span.date  Active loans count
+    .span25.stat
+      .data
+        %span.number= @requests_count
+
+      %span.date  Requests count
+
+    .span25.stat
       .data
         %span.number= number_to_currency(@total_lending, unit: '$', format: " %u %n", delimiter: ",", separator: ".")
         
-      %span.date Capital en préstamos
-    .span3.stat
+      %span.date Loans amount granted
+    .span25.stat
       .data
-        %span.number 0
-        
-      %span.date  -
-    .span3.stat.last
+        %span.number= number_to_currency(@total_interested_generated, unit: '$')
+
+      %span.date Total interested generated
+
+    .span25.stat
       .data
-        %span.number 0
-        
-      %span.date Cuotas en atraso
+        %span.number= number_to_currency(@total_late_fee_amount, unit: '$')
+
+      %span.date Total late fee amount
+
 #main-stats
   .row.row-fluid.stats-row
-    .span3.stat
+    .span25.stat
       .data
-        %span.number 0
+        %span.number= @total_payments_on_delay
         
-      %span.date Efectivo en caja
-    .span3.stat
+      %span.date Payments on delay
+    .span25.stat
       .data
-        %span.number= number_to_currency(@available_for_loans, unit: 'RD$', format: " %u %n", delimiter: ",", separator: ".")
+        %span.number= @total_loans_with_delay_payments
         
-      %span.date Efectivo en Caja
-    .span3.stat
+      %span.date Loans with delay payments
+    .span25.stat
       .data
-        %span.number 0
+        %span.number= @loan_with_one_late_p
         
-      %span.date Solicitudes pendientes
-    .span3.stat.last
+      %span.date loan with one late payment
+    .span25.stat.last
       .data
-        %span.number 0
+        %span.number= @loan_with_two_late_p
         
-      %span.date Lorem ipsum dolor
+      %span.date loan with two late payment
 
+    .span25.stat.last
+      .data
+        %span.number= @loan_with_three_late_p
+
+      %span.date loan with three late payment
 
 
 

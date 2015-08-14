@@ -16,11 +16,11 @@ class User < ActiveRecord::Base
   accepts_nested_attributes_for :profile
 
 
-  delegate :name, to: :profile, prefix: false
-  delegate :assets, to: :profile, prefix: false
-  delegate :references, to: :profile, prefix: false
-  delegate :garantor, to: :profile, prefix: false
-  delegate :editable?, to: :profile, prefix: false
+  delegate :name, to: :profile, prefix: false, allow_nil: true
+  delegate :assets, to: :profile, prefix: false, allow_nil: true
+  delegate :references, to: :profile, prefix: false, allow_nil: true
+  delegate :garantor, to: :profile, prefix: false, allow_nil: true
+  delegate :editable?, to: :profile, prefix: false, allow_nil: true
 
   def self.prepare_new
     user = self.new
