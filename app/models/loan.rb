@@ -52,7 +52,9 @@ class Loan < ActiveRecord::Base
     payment_counter = 1
 
     loop do
+      Rails.logger.info "-----------------"
       payment_day = self.emission_date + payment_counter.month
+      Rails.logger.info "payment_day: #{payment_day}"
       balance_start_of_month = balance
       is_future_period = payment_day > current_date
 
@@ -75,17 +77,30 @@ class Loan < ActiveRecord::Base
       end
 
       # get all payments in this month
-      payments_in_this_month = Payment.where {
-          (payment_date.gteq my{payment_day}) &
-          (payment_date.lt my{payment_day + 1.month}) &
-          (payment_date.lteq my{current_date}) &
-          (loan_id.eq my{self.id})
-        }
+      if payment_counter == 1
+        payments_in_this_month = Payment.where {
+            (payment_date.lt my{payment_day + 1.month}) &
+            (payment_date.lteq my{current_date}) &
+            (loan_id.eq my{self.id})
+          }
+      else
+        payments_in_this_month = Payment.where {
+            (payment_date.gteq my{payment_day}) &
+            (payment_date.lt my{payment_day + 1.month}) &
+            (payment_date.lteq my{current_date}) &
+            (loan_id.eq my{self.id})
+          }
+      end
+
+      Rails.logger.info "Payments in this month = #{payments_in_this_month.inspect}"
 
       # group payments by before & after late fee date
       payments_by_fee = payments_in_this_month.group_by do |p|
         p.payment_date <= payment_day + late_fee_days ? :without_fee : :with_fee
       end
+
+      Rails.logger.info "payments_without_fee: #{payments_by_fee[:without_fee].inspect}"
+      Rails.logger.info "payments_with_fee: #{payments_by_fee[:with_fee].inspect}"
 
       amount_without_fee = (payments_by_fee[:without_fee] || []).inject(0){ |sum, x| sum + (x.amount || 0) }
       amount_with_fee = (payments_by_fee[:with_fee] || []).sum(&:amount)
@@ -99,8 +114,12 @@ class Loan < ActiveRecord::Base
 
 
       amount_without_fee = monthly_payment if is_future_period
+      Rails.logger.info "amount_without_fee = #{amount_without_fee}"
 
       paid_in_fact = amount_without_fee + amount_with_fee
+
+      Rails.logger.info "unpaid balance = #{unpaid_balance}"
+      Rails.logger.info "[monthly_payment - amount_without_fee, 0].max = #{[monthly_payment - amount_without_fee, 0].max}"
 
       late_fee = ([monthly_payment - amount_without_fee, 0].max + unpaid_balance) * late_fee_rate
       to_pay = unpaid_balance + monthly_payment + late_fee
