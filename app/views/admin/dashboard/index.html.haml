@@ -1,3 +1,43 @@
+#main-stats
+  .row.stats-row
+    .col-md-3.col-sm-3.stat
+      .data
+        %span.number= "#{@active_loans_count} / #{@requests_count}"
+      %span.date Préstamos activos / Solicitudes
+    .col-md-3.col-sm-3.stat
+      .data
+        %span.number= number_to_currency(@total_lending, unit: '$', format: " %u %n", delimiter: ",", separator: ".")
+      %span.date Capital prestado
+    .col-md-3.col-sm-3.stat
+      .data
+        %span.number= number_to_currency(@total_interested_generated, unit: '$', format: " %u %n", delimiter: ",", separator: ".")
+      %span.date Interés generado 
+    .col-md-3.col-sm-3.stat.last
+      .data
+        %span.number= number_to_currency(@total_late_fee_amount, unit: '$', format: " %u %n", delimiter: ",", separator: ".")
+      %span.date Moras generadas   
+
+#main-stats
+  .row.stats-row
+    .col-md-3.col-sm-3.stat
+      .data
+        %span.number= @total_payments_on_delay
+      %span.date Préstamos en atraso
+    .col-md-3.col-sm-3.stat
+      .data
+        %span.number= @total_loans_with_delay_payments
+      %span.date Préstamos en atraso
+    .col-md-3.col-sm-3.stat
+      .data
+        %span.number 0
+      %span.date xx
+    .col-md-3.col-sm-3.stat.last
+      .data
+        %span.number= "#{@loan_with_one_late_p} / #{@loan_with_two_late_p} / #{@loan_with_three_late_p}"
+      %span.date 1 / 2 / 3 cuotas atrasadas
+        
+        
+
 
 #main-stats
   .row.row-fluid.stats-row
@@ -5,18 +45,16 @@
       .data
         %span.number= @active_loans_count
         
-      %span.date  Active loans count
+      %span.date  Préstamos activos
     .span25.stat
       .data
         %span.number= @requests_count
-
-      %span.date  Requests count
+      %span.date  Solicitudes
 
     .span25.stat
       .data
         %span.number= number_to_currency(@total_lending, unit: '$', format: " %u %n", delimiter: ",", separator: ".")
-        
-      %span.date Loans amount granted
+      %span.date Capital prestado
     .span25.stat
       .data
         %span.number= number_to_currency(@total_interested_generated, unit: '$')
