@@ -93,6 +93,7 @@ class Loan < ActiveRecord::Base
       end
 
       Rails.logger.info "Payments in this month = #{payments_in_this_month.inspect}"
+      actual_payment_date = payments_in_this_month.map(&:payment_date).min
 
       # group payments by before & after late fee date
       payments_by_fee = payments_in_this_month.group_by do |p|
@@ -149,7 +150,8 @@ class Loan < ActiveRecord::Base
         late_fee: late_fee,
         extra_capital: extra_capital_payment,
         net_balance: is_future_period ? 0 : unpaid_balance,
-        payments_on_delay: payments_on_delay
+        payments_on_delay: payments_on_delay,
+        actual_payment_date: actual_payment_date
       }
 
       payment_counter += 1
