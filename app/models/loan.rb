@@ -52,7 +52,7 @@ class Loan < ActiveRecord::Base
     payment_counter = 1
 
     loop do
-      Rails.logger.info "-----------------"
+      payments_on_delay = 0
       payment_day = self.emission_date + payment_counter.month
       Rails.logger.info "payment_day: #{payment_day}"
       balance_start_of_month = balance
@@ -93,6 +93,7 @@ class Loan < ActiveRecord::Base
       end
 
       Rails.logger.info "Payments in this month = #{payments_in_this_month.inspect}"
+      actual_payment_date = payments_in_this_month.map(&:payment_date).min
 
       # group payments by before & after late fee date
       payments_by_fee = payments_in_this_month.group_by do |p|
@@ -101,6 +102,7 @@ class Loan < ActiveRecord::Base
 
       Rails.logger.info "payments_without_fee: #{payments_by_fee[:without_fee].inspect}"
       Rails.logger.info "payments_with_fee: #{payments_by_fee[:with_fee].inspect}"
+      payments_on_delay += payments_by_fee[:with_fee].try(:count) || 0
 
       amount_without_fee = (payments_by_fee[:without_fee] || []).inject(0){ |sum, x| sum + (x.amount || 0) }
       amount_with_fee = (payments_by_fee[:with_fee] || []).sum(&:amount)
@@ -147,7 +149,9 @@ class Loan < ActiveRecord::Base
         paid_in_fact: is_future_period ? 0 : amount_without_fee + amount_with_fee,
         late_fee: late_fee,
         extra_capital: extra_capital_payment,
-        net_balance: is_future_period ? 0 : unpaid_balance
+        net_balance: is_future_period ? 0 : unpaid_balance,
+        payments_on_delay: payments_on_delay,
+        actual_payment_date: actual_payment_date
       }
 
       payment_counter += 1
