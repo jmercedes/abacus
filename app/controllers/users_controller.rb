@@ -34,7 +34,7 @@ class UsersController < ApplicationController
 
     def set_user
       @user = current_user
-      @user.build_profile unless @user.profile?
+      @user.build_profile unless @user.profile
     end
 
     def user_params
