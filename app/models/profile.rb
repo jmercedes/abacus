@@ -2,7 +2,7 @@ class Profile < ActiveRecord::Base
 
   include PermittableParams
   
-  before_save :update_profile_progress
+  after_save :update_profile_progress
   
   belongs_to :user
   has_many :assets, dependent: :destroy
@@ -56,7 +56,6 @@ class Profile < ActiveRecord::Base
       profile_fields.each do |field|
         progress += 1 if !self.send(field).nil? || self.send(field).present?
       end
-
       guarantor_fields.each do |field|
         progress += 1 if self.guarantor.send(field).present?
       end
@@ -76,6 +75,7 @@ class Profile < ActiveRecord::Base
       # calculate % of completence and store it in progress_status field
       total_fields = profile_fields.length + guarantor_fields.length + (self.assets.length * assets_fields.length) + (self.references.length * references_fields.length)
       self.progress_status = ((progress * 100) / total_fields ).to_i
+      save!
     end
   
 end
