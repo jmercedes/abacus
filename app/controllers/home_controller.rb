@@ -64,7 +64,7 @@ class HomeController < ApplicationController
        end.to_json
        
        
-       @all_payments = current_user.loan.payments.all
+       @all_payments = current_user.loan.payments.all || []
        
     end   
     
