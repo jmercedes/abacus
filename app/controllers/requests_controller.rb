@@ -51,6 +51,6 @@ class RequestsController < ApplicationController
     end
 
     def request_params
-      params.require(:request).permit(:amount, :financing_time, :user_id)
+      params.require(:request).permit(:amount, :financing_time, :user_id, :status)
     end
 end
