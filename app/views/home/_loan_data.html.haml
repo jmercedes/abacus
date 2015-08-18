@@ -91,7 +91,7 @@
               Pago realizado
 
         %body
-          - @all_payments.each do |payment|
+          - ( @all_payments || [] ).each do |payment|
             %tr
               %td
                 = number_to_currency(payment.amount, unit: '$', delimeter: ',', separator: '.')
