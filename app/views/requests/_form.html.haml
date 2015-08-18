@@ -11,7 +11,7 @@
         = f.input :status, :as => :hidden, :input_html => { :value => Loan::Pending }
         = f.input :amount, input_html:  {value: f.object.amount || '10000'}, label: 'Monto'
         = f.input :financing_time, input_html:  {value: f.object.financing_time || '12'}, label: 'Tiempo de financiamiento (en meses)'
-        = f.input :financing_rate, input_html:  {value: Request::DefaultFinancingRate, disabled: true }, label: 'Monto'
+        = f.input :financing_rate, input_html:  {value: Request::DefaultFinancingRate, disabled: true }, label: 'Financing rate'
 
     
         .actions
