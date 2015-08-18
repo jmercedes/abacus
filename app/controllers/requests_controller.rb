@@ -33,6 +33,7 @@ class RequestsController < ApplicationController
         format.html { redirect_to [@user, @request], notice: 'Request was successfully created.' }
         format.json { render json: @request, status: :created }
       else
+        Rails.logger.info "@request.errors = #{@request.errors.full_messages}"
         format.html { render action: 'new' }
         format.json { render json: @request.errors, status: :unprocessable_entity }
       end
