@@ -18,22 +18,22 @@
     .span3.stat
       .data
         %span.number= number_to_currency(@remaining_balance, unit: '$', separator: '.', delimiter: ',', format: "%u %n")
-        
+
       %span.date Balance a la fecha
     .span3.stat
       .data
         %span.number= @payments_count
-        
+
       %span.date Cuotas Pagadas
     .span3.stat
       .data
         %span.number= number_to_currency(@monthly_payment, unit: "$", format: "%u %n")
-        
+
       %span.date  Cuota mensual
     .span3.stat.last
       .data
         %span.number= number_to_currency(@borrowed_amount, unit: '$', separator: '.', delimiter: ',', format: "%u %n")
-        
+
       %span.date Monto prestado
 
 #main-stats
@@ -41,22 +41,22 @@
     .span3.stat
       .data
         %span.number= @delayed_payments_quantity
-        
+
       %span.date Cuotas atrasadas
     .span3.stat
       .data
         %span.number= @remaining_payments
-        
+
       %span.date Cuotas pendientes
     .span3.stat
       .data
         %span.number= pluralize(@loan_financing_time, 'Mes')
-        
+
       %span.date Financiamiento
     .span3.stat.last
       .data
-        %span.number= l @loan_emission_date, format: :long
-        
+        %span.number= @loan_emission_date.nil? ? '' : l(@loan_emission_date, format: :long)
+
       %span.date Fecha de emisión
 
 #pad-wrapper.users-list
@@ -69,7 +69,7 @@
       .span12
         %br/
         #amortization-area{:style => "height: 250px;"}
-		  
+
 
 #pad-wrapper.users-list
   .row.header
@@ -84,12 +84,12 @@
           %th.col-md-2
             Monto Pagado
             %th.col-md-3
-              %span.line> 
+              %span.line>
               Cargo por mora
             %th.col-md-4
               %span.line>
               Pago realizado
-        
+
         %body
           - @all_payments.each do |payment|
             %tr
@@ -99,7 +99,7 @@
                 = number_to_currency(payment.late_fee, unit: '$', delimeter: ',', separator: '.')
               %td
                 = "#{distance_of_time_in_words(payment.payment_date, Time.now)} / #{l payment.payment_date, format: :long }"
-                 
+
 
 /= @loan_payment_history
 /= @loan_track.to_json
