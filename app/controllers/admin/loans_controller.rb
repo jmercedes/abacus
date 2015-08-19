@@ -60,6 +60,8 @@ class Admin::LoansController <  Admin::BaseController
   end
 
   def amortization
+    @client = "#{@loan.user.try(:profile).names} #{@loan.user.try(:profile).lastnames}"
+    @payments = @loan.payments
     @amortization = @loan.amortization_calculation
 
     @morris_chart = @amortization[:periods].inject([]) do |json_data, (key,value)|

@@ -48,6 +48,7 @@ class Loan < ActiveRecord::Base
     unpaid_balance = 0
     late_fee = 0
     to_pay = 0
+    total_extra_capital = 0
 
     payment_counter = 1
 
@@ -118,18 +119,25 @@ class Loan < ActiveRecord::Base
       amount_without_fee = monthly_payment if is_future_period
       Rails.logger.info "amount_without_fee = #{amount_without_fee}"
 
-      paid_in_fact = amount_without_fee + amount_with_fee
+      paid_in_fact = amount_without_fee + amount_with_fee + total_extra_capital
 
       Rails.logger.info "unpaid balance = #{unpaid_balance}"
       Rails.logger.info "[monthly_payment - amount_without_fee, 0].max = #{[BigDecimal.new(monthly_payment) - BigDecimal.new(amount_without_fee), BigDecimal.new(0)].max}"
 
-      late_fee = ([monthly_payment - amount_without_fee, 0].max + unpaid_balance) * late_fee_rate
+      late_sub = [monthly_payment - amount_without_fee, 0].max + unpaid_balance
+      if late_sub > 0
+        difference = late_sub - total_extra_capital
+        total_extra_capital = [-difference, 0].max
+        late_sub = [difference, 0].max
+      end
+      late_fee = late_sub * late_fee_rate
       to_pay = unpaid_balance + monthly_payment + late_fee
       unpaid_balance = [to_pay - paid_in_fact, 0].max
 
       late_fee = 0 if is_future_period
 
       extra_capital_payment = [ paid_in_fact - to_pay, 0 ].max
+      total_extra_capital = extra_capital_payment
 
       # Remaining debt after payment
       balance = balance * (1 + monthly_rate) - paid_in_fact
@@ -146,9 +154,9 @@ class Loan < ActiveRecord::Base
         interest: interest,
         balance: balance_start_of_month,
         total_interest: total_interest,
-        paid_in_fact: is_future_period ? 0 : amount_without_fee + amount_with_fee,
+        paid_in_fact: is_future_period ? 0 : paid_in_fact,
         late_fee: late_fee,
-        extra_capital: extra_capital_payment,
+        extra_capital: 0,
         net_balance: is_future_period ? 0 : unpaid_balance,
         payments_on_delay: payments_on_delay,
         actual_payment_date: actual_payment_date
