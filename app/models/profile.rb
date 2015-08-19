@@ -56,7 +56,7 @@ class Profile < ActiveRecord::Base
       profile_fields.each do |field|
         progress += 1 if !self.send(field).nil? || self.send(field).present?
       end
-
+      self.build_guarantor unless guarantor
       guarantor_fields.each do |field|
         progress += 1 if self.guarantor.send(field).present?
       end
@@ -72,6 +72,7 @@ class Profile < ActiveRecord::Base
           progress += 1 if ass.send(field).present?
         end
       end
+
 
       # calculate % of completence and store it in progress_status field
       total_fields = profile_fields.length + guarantor_fields.length + (self.assets.length * assets_fields.length) + (self.references.length * references_fields.length)
