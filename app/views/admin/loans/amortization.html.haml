@@ -11,11 +11,23 @@
   lineColors: ["#81d5d9", "#a6e182"]
   });
 
-#pad-wrapper
-  %h1 Amortización - Préstamos
-  %hr
+
 
 #pad-wrapper
+  %h1 Amortización - #{@client}
+  %table.table.table-bordered.table-striped#payments-table
+    %thead
+      %tr
+        %th Payment date
+        %th Amount paid
+
+    %tbody
+      - @payments.each_with_index do |payment|
+        %tr
+          %td= payment.payment_date
+          %td= number_to_currency(payment.amount, unit: "$", format: " %u %n", delimiter: ",", separator: ".")
+%br
+
   %table.table.table-bordered.table-striped#amortization-table
     %thead
       %tr
