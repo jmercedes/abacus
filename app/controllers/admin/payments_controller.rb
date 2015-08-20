@@ -71,7 +71,7 @@ class Admin::PaymentsController < Admin::BaseController
 
     render text: late_fee
   end
-
+  
   private
 
   def set_admin_payment

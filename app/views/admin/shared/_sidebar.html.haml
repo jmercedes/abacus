@@ -49,6 +49,24 @@
       = link_to admin_payments_path do
         %i.icon-edit
         %span Pagos
+    %li{class: "#{'dropdown-toggle active' if controller_name == 'payments'}"}
+      - if controller_name == 'payments'
+        .pointer
+          .arrow
+          .arrow_border
+      = link_to admin_payments_path do
+        %i.icon-edit
+        %span Pagos
+      %ul.submenu
+        %li
+          = link_to "Cuota", admin_payments_path
+        %li
+          = link_to "Capital", "#"
+        %li
+          = link_to "Cierre", "#"
+        %li
+          = link_to "Renegociación", "#"
+
     %li{class: "#{'active' if controller_name == 'deposits'}"}
       - if controller_name == 'deposits'
         .pointer
