@@ -3,7 +3,8 @@ class Loan < ActiveRecord::Base
   Pending = 'Pendiente'
   Approved = 'Aprobado'
   Declined = 'Declinado'
-
+  Paid = 'Pagado'
+  
   DefaultFinancingRate = 42
 
   Statuses = [Pending, Approved, Declined]
