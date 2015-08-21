@@ -1,0 +1,23 @@
+= simple_form_for [:admin, @payment], url: closure_loan_admin_payments_path(@payment) , html: { class: 'form-vertical' }  do |f|
+
+  /= f.association :loan, collection: Loan.approved_loans, prompt: "Seleccionar préstamo", label_method: :user_id
+  %h2
+    Closure
+  = f.input :loan_id, as: :hidden, input_html: { value: @loan.id }
+  %br
+  %br
+  %h3
+    Closure date
+
+  %br
+  = f.input_field :payment_date, label: "Fecha"
+  %br
+  %br
+    RD #{number_to_currency(@balance, unit: "$", format: "%u %n")}
+  %br
+  = f.input :amount, label: "Enter payment for closure"
+  %br
+  .actions
+    = f.submit 'Closure', :class => 'btn-flat success btn-finish'
+
+%hr
