@@ -1,0 +1,36 @@
+#pad-wrapper.user-profile
+  .row.header
+    .col-md-8
+      %h3.name
+        Préstamos
+  - if @loans.present?
+
+    .table-wrapper.users-table
+      .row-fluid
+        %table.table.table-hover
+          %thead
+            %tr
+              %th ID
+              %th Usuario
+              %th Monto
+              %th Estatus
+              %th Tiempo
+              %th Tasa
+              %th Fecha
+
+          %tbody
+            - @loans.each do |loan|
+              %tr
+                %td= loan.id
+                %td= loan.user.name
+                %td= number_to_currency(loan.amount, delimeter: ',', unit: 'RD$', separator: '.', format: "%u %n")
+                %td= loan.status
+                %td= pluralize loan.financing_time, 'month'
+                %td= number_to_percentage(loan.financing_rate, precision: 0)
+                %td= loan.created_at.strftime('%e %b %Y %H:%M:%S')
+                %td
+                  = link_to 'Closure', new_admin_payment_path(loan_id: loan.id, close_loan: true)
+  - else
+    %br
+    %h3
+      No approved loans

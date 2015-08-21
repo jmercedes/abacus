@@ -10,6 +10,8 @@ class Admin::PaymentsController < Admin::BaseController
 
     @loan = ::Loan.find(params[:loan_id])
     @payment = @loan::payments.build
+    @close_loan = params[:close_loan]
+    @balance = @loan.try(:values_for_now).try(:round, 2)
 
     #@payment = ::Payment.new
     #@prescription = @patient.prescriptions.build #Prescription.new
@@ -70,6 +72,28 @@ class Admin::PaymentsController < Admin::BaseController
     late_fee = period.try(:[], :late_fee).try(:round, 2) || 0
 
     render text: late_fee
+  end
+
+  def loans
+    @loans = Loan.approved_loans.select{ |loan| loan.values_for_now != (nil || 0) }
+  end
+
+  def closure_loan
+    @payment = ::Payment.new(admin_payment_params)
+    @payment.for_close(true)
+    respond_to do |format|
+      if @payment.save
+        loan = Loan.find(@payment.loan_id)
+        loan.update_attribute(:status, Loan::Paid)
+        @user = User.find(loan.user_id)
+        format.html { redirect_to loans_admin_payments_path, notice: 'Payment was successfully created. Loan was paid' }
+        format.json { render json: @payment, status: :created }
+      else
+        format.html { redirect_to new_admin_payment_path(loan_id: params[:payment][:loan_id], close_loan: true), flash: {error: 'El balance debe ser igual al monto de cierre'} }
+        format.json { render json: @payment.errors, status: :unprocessable_entity }
+      end
+    end
+
   end
   
   private

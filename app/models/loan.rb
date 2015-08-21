@@ -171,6 +171,20 @@ class Loan < ActiveRecord::Base
     period_values
   end
 
+  def values_for_now
+    payment_date = Date.today
+    late_fee = 0
+    amount = 0
+    amortization_calculation[:periods].each do |period, values|
+      if (period ... period + 1.month) === payment_date
+        late_fee = values.try(:[], :late_fee)
+      end
+      if period + 1.month >= payment_date
+        amount += values.try(:[], :monthly_payment)
+      end
+    end
+    amount + late_fee
+  end
 
   private
 
