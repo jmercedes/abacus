@@ -15,8 +15,10 @@
     .col-md-12
   .row.form-wrapper
     .col-md-9.with-sidebar
-    
-      = render 'form'
+      - if @close_loan
+        = render 'form_2'
+      - else
+        = render 'form'
 
       = link_to 'Show', @admin_payment
       \|

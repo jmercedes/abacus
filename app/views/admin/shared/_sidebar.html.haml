@@ -54,7 +54,7 @@
         .pointer
           .arrow
           .arrow_border
-      = link_to admin_payments_path do
+      = link_to 'javascript:void(0)' do
         %i.icon-edit
         %span Pagos
       %ul.submenu
@@ -63,7 +63,7 @@
         %li
           = link_to "Capital", "#"
         %li
-          = link_to "Cierre", "#"
+          = link_to "Cierre", loans_admin_payments_path
         %li
           = link_to "Renegociación", "#"
         %li

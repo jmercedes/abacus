@@ -171,6 +171,10 @@ class Loan < ActiveRecord::Base
     period_values
   end
 
+  def values_for_now
+    payment_date = Date.today
+    amortization_calculation[:periods].select{|period,_| (period ... period + 1.month) === payment_date}.values.first
+  end
 
   private
 
