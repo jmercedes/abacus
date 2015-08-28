@@ -49,7 +49,7 @@
       = link_to admin_payments_path do
         %i.icon-edit
         %span Pagos
-    %li{class: "#{'dropdown-toggle active' if controller_name == 'payments'}"}
+    %li{class: "dropdown-toggle #{'active' if controller_name == 'payments'}"}
       - if controller_name == 'payments'
         .pointer
           .arrow
