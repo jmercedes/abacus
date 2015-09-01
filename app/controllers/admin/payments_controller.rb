@@ -10,7 +10,7 @@ class Admin::PaymentsController < Admin::BaseController
 
     @loan = ::Loan.find(params[:loan_id])
     @payment = @loan::payments.build
-    @close_loan = params[:close_loan]
+    @operation = params[:operation]
     @balance = @loan.try(:values_for_now).try(:round, 2)
 
     #@payment = ::Payment.new
@@ -75,6 +75,7 @@ class Admin::PaymentsController < Admin::BaseController
   end
 
   def loans
+    @operation = params[:operation]
     @loans = Loan.approved_loans.select{ |loan| loan.values_for_now != (nil || 0) }
   end
 
@@ -89,11 +90,27 @@ class Admin::PaymentsController < Admin::BaseController
         format.html { redirect_to loans_admin_payments_path, notice: 'Payment was successfully created. Loan was paid' }
         format.json { render json: @payment, status: :created }
       else
-        format.html { redirect_to new_admin_payment_path(loan_id: params[:payment][:loan_id], close_loan: true), flash: {error: 'El balance debe ser igual al monto de cierre'} }
+        format.html { redirect_to new_admin_payment_path(loan_id: params[:payment][:loan_id], operation: "closure"), flash: {error: @payment.errors.full_messages} }
         format.json { render json: @payment.errors, status: :unprocessable_entity }
       end
     end
 
+  end
+
+  def capital_payment
+    @payment = ::Payment.new(admin_payment_params)
+    @payment.for_capital
+    respond_to do |format|
+      if @payment.save
+        loan = Loan.find(@payment.loan_id)
+        @user = User.find(loan.user_id)
+        format.html { redirect_to loans_admin_payments_path, notice: 'Capital payment was successfully created. Balance of loan was changed' }
+        format.json { render json: @payment, status: :created }
+      else
+        format.html { redirect_to new_admin_payment_path(loan_id: params[:payment][:loan_id], operation: "capital"), flash: {error: @payment.errors.full_messages} }
+        format.json { render json: @payment.errors, status: :unprocessable_entity }
+      end
+    end
   end
   
   private

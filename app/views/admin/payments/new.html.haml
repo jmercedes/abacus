@@ -15,8 +15,10 @@
     .col-md-12
   .row.form-wrapper
     .col-md-9.with-sidebar
-      - if @close_loan
-        = render 'form_2'
+      - if @operation == 'closure'
+        = render 'closure_form'
+      - elsif @operation == 'capital'
+        = render 'capital_form'
       - else
         = render 'form'
 

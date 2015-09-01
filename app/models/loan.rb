@@ -83,14 +83,16 @@ class Loan < ActiveRecord::Base
         payments_in_this_month = Payment.where {
             (payment_date.lt my{payment_day + 1.month}) &
             (payment_date.lteq my{current_date}) &
-            (loan_id.eq my{self.id})
+            (loan_id.eq my{self.id}) &
+            (capital_payment.eq 0)
           }
       else
         payments_in_this_month = Payment.where {
             (payment_date.gteq my{payment_day}) &
             (payment_date.lt my{payment_day + 1.month}) &
             (payment_date.lteq my{current_date}) &
-            (loan_id.eq my{self.id})
+            (loan_id.eq my{self.id}) &
+            (capital_payment.eq 0)
           }
       end
 
@@ -142,6 +144,14 @@ class Loan < ActiveRecord::Base
 
       # Remaining debt after payment
       balance = balance * (1 + monthly_rate) - paid_in_fact
+      capital_payments = Payment.where {
+            (payment_date.lt my{payment_day + 1.month}) &
+            (payment_date.gteq my{payment_day}) &
+            (payment_date.lt my{payment_day + 1.month}) &
+            (loan_id.eq my{self.id}) &
+            (capital_payment.not_eq 0)
+      }
+      balance -= capital_payments.sum(:capital_payment)
 
       # total_late_debt = 0
 
@@ -160,7 +170,8 @@ class Loan < ActiveRecord::Base
         extra_capital: 0,
         net_balance: is_future_period ? 0 : unpaid_balance,
         payments_on_delay: payments_on_delay,
-        actual_payment_date: actual_payment_date
+        actual_payment_date: actual_payment_date,
+        fresh_balance: balance
       }
 
       payment_counter += 1
@@ -173,17 +184,16 @@ class Loan < ActiveRecord::Base
 
   def values_for_now
     payment_date = Date.today
-    late_fee = 0
-    amount = 0
-    amortization_calculation[:periods].each do |period, values|
-      if (period ... period + 1.month) === payment_date
-        late_fee = values.try(:[], :late_fee)
-      end
-      if period + 1.month >= payment_date
-        amount += values.try(:[], :monthly_payment)
-      end
+    daily_rate = self.financing_rate / 36000
+    amortization = amortization_calculation[:periods].select {|period, values| (period ... period + 1.month) === payment_date }
+    if amortization.present?
+      last_period = amortization.keys.first
+      values = amortization.values.first
+      remain_days = (payment_date - last_period).to_i
+      values[:fresh_balance]+ values[:late_fee] + self.amount * daily_rate * remain_days
+    else
+      0
     end
-    amount + late_fee
   end
 
   private

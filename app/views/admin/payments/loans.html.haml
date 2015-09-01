@@ -29,7 +29,10 @@
                 %td= number_to_percentage(loan.financing_rate, precision: 0)
                 %td= loan.created_at.strftime('%e %b %Y %H:%M:%S')
                 %td
-                  = link_to 'Closure', new_admin_payment_path(loan_id: loan.id, close_loan: true)
+                  - if @operation == 'closure'
+                    = link_to 'Closure', new_admin_payment_path(loan_id: loan.id, operation: 'closure')
+                  - else
+                    = link_to 'Capital payment', new_admin_payment_path(loan_id: loan.id, operation: 'capital')
   - else
     %br
     %h3

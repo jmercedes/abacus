@@ -1,0 +1,22 @@
+= simple_form_for [:admin, @payment], url: capital_payment_admin_payments_path(@payment) , html: { class: 'form-vertical' }  do |f|
+
+  %h2
+    Capital payment
+  = f.input :loan_id, as: :hidden, input_html: { value: @loan.id }
+  %br
+  %br
+  %h3
+    Payment date
+
+  %br
+  = f.input_field :payment_date, label: "Fecha"
+  %br
+  %br
+    RD #{number_to_currency(@balance, unit: "$", format: "%u %n")}
+  %br
+  = f.input :amount, label: "Enter amount of capital payment"
+  %br
+  .actions
+    = f.submit 'Registar', :class => 'btn-flat success btn-finish'
+
+%hr

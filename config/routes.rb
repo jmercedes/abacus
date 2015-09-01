@@ -22,6 +22,7 @@ AbacusApp::Application.routes.draw do
         get :calculate_late_fee
         get :loans
         post :closure_loan
+        post :capital_payment
       end
     end
 

@@ -61,9 +61,9 @@
         %li
           = link_to "Cuota", admin_payments_path
         %li
-          = link_to "Capital", "#"
+          = link_to "Capital", loans_admin_payments_path(operation: 'capital')
         %li
-          = link_to "Cierre", loans_admin_payments_path
+          = link_to "Cierre", loans_admin_payments_path(operation: 'closure')
         %li
           = link_to "Renegociación", "#"
         %li
